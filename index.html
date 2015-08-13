@@ -1,0 +1,103 @@
+<!--
+   __  __         _   __     __                      __
+  / /_/ /_  ___  / | / /__  / /__      ______  _____/ /__
+ / __/ __ \/ _ \/  |/ / _ \/ __/ | /| / / __ \/ ___/ //_/
+/ /_/ / / /  __/ /|  /  __/ /_ | |/ |/ / /_/ / /  / ,<
+\__/_/ /_/\___/_/ |_/\___/\__/ |__/|__/\____/_/  /_/|_|
+
+-->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+		<script src="static/js/vendor/jquery.js"></script>
+		<script src="static/js/vendor/modernizr.js"></script>
+
+		<link rel='stylesheet' href='static/css/vendor/normalize.css'>
+		<link rel='stylesheet' href='static/css/vendor/foundation.min.css'>
+		<link rel='stylesheet' href='static/css/vendor/slick.css'>
+
+		<script src="static/js/vendor/foundation.min.js"></script>
+		<script src="static/js/foundation/foundation.topbar.js"></script>
+		<script src="static/js/foundation/foundation.abide.js"></script>
+		<script src="static/js/vendor/slick.js"></script>
+
+		<script src="config.js"></script>
+		<script src="static/js/account.js"></script>
+		<script src="static/js/vendor/theNetwork.js"></script>
+
+	</head>
+
+	<body>
+
+		<div id="background"></div>
+
+		<div id="html" class="off-canvas-wrap" data-offcanvas>
+		  <div class="inner-wrap">
+		    <nav class="tab-bar">
+
+		      <section class="middle tab-bar-section">
+		        <a href='#'><h1 class="data-title"></h1></a>
+		      </section>
+
+		      <section class="right-small">
+		        <a class="right-off-canvas-toggle menu-icon" ><span></span></a>
+		      </section>
+		    </nav>
+
+		    <aside class="right-off-canvas-menu">
+		      <ul class="off-canvas-list">
+						<li class='top'><label></label></li>
+		        <li><label></label></li>
+		        <!-- <li><a href="#">Hari Seldon</a></li>
+		        <li class="has-submenu"><a href="#">R. Giskard Reventlov</a>
+		            <ul class="right-submenu">
+		                <li class="back"><a href="#">Back</a></li>
+		                <li><label>Level 1</label></li>
+		                <li><a href="#">Link 1</a></li>
+		                <li class="has-submenu"><a href="#">Link 2 w/ submenu</a>
+		                    <ul class="right-submenu">
+		                        <li class="back"><a href="#">Back</a></li>
+		                        <li><label>Level 2</label></li>
+		                    </ul>
+		                </li>
+		            </ul>
+		        </li> -->
+		      </ul>
+		    </aside>
+
+		    <main class="main-section" data-html="static/html/home.html"></main>
+
+		  <a class="exit-off-canvas"></a>
+
+		  </div>
+		</div>
+
+		<div id='login-modal' class='reveal-modal' data-reveal>
+			<form id='login-form'>
+				<h2><span class='data-title'></span></h2>
+				<div class='row collapse'>
+					<div class='columns small-12'>
+						<input type='text' placeholder='Username' name='username' required>
+					</div>
+					<div class='columns small-12'>
+						<input type='password' placeholder='Password' name='password' required>
+					</div>
+					<div class='columns small-2'>
+						<input type='submit' class='button success' value='Login'>
+					</div>
+		      <div class='circles-loader'></div>
+		      <div class='columns small-12 errors'>
+		        <h5 style="color: red;"></h5>
+		      </div>
+				</div>
+			</form>
+		</div>
+
+	</body>
+
+</html>

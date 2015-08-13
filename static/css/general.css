@@ -1,0 +1,33 @@
+
+#background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #222;
+  z-index: -1;
+  overflow: hidden;
+}
+
+#background img {
+  min-width: 100%;
+  min-height: 100%;
+  max-width: 1000%;
+  -webkit-transition: -webkit-filter 300ms;
+}
+
+#background.hash img {
+  -webkit-filter: saturate(0%) brightness(45%);
+}
+
+#html, #html > div, main {
+  min-height: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.shadow {
+  color: white;
+  text-shadow: 0 0.05em 0 #333, 0 0.1em 0 #777;
+}

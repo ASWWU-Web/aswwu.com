@@ -1,0 +1,28 @@
+
+#full-profile * {
+	color: white;
+}
+
+.profile-photo {
+	width: 3em;
+	display: block;
+	background-position: top center;
+	background-size: cover;
+}
+
+.profile-photo.fill {
+	width: 100%;
+	overflow: hidden;
+}
+
+.profile-photo img {
+	min-width: 100%;
+	min-height: 100%;
+}
+
+.profile-photo.inline {
+	display: inline-block;
+	height: 1em;
+	width: 1em;
+	margin: 0 0.25em;
+}

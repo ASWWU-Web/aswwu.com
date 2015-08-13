@@ -1,0 +1,17 @@
+
+#login-form > div > .circles-loader {
+	margin: 2em auto;
+	display: none;
+}
+#login-form.loading > div > div {
+	display: none;
+}
+#login-form.loading > div > div.circles-loader {
+	display: inherit;
+}
+
+.errors {
+	color: red;
+	font-weight: bold;
+	text-transform: capitalize;
+}
