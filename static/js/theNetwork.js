@@ -1,7 +1,33 @@
 
 var loadCount = 0;
+var main;
+
+var handlers = [
+	["/profile/.*/update", updateProfileHandler],
+	["/profile/.*", profileHander],
+	[".*", indexHandler]
+];
+
+function hasher() {
+	checkLogin(function() {
+		var hash = window.location.hash.substr(1);
+		for (var h in handlers) {
+			var path = handlers[h][0].replace(/\//g,"\\\/");
+			var r = new RegExp(path);
+			var m = hash.match(path);
+			if (m && m[0] === hash) {
+				m = path.split("\\\/");
+				hash = hash.split("/").filter(function(i) { return m.indexOf(i) < 0; });
+				$("#background").addClass("hash");
+				handlers[h][1].apply(this, hash);
+				return true;
+			}
+		}
+	});
+}
 
 $(document).ready(function() {
+	main = $("main");
 
 	$.get(config.mu.bgs, function(data) {
 		var bgs = JSON.parse(data);
@@ -85,28 +111,6 @@ function dbSearch(q, limits, cb) {
 				cb(data);
 		}, error: function(data) {
 			console.error(data);
-		}
-	});
-}
-
-function hasher() {
-	checkLogin(function() {
-		var hash = window.location.hash.substr(1);
-		var cmds = hash.split("/");
-		var main = $("main");
-		$("#background").addClass("hash");
-		if (cmds[0] == "profile") {
-			if (cmds[2] && cmds[2] == "update")
-				updateProfile(cmds[1]);
-			else
-				loader(main,"static/html/profile.html #full-profile",function(){
-					getProfile(cmds[1]+"/"+cmds[2],function(data) {
-						setProfileData(data,main);
-					});
-				});
-		} else {
-			$("#background").removeClass("hash");
-			loader(main,main.data("html"));
 		}
 	});
 }

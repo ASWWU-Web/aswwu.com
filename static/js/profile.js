@@ -1,18 +1,13 @@
 
-function getProfile(name,cb) {
+function getProfile(name, year, cb) {
 	var limits = "profiles";
-	var archives = name.split("/");
-	if (archives.length == 2 && archives[1] !== "undefined") {
-		limits = "archives,"+archives[0];
-		name = archives[1];
-	} else
-		name = archives[0];
+	if (year && year.length == 4)
+		limits = "archives,"+year;
 	$.ajax({
 		url: au()+"&cmd=search&limits="+limits+"&q="+name,
 		dataType: "JSON",
 		type: "GET",
 		success: function(data) {
-			console.log(data);
 			if (typeof cb == "function")
 				cb(data);
 		}, error: function(data) {
@@ -25,7 +20,6 @@ function setProfileData(data,div) {
 	if (!data.results)
 		data.profile = {"fullname": "Profile Not Found", "photo": null};
 	else if (data.results.length > 1) {
-		console.error("too many profiles found");
 		data.profile = {"fullname": "Too Many Profiles Found","photo": null};
 	} else
 		data.profile = data.results[0];
@@ -72,7 +66,7 @@ function updateProfile(name,cmd) {
 			}
 		});
 	} else {
-		getProfile(name,function(data) {
+		getProfile(name,undefined,function(data) {
 			if (data.results)
 				var profile = data.results[0];
 			var $form = $("<form id='updateForm'>");

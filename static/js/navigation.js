@@ -5,8 +5,8 @@ function navInit() {
 	sidebar.find(".prot").remove();
 	if (user.username) {
 		sidebar.prepend("<li class='prot'><a href='./' onclick='logout();'>Logout</a></li>");
-		sidebar.prepend("<li class='prot'><a href='#profile/"+user.username+"/update'>Update Profile</a></li>");
-		sidebar.prepend("<li class='prot'><a href='#profile/"+user.username+"'><div class='profile-photo inline' style='background-image:url("+config.mu.xs+(user.photo || config.defaults.profilePhoto)+");'></div>"+user.fullname+"</a></li>");
+		sidebar.prepend("<li class='prot'><a href='#/profile/"+user.username+"/update'>Update Profile</a></li>");
+		sidebar.prepend("<li class='prot'><a href='#/profile/"+user.username+"'><div class='profile-photo inline' style='background-image:url("+config.mu.xs+(user.photo || config.defaults.profilePhoto)+");'></div>"+user.fullname+"</a></li>");
 	} else {
 		sidebar.prepend("<li class='prot'><a href='#' data-reveal-id='login-modal'>Login</a></li>");
 	}
