@@ -29,15 +29,11 @@ function hasher() {
 $(document).ready(function() {
 	main = $("main");
 
-	$.get(config.mu.bgs, function(data) {
-		var bgs = JSON.parse(data);
-		var bg = bgs[Math.floor(Math.random()*bgs.length)];
-		$("#background").html("<img>");
-		$("#background img").hide().load(function() {
-			$(this).fadeIn();
-		}).attr("src",function() {
-			return config.mu.lg+bg;
-		});
+	$("#background").html("<img>");
+	$("#background img").hide().load(function() {
+		$(this).fadeIn();
+	}).attr("src",function() {
+		return config.mu.bg;
 	});
 
 	checkLogin(function(data) {

@@ -29,5 +29,5 @@ config.mu = {
 	md: config.defaults.mediaURL+"img-md/",
 	lg: config.defaults.mediaURL+"img-lg/",
 	xl: config.defaults.mediaURL,
-	bgs: config.defaults.mediaURL+"mediaServer.php?backgroundPhotos"
+	bg: config.defaults.mediaURL+"background.php"
 }
