@@ -35,22 +35,3 @@
 .right-off-canvas-menu {
   position: fixed;
 }
-
-#menu_icon {
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 3em;
-  height: 3em;
-}
-#menu_icon span::after {
-  content: "";
-  position: absolute;
-  display: block;
-  height: 0;
-  top: 50%;
-  margin-top: -0.5rem;
-  left: 0.90625rem;
-  box-shadow: 0 0 0 1px #fff,0 7px 0 1px #fff,0 14px 0 1px #fff;
-  width: 1rem;
-}
