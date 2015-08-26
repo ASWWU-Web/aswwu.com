@@ -19,7 +19,8 @@ var config = {
 	defaults: {
 		profilePhoto: "images/mask_unknown.png",
 		mediaURL: "https://aswwu.com/media/",
-		uploadPath: "uploads/"
+		uploadPath: "uploads/",
+		year: 1516
 	},
 };
 config.favicon = config.defaults.mediaURL+"img-xs/"+config.favicon;
