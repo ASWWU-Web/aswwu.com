@@ -2,6 +2,9 @@
 function indexHandler() {
   $("#background").removeClass("hash");
   loader(main,main.data("html"));
+  if (window.location.hash.length > 1) {
+    window.location.hash = "";
+  }
 }
 
 function profileHander(username, year) {

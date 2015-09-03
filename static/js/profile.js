@@ -27,6 +27,9 @@ function setProfileData(data,div) {
 	} else {
 		var profile = data;
 	}
+	if (!profile.fullname || profile.fullname.length < 5)
+		profile.fullname = profile.username.replace(/\./g," ");
+		
 	$.each(profile, function(key,value) {
 		var obj = div.find(".profile-"+key);
 		if (key == "photo") {

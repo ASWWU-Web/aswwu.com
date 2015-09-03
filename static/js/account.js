@@ -1,9 +1,9 @@
 var user = {};
 
 function au(check) {
-	var w = sessionStorage.wwuid || "";
+	var w = localStorage.wwuid || "";
 	if (w == "undefined") w = "";
-	var t = sessionStorage.token || "";
+	var t = localStorage.token || "";
 	if (t == "undefined") t = "";
 	if (check && (t == "" || w == ""))
 		return false;
@@ -31,8 +31,8 @@ function checkLogin(callback) {
 
 function processLogin(newUser) {
 	user = newUser;
-	sessionStorage.wwuid = user.wwuid;
-	sessionStorage.token = user.token;
+	localStorage.wwuid = user.wwuid;
+	localStorage.token = user.token;
 	if (typeof navInit == "function")
 		navInit();
 }

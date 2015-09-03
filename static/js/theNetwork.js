@@ -87,11 +87,14 @@ function setData() {
 	$("div.search").html("<input><div></div>");
 	$("div.search input").keyup(function(e) {
 			var rbox = $(this).next();
-			dbSearch($(this).val(), $(this).parent().data("search-limits"), function(data) {
+			var searchLimits = $(this).parent().data("search-limits");
+			dbSearch($(this).val(), searchLimits, function(data) {
 				rbox.empty();
 				if (data.results) {
 					$.each(data.results, function(i, r) {
-						rbox.append("<a href='#profile/"+(r.year ? r.year+"/" : "")+r.username+"'>"+r.fullname+"</a>");
+						if (searchLimits.split(",").length == 2)
+							r.year = searchLimits.split(",")[1];
+						rbox.append("<a href='#/profile/"+r.username+"/"+(r.year ? r.year+"/" : "")+"'>"+r.fullname+"</a>");
 					});
 				}
 			});
