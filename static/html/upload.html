@@ -4,19 +4,17 @@
 		<br>
 		<h1 class='data-title shadow'></h1>
 		<hr>
-		<form action="server/?cmd=upload" method="POST" enctype="multipart/form-data">
+		<form id="uploadImage" action="server/?cmd=upload" method="POST" enctype="multipart/form-data">
 			<div class="row">
 				<div class="small-8 medium-6 large-6 small-centered columns">
 			    <div class="card">
 						<div class="content">
 			        <span class="title">Upload Image</span>
 							<div id="drop">
-								  <div class="fileUpload button"><span>Browse</span><input type="file" id="uploadBtn" class="upload" name="uFile" onchange="makeFileList();" multiple/></div>
+								  <div class="fileUpload">Browse</div>
+									<input type="file" id="uploadBtn" class="upload" name="uFile" multiple/></div>
 									<!--<input class="button success" type="submit" value="Upload" name="submit"/>-->
-
-
 							</div>
-			      </div>
 						<div class="action">
 							<ul id="fileList">
 							</ul>
@@ -25,5 +23,8 @@
 			  </div>
 			</div>
 		</form>
+		<script type="text/javascript">
+
+    </script>
 	</div>
 </div>
