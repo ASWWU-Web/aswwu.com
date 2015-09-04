@@ -6,6 +6,7 @@ var handlers = [
 	["/profile/.*/update", updateProfileHandler],
 	["/profile/.*", profileHander],
 	["/search/.*", searchHandler],
+	["/upload/.*", uploadHandler],
 	[".*", indexHandler]
 ];
 

@@ -7,7 +7,8 @@ var config = {
 	files: {
 		js: [
 			"static/js/navigation.js",
-			"static/js/profile.js"
+			"static/js/profile.js",
+			"static/js/upload.js"
 		],
 		css: [
 			"static/css/navigation.css",
