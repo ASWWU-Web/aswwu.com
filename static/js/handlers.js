@@ -15,6 +15,10 @@ function profileHander(username, year) {
   });
 }
 
+function uploadHandler(x, y) {
+  loader(main, "static/html/upload.html");
+}
+
 function updateProfileHandler(username) {
   updateProfile(username);
 }

@@ -9,6 +9,7 @@ function navInit() {
 		sidebar.prepend("<li class='prot'><a href='#/profile/"+user.username+"'><div class='profile-photo inline' style='background-image:url("+config.mu.xs+(user.photo || config.defaults.profilePhoto)+");'></div>"+user.fullname+"</a></li>");
 	} else {
 		sidebar.prepend("<li class='prot'><a href='#' data-reveal-id='login-modal'>Login</a></li>");
+		sidebar.prepend("<li class='prot'><a href='#/upload/'>Upload Photos</a></li>");
 	}
 
 	label.remove();

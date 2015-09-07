@@ -2,11 +2,29 @@
 <div class='row'>
 	<div class='small-10 small-offset-1 columns'>
 		<br>
-		<h1 class='data-title'></h1>
+		<h1 class='data-title shadow'></h1>
 		<hr>
-		<form action="server/?cmd=upload" method="POST" enctype="multipart/form-data">
-			<input type="file" name="uFile">
-			<input type="submit" value="Upload" name="submit">
+		<form id="uploadImage" action="server/?cmd=upload" method="POST" enctype="multipart/form-data">
+			<div class="row">
+				<div class="small-8 medium-6 large-6 small-centered columns">
+			    <div class="card">
+						<div class="content">
+			        <span class="title">Upload Image</span>
+							<div id="drop">
+								  <div class="fileUpload">Browse</div>
+									<input type="file" id="uploadBtn" class="upload" name="uFile" multiple/></div>
+									<!--<input class="button success" type="submit" value="Upload" name="submit"/>-->
+							</div>
+						<div class="action">
+							<ul id="fileList">
+							</ul>
+						</div>
+			    </div>
+			  </div>
+			</div>
 		</form>
+		<script type="text/javascript">
+
+    </script>
 	</div>
 </div>
