@@ -32,10 +32,6 @@
   text-shadow: 0 0.05em 0 #333, 0 0.1em 0 #777;
 }
 
-.right-off-canvas-menu {
-  position: fixed;
-}
-
 /*.card {
   font-family: 'PT Sans Narrow', sans-serif;
   overflow: hidden;
