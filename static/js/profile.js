@@ -3,7 +3,6 @@ function getProfile(name, year, cb) {
 	var limits = "profiles";
 	if (year && year.toString().length == 4)
 		limits = "archives,"+year;
-	console.log("searching",limits,name);
 	$.ajax({
 		url: au()+"&cmd=search&limits="+limits+"&q="+name,
 		dataType: "JSON",
@@ -29,7 +28,7 @@ function setProfileData(data,div) {
 	}
 	if (!profile.fullname || profile.fullname.length < 5)
 		profile.fullname = profile.username.replace(/\./g," ");
-		
+
 	$.each(profile, function(key,value) {
 		var obj = div.find(".profile-"+key);
 		if (key == "photo") {

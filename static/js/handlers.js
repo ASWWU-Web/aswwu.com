@@ -28,6 +28,10 @@ function searchHandler(q, y) {
   main.html("<div id='searchResults' class='row'></div>");
   var sr = $("#searchResults");
   getProfile(q, y, function(data) {
+    if (data.results.length == 1) {
+      window.location.href = "#/profile/"+data.results[0].username+(y ? "/"+y : "");
+      return;
+    }
     for (d in data.results) {
       var tag = data.results[d].username.replace(/\./g,"-");
       sr.append("<div id='profile-"+tag+"' class='medium-3 small-6 columns'><div class='profile-photo fill'></div></div>");

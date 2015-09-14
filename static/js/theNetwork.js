@@ -2,6 +2,13 @@
 var loadCount = 0;
 var main;
 
+String.prototype.capitalize = function() {
+	var words = this.split(" ");
+	for (var i in words)
+		words[i] = words[i].replace(new RegExp(words[i][0]),words[i][0].toUpperCase());
+	return words.join(" ");
+}
+
 var handlers = [
 	["/profile/.*/update", updateProfileHandler],
 	["/profile/.*", profileHander],
@@ -85,21 +92,34 @@ function setData() {
 	$.each(config, function(key,value) {
 		$(".data-"+key).text(value);
 	});
-	$("div.search").html("<input><div></div>");
-	$("div.search input").keyup(function(e) {
-			var rbox = $(this).next();
-			var searchLimits = $(this).parent().data("search-limits");
-			dbSearch($(this).val(), searchLimits, function(data) {
-				rbox.empty();
-				if (data.results) {
-					$.each(data.results, function(i, r) {
-						if (searchLimits.split(",").length == 2)
-							r.year = searchLimits.split(",")[1];
-						rbox.append("<a href='#/profile/"+r.username+"/"+(r.year ? r.year+"/" : "")+"'>"+r.fullname+"</a>");
-					});
-				}
-			});
+	var $searchDivs = $("div.search").filter(function(i, div) {
+		return !div.className.match("already-set");
 	});
+	$searchDivs.html("<input><div></div>");
+	$searchDivs.find("input").keyup(function(e) {
+		if (e.keyCode == 13) {
+			window.location.href="#/search/"+$(this).val();
+			return;
+		}
+		var rbox = $(this).next();
+		var searchLimits = function(div) {
+			return div.parent().data("search-limits") || "profiles";
+		};
+		searchLimits = searchLimits($(this));
+		dbSearch($(this).val(), searchLimits, function(data) {
+			rbox.empty();
+			if (data.results) {
+				$.each(data.results, function(i, r) {
+					if (searchLimits.split(",").length == 2)
+						r.year = searchLimits.split(",")[1];
+					if (!r.fullname)
+						r.fullname = r.username.replace("."," ").capitalize();
+					rbox.append("<a href='#/profile/"+r.username+"/"+(r.year ? r.year+"/" : "")+"'>"+r.fullname+"</a>");
+				});
+			}
+		});
+	});
+	$searchDivs.addClass("already-set");
 }
 
 function dbSearch(q, limits, cb) {
