@@ -1,19 +1,18 @@
 function navInit() {
 
-	var sidebar = $(".right-off-canvas-menu .off-canvas-list");
-	var label = sidebar.find(".top");
-	sidebar.find(".prot").remove();
+	var accountLinks = $(".top-bar-section .left");
+	accountLinks.empty();
+
 	if (user.username) {
-		sidebar.prepend("<li class='prot'><a href='./' onclick='logout();'>Logout</a></li>");
-		sidebar.prepend("<li class='prot'><a href='#/profile/"+user.username+"/update'>Update Profile</a></li>");
-		sidebar.prepend("<li class='prot'><a href='#/profile/"+user.username+"'><div class='profile-photo inline' style='background-image:url("+config.mu.xs+(user.photo || config.defaults.profilePhoto)+");'></div>"+user.fullname+"</a></li>");
+		var profile = "<a href='#/profile/"+user.username+"'><div class='profile-photo inline' style='background-image:url("+config.mu.xs+(user.photo || config.defaults.profilePhoto)+");'></div>"+user.fullname+"</a>";
+		accountLinks.append("<li class='has-dropdown'>"+profile+"<ul class='dropdown'></ul></li>");
+		accountLinks = accountLinks.find("li > ul");
+		accountLinks.append("<li><a href='#/profile/"+user.username+"/update'>Update Profile</a></li>");
+		accountLinks.append("<li><a href='./' onclick='logout();'>Logout</a></li>");
 	} else {
-		sidebar.prepend("<li class='prot'><a href='#' data-reveal-id='login-modal'>Login</a></li>");
+		accountLinks.append("<li><a href='#' data-reveal-id='login-modal'>Login</a></li>");
 		// sidebar.prepend("<li class='prot'><a href='#/upload/'>Upload Photos</a></li>");
 	}
-
-	label.remove();
-	sidebar.prepend(label);
 
 	$("#login-form").submit(function() {
 		$(this).addClass("loading");

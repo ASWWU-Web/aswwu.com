@@ -28,69 +28,49 @@
 
 		<div id="background"></div>
 
-		<div id="html" class="off-canvas-wrap" data-offcanvas>
-		  <div class="inner-wrap">
-				<nav class="tab-bar">
-		      <section class="left-small">
-		        <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
-		      </section>
+		<div class="fixed">
+			<nav class="top-bar" data-topbar role="navigation">
+				<ul class="title-area">
+					<li class="name">
+						<h1><a href="#" class="data-title"></a></h1>
+					</li>
+					<li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+				</ul>
+				<section class="top-bar-section">
 
-		      <section class="middle tab-bar-section">
-		        <h1><a href="#" class="data-title" style="color: inherit;"></a></h1>
-		      </section>
+					<ul class="left"></ul>
 
-		      <section class="right-small">
-		        <a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>
-		      </section>
-		    </nav>
-				<!-- <a id="search_icon" class="left-off-canvas-toggle menu-icon"><span></span></a> -->
-		    <!-- <a id="menu_icon" class="right-off-canvas-toggle menu-icon"><span></span></a> -->
-
-				<aside class="left-off-canvas-menu">
-					<ul class="off-canvas-list">
-						<li class="top"><label></label></li>
-						<li><a>Search</a></li>
-						<li><div class="search" data-search-limits="archives,1415"></div></li>
-					</ul>
-				</aside>
-
-		    <aside class="right-off-canvas-menu">
-		      <ul class="off-canvas-list">
-						<li class='top'><label></label></li>
-		        <li><label></label></li>
-						<li class="has-submenu">
+					<ul class="right">
+						<li class="has-dropdown">
 							<a href="#">Media</a>
-							<ul class="right-submenu">
-								<li class="back"><a href="#">Back</a></li>
+							<ul class="dropdown">
 								<li><a href="https://aswwu.com/collegian" target="_blank">Collegian</a></li>
 								<li><a href="https://aswwu.com/music" target="_blank">Music</a></li>
 								<li><a href="https://aswwu.smugmug.com" target="_blank">Photos</a></li>
 								<li><a href="https://vimeo.com/aswwu" target="_blank">Videos</a></li>
 							</ul>
 						</li>
-		        <!-- <li><a href="#">Hari Seldon</a></li>
-		        <li class="has-submenu"><a href="#">R. Giskard Reventlov</a>
-		            <ul class="right-submenu">
-		                <li class="back"><a href="#">Back</a></li>
-		                <li><label>Level 1</label></li>
-		                <li><a href="#">Link 1</a></li>
-		                <li class="has-submenu"><a href="#">Link 2 w/ submenu</a>
-		                    <ul class="right-submenu">
-		                        <li class="back"><a href="#">Back</a></li>
-		                        <li><label>Level 2</label></li>
-		                    </ul>
-		                </li>
-		            </ul>
-		        </li> -->
-		      </ul>
-		    </aside>
+						<li class="has-dropdown">
+							<a href="#">WWU Links</a>
+							<ul class="dropdown">
+								<li><a href="https://class.wallawalla.edu" target="_blank">Desire To Learn (D2L)</a></li>
+								<li><a href="https://dorm.wallawalla.edu" target="_blank">WWU Dorm</a></li>
+								<li><a href="https://wallawalla.edu" target="_blank">WWU Homepage</a></li>
+								<li><a href="http://www.wallawalla.edu/klassica" target="_blank">Klassica</a></li>
+								<li><a href="https://library.wallawalla.edu" target="_blank">Library</a></li>
+								<li><a href="https://mywwu.wallawalla.edu" target="_blank">MyWWU</a></li>
+								<li><a href="https://outlook.com/owa/wallawalla.edu" target="_blank">Outlook Email</a></li>
+								<li><a href="https://tc.wallawalla.edu/WebClock30/Login.aspx" target="_blank">TimeCard</a></li>
+								<li><a href="https://webwork.wallawalla.edu/moodle/login" target="_blank">WebWork / Moodle</a></li>
+							</ul>
+						</li>
+			    </ul>
 
-		    <main class="main-section" data-html="static/html/home.html"></main>
-
-		  <a class="exit-off-canvas"></a>
-
-		  </div>
+				</section>
+			</nav>
 		</div>
+
+		<main class="main-section" data-html="static/html/home.html"></main>
 
 		<div id='login-modal' class='reveal-modal' data-reveal>
 			<form id='login-form'>
