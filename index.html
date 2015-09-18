@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
 
+		<link rel='stylesheet' href='static/css/vendor/jquery-ui.css'>
 		<link rel='stylesheet' href='static/css/vendor/font-awesome.min.css'>
 		<link rel='stylesheet' href='static/css/vendor/normalize.css'>
 		<link rel='stylesheet' href='static/css/vendor/foundation.min.css'>
 		<link rel='stylesheet' href='static/css/vendor/foundation-datepicker.css'>
 
 		<script src="static/js/vendor/jquery.js"></script>
+		<script src="static/js/vendor/jquery-ui.js"></script>
 		<script src="static/js/vendor/modernizr.js"></script>
 
 		<script src="static/js/vendor/foundation.min.js"></script>
@@ -39,7 +41,11 @@
 				</ul>
 				<section class="top-bar-section">
 
-					<ul class="left"></ul>
+					<ul class="left">
+						<li>
+							<input type="text" class="autocomplete-search autofocus" placeholder="Search">
+						</li>
+					</ul>
 
 					<ul class="right">
 						<li class="has-dropdown">

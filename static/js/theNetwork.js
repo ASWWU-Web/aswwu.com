@@ -103,48 +103,18 @@ function setData() {
 		navInit();
 	$(".datepicker").fdatepicker();
 
-	// var $searchDivs = $("div.search").filter(function(i, div) {
-	// 	return !div.className.match("already-set");
-	// });
-	// $searchDivs.html("<input><div></div>");
-	// $searchDivs.find("input").keyup(function(e) {
-	// 	if (e.keyCode == 13) {
-	// 		window.location.href="#/search/"+$(this).val();
-	// 		return;
-	// 	}
-	// 	var rbox = $(this).next();
-	// 	var searchLimits = function(div) {
-	// 		return div.parent().data("search-limits") || "profiles";
-	// 	};
-	// 	searchLimits = searchLimits($(this));
-	// 	dbSearch($(this).val(), searchLimits, function(data) {
-	// 		rbox.empty();
-	// 		if (data.results) {
-	// 			$.each(data.results, function(i, r) {
-	// 				if (searchLimits.split(",").length == 2)
-	// 					r.year = searchLimits.split(",")[1];
-	// 				if (!r.fullname)
-	// 					r.fullname = r.username.replace("."," ").capitalize();
-	// 				rbox.append("<a href='#/profile/"+r.username+"/"+(r.year ? r.year+"/" : "")+"'>"+r.fullname+"</a>");
-	// 			});
-	// 		}
-	// 	});
-	// });
-	// $searchDivs.addClass("already-set");
-}
-
-function dbSearch(q, limits, cb) {
-	$.ajax({
-		url: au()+"&cmd=search&q="+q+"&limits="+limits,
-		dataType: "JSON",
-		type: "GET",
-		success: function(data) {
-			if (typeof cb == "function")
-				cb(data);
-		}, error: function(data) {
-			console.error(data);
+	setAutoComplete($("input.autocomplete-search"), function(request, response) {
+		var limits = this.element[0].dataset.searchLimits || "profiles";
+		dbSearch(request.term, limits, response, true);
+	});
+	$("input.autocomplete-search").on("keydown", function(event) {
+		if (event.keyCode == $.ui.keyCode.ENTER) {
+			window.location.href = "#/search/"+$(this).val().replace(" \[","/").replace("]","");
+			event.preventDefault();
 		}
 	});
+
+	$(".autofocus").last().focus();
 }
 
 function loader(div,url,cb) {
@@ -158,4 +128,38 @@ function loader(div,url,cb) {
 		if (cb && typeof cb === "function") cb();
 		setData();
 	});
+}
+
+function setAutoComplete($obj, source, multiple) {
+	if (!multiple) {
+		if (typeof source == "obj") {
+			$obj.autocomplete(source);
+		} else {
+			$obj.autocomplete({ source: source });
+		}
+	} else {
+		$obj.bind("keydown", function( event ) {
+			if ( event.keyCode === $.ui.keyCode.TAB &&
+					$( this ).autocomplete( "instance" ).menu.active ) {
+				event.preventDefault();
+			}
+		}).autocomplete({
+			minLength: 0,
+			source: function( request, response ) {
+				response( $.ui.autocomplete.filter(
+					source, request.term.split(/,\s*/).pop()) );
+			},
+			focus: function() {
+				return false;
+			},
+			select: function( event, ui ) {
+				var terms = this.value.split(/,\s*/);
+				terms.pop();
+				terms.push( ui.item.value );
+				terms.push( "" );
+				this.value = terms.join( ", " );
+				return false;
+			}
+		});
+	}
 }

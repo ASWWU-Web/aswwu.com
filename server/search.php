@@ -35,8 +35,11 @@
         $key = $pair[0];
         $value = (count($pair) == 2 ? $pair[1] : $pair[0]);
         if ($key == $value) {
-          if ($f == "profiles" || $f == "archives")
+          if ($f == "profiles" || $f == "archives") {
+            $value = str_replace(".","%",$value);
+            $value = str_replace(" ","%",$value);
             $p = "(username LIKE '%".$value."%' OR fullname LIKE '%".$value."%' COLLATE NOCASE)";
+          }
         } else
           $p = $key." LIKE '%".$value."%' COLLATE NOCASE";
         $q[] = $p;

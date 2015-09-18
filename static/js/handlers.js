@@ -38,7 +38,8 @@ function updateProfileHandler(username) {
 }
 
 function searchHandler(q, y) {
-  y = 1415;
+  if (!y)
+    y = 1415;
   main.html("<div id='searchResults' class='row'></div>");
   var sr = $("#searchResults");
   getProfile(q, y, function(data) {

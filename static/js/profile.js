@@ -58,6 +58,15 @@ function setProfileData(data,div) {
 				});
 				return;
 			}
+			var autocomplete_field = profileFields[key];
+			if (key == "attached_to") {
+				autocomplete_field = function(request, response) {
+						dbSearch(request.term, "archives,1415", response, true);
+				}
+			}
+			setAutoComplete(obj.find("input.autocomplete"), autocomplete_field);
+			setAutoComplete(obj.find("input.autocomplete-multiple"), autocomplete_field,true);
+
 			obj.find("input[type=text], select").val(value).attr("name",key).attr("placeholder",key.replace("_"," ").capitalize());
 			obj.find(".value").text(value);
 			obj.find(".key").text(key.replace("_"," ").capitalize());
@@ -105,6 +114,34 @@ function updateProfile(name,cmd) {
 		success: function(data) {
 			window.location.href = window.location.href.replace("/update","");
 			// console.log(data);
+		}, error: function(data) {
+			console.error(data);
+		}
+	});
+}
+
+function dbSearch(q, limits, cb, autocomplete) {
+	$.ajax({
+		url: au()+"&cmd=search&q="+q+"&limits="+limits,
+		dataType: "JSON",
+		type: "GET",
+		success: function(data) {
+			if (autocomplete) {
+				var r = [], l = "";
+				if (limits.split(",").length > 1)
+					l = " ["+limits.split(",")[1]+"]";
+				for (var d = 0; d < data.results.length; d++) {
+					var dt = data.results[d];
+					dt.username = dt.username.replace("."," ").capitalize();
+					if (dt.username !== dt.fullname && dt.fullname.length > 5) {
+						r.push({"label": dt.fullname+l, "value": dt.username+l});
+					}
+					r.push({"label": dt.username+l, "value": dt.username+l});
+				}
+				data = r;
+			}
+			if (typeof cb == "function")
+				cb(data);
 		}, error: function(data) {
 			console.error(data);
 		}
