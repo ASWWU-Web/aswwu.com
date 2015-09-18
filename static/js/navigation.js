@@ -10,7 +10,7 @@ function navInit() {
 		accountLinks.append("<li><a href='#/profile/"+user.username+"/update'>Update Profile</a></li>");
 		accountLinks.append("<li><a href='./' onclick='logout();'>Logout</a></li>");
 	} else {
-		accountLinks.append("<li><a href='#' data-reveal-id='login-modal'>Login</a></li>");
+		accountLinks.prepend("<li class='accountLinks'><a href='#' data-reveal-id='login-modal'>Login</a></li>");
 		// sidebar.prepend("<li class='prot'><a href='#/upload/'>Upload Photos</a></li>");
 	}
 
