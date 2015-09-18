@@ -3,6 +3,22 @@
 <div class='row'>
 	<div class='columns small-10 small-offset-1' style='background-color:rgba(0,0,0,0.5); padding: 2em; text-align: center;'>
 		<h1 style='color:white;'>Welcome to ASWWU.com!</h1>
-		<h3><a style='color: white;' href='#' data-reveal-id='login-modal'>Login</a></h3>
+		<hr>
+		<h3 class="hide-for-logged-in"><a style='color: white;' href='#' data-reveal-id='login-modal'>Login</a></h3>
+		<div class="hide-for-logged-out row" id="homeLinks">
+		</div>
+		<style>
+			#homeLinks * {
+				color: white;
+				list-style: none;
+			}
+			#homeLinks a[href^="#/profile"] {
+				font-size: 1.5em;
+			}
+			#homeLinks .profile-photo {
+				width: 1em;
+				height: 1em;
+			}
+		</style>
 	</div>
 </div>

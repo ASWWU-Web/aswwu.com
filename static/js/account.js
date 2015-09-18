@@ -33,8 +33,8 @@ function processLogin(newUser) {
 	user = newUser;
 	localStorage.wwuid = user.wwuid;
 	localStorage.token = user.token;
-	if (typeof navInit == "function")
-		navInit();
+	// if (typeof navInit == "function")
+	// 	navInit();
 }
 
 function login(form) {
@@ -51,6 +51,7 @@ function login(form) {
 			} else {
 				$("#login-modal").foundation("reveal","close");
 				processLogin(data.user);
+				location.reload();
 			}
 		}, error: function(data) {
 			console.error(data);
@@ -60,4 +61,5 @@ function login(form) {
 
 function logout() {
 	processLogin("");
+	location.reload();
 }

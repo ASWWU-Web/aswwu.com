@@ -7,35 +7,366 @@
 		</div>
 		<div class='medium-6 columns'>
 			<h2 class='profile-fullname'></h2>
-			<h5 class='profile-phone'></h5>
-			<h5 class='profile-email'></h5>
-			<h5 class='profile-website'></h5>
-			<h5 class='profile-birthday'></h5>
-			<h5 class='profile-class_standing'></h5>
+			<h5 class='profile-phone with-label'></h5>
+			<h5 class='profile-email with-label'></h5>
+			<h5 class='profile-website with-label'></h5>
+			<h5 class='profile-birthday with-label'></h5>
+			<h5 class='profile-class_standing with-label'></h5>
 
-			<h5 class='profile-relationship_status'></h5>
-			<h5 class='profile-attached_to'></h5>
+			<h5 class='profile-relationship_status with-label'></h5>
+			<h5 class='profile-attached_to with-label'></h5>
 
-			<h5 class='profile-majors'></h5>
-			<h5 class='profile-minors'></h5>
-			<h5 class='profile-preprofessional'></h5>
-			<h5 class='profile-graduate'></h5>
-			<h5><span class='profile-high_school'></span> - <span class='profile-class_of'></span></h5>
+			<h5 class='profile-majors with-label'></h5>
+			<h5 class='profile-minors with-label'></h5>
+			<h5 class='profile-preprofessional with-label'></h5>
+			<h5 class='profile-graduate with-label'></h5>
+			<h5 class='profile-high_school with-label'></h5>
+			<h5 class='profile-class_of with-label'></h5>
 
-			<h5 class='profile-hobbies'></h5>
-			<h5 class='profile-pet_peeves'></h5>
-			<h5 class='profile-career_goals'></h5>
-			<h5 class='profile-personality'></h5>
+			<h5 class='profile-hobbies with-label'></h5>
+			<h5 class='profile-pet_peeves with-label'></h5>
+			<h5 class='profile-career_goals with-label'></h5>
+			<h5 class='profile-personality with-label'></h5>
 
-			<h5 class='profile-department'></h5>
-			<h5 class='profile-office'></h5>
-			<h5 class='profile-office_hours'></h5>
+			<h5 class='profile-department with-label'></h5>
+			<h5 class='profile-office with-label'></h5>
+			<h5 class='profile-office_hours with-label'></h5>
 
-			<h5 class='profile-favorite_books'></h5>
-			<h5 class='profile-favorite_food'></h5>
-			<h5 class='profile-favorite_movies'></h5>
-			<h5 class='profile-favorite_music'></h5>
-			<h5><span class='profile-quote'></span> - <i class='profile-quote_author'></i></h5>
+			<h5 class='profile-favorite_books with-label'></h5>
+			<h5 class='profile-favorite_food with-label'></h5>
+			<h5 class='profile-favorite_movies with-label'></h5>
+			<h5 class='profile-favorite_music with-label'></h5>
+			<h5 class='profile-quote with-label'></h5>
+			<h5 class='profile-quote_author with-label'></h5>
 		</div>
 	</div>
 </div>
+
+
+<form id="updateForm">
+	<div class="row">
+		<div class="small-12 columns">
+			<h1>Update Your Profile</h1>
+		</div>
+	</div>
+	<div class="row profile-photo as-input">
+	</div>
+	<div class="row">
+		<hr>
+		<div class="small-12 medium-6 columns profile-fullname as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<input type="text">
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-phone as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<input type="text">
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-email as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<input type="text">
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-website as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<input type="text">
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-birthday as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<input type="text" class="datepicker" data-date-format="mm/dd/yyyy">
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-gender as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<select></select>
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-class_standing as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-4 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-8 columns">
+        	<select></select>
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-privacy as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-4 columns">
+					<span class="prefix">Visibility</span>
+				</div>
+        <div class="small-8 columns">
+        	<select>
+						<option value="0">Public</option>
+						<option value="1">Must Be Logged In</option>
+						<option value="2">Hidden</option>
+					</select>
+        </div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<hr>
+		<div class="small-12 medium-6 columns profile-relationship_status as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-6 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-6 columns">
+        	<select></select>
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-attached_to as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<input type="text">
+        </div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<hr>
+		<div class="small-12 medium-6 columns profile-majors as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<select></select>
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-minors as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<select></select>
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-preprofessional as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<input type="text">
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-graduate as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<input type="text">
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-high_school as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<input type="text">
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-class_of as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<input type="text">
+        </div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<hr>
+		<div class="small-12 medium-6 columns profile-hobbies as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<input type="text">
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-pet_peeves as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<input type="text">
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-career_goals as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<input type="text">
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-personality as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<select></select>
+        </div>
+			</div>
+		</div>
+	</div>
+	<div class="row hide-for-students">
+		<hr>
+		<div class="small-12 medium-6 columns profile-department as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<input type="text">
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-office as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<input type="text">
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-office_hours as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<input type="text">
+        </div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<hr>
+		<div class="small-12 medium-6 columns profile-favorite_books as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<input type="text">
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-favorite_food as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<input type="text">
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-favorite_movies as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<input type="text">
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-favorite_music as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<input type="text">
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-quote as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<input type="text">
+        </div>
+			</div>
+		</div>
+		<div class="small-12 medium-6 columns profile-quote_author as-input">
+			<div class="row collapse prefix-radius">
+				<div class="small-3 columns">
+					<span class="prefix key"></span>
+				</div>
+        <div class="small-9 columns">
+        	<input type="text">
+        </div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<hr>
+		<div class="small-12 columns">
+			<button type="submit" class="button expand">Save!</button>
+		</div>
+	</div>
+</form>

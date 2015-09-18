@@ -1,7 +1,9 @@
 
 function indexHandler() {
   $("#background").removeClass("hash");
-  loader(main,main.data("html"));
+  loader(main, "static/html/home.html", function() {
+    setData();
+  });
   if (window.location.hash.length > 1) {
     window.location.hash = "";
   }
@@ -20,7 +22,19 @@ function uploadHandler(x, y) {
 }
 
 function updateProfileHandler(username) {
-  updateProfile(username);
+  if (username !== user.username) {
+    indexHandler();
+    return;
+  }
+  loader(main, "static/html/profile.html #updateForm", function() {
+    getProfile(username, undefined, function(data) {
+      setProfileData(data, main);
+    });
+    $("#updateForm").submit(function() {
+      updateProfile(name,"send");
+      return false;
+    });
+  });
 }
 
 function searchHandler(q, y) {

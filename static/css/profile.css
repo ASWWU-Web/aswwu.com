@@ -12,6 +12,7 @@
 
 .profile-photo.fill {
 	width: 100%;
+	padding: 0;
 	overflow: hidden;
 }
 
@@ -27,6 +28,38 @@
 	margin: 0 0.25em;
 }
 
+.profile-photo.inline.medium {
+	height: 10em;
+	width: 8em;
+}
+
 .profile-fullname {
 	text-transform: capitalize;
+}
+
+#full-profile h5 {
+	margin: 0;
+}
+
+#updateForm h1, #updateForm label {
+	color: white;
+}
+
+#updateForm .profile-photo label {
+	width: 8em;
+}
+
+#updateForm .profile-photo input {
+	visibility: hidden;
+	position: absolute;
+}
+
+#updateForm .profile-photo input + img {
+	cursor: pointer;
+	border: solid 2px transparent;
+	width: 100%;
+}
+
+#updateForm .profile-photo input:checked + img {
+	border: solid 2px lime;
 }

@@ -9,11 +9,30 @@
     return $time["year"]*10000+$time["mon"]*100+$time["mday"];
   }
 
+  function sqe($data) {
+    return str_replace("'","?S?",$data);
+  }
+  function usqe($data) {
+    return str_replace("?S?","'",$data);
+  }
+
   class DataBase {
     private $db;
 
     public function __construct($db) {
       $this->db = new SQLite3($db);
+    }
+
+    private function escape($data) {
+      if (is_array($data))
+        return array_map("sqe", $data);
+      return sqe($data);
+    }
+
+    private function unescape($data) {
+      if (is_array($data))
+        return array_map("usqe", $data);
+      return usqe($data);
     }
 
     private function query($query) {
@@ -22,20 +41,23 @@
         return false;
       $rows = [];
       while ($result = $results->fetchArray(SQLITE3_ASSOC))
-        $rows[] = $result;
+        $rows[] = $this->unescape($result);
       return $rows;
     }
 
     private function conditionString($conditions) {
       if (is_array($conditions)) {
         if (isAssoc($conditions)) {
-          foreach ($conditions as $key => $value)
+          foreach ($conditions as $key => $value) {
+            $value = $this->escape($value);
             $where[] = $key."='".$value."'";
-              $conditions = $where;
+          }
+          $conditions = $where;
         }
         $conditions = " where ".implode(" and ", $conditions);
-      } else if ($conditions)
+      } else if ($conditions) {
         $conditions = " where ".$conditions;
+      }
 
       return $conditions;
     }
@@ -53,7 +75,7 @@
       if (!isAssoc($data))
         return false;
 
-      $query_string = "insert into ".$table." (".implode(",", array_keys($data)).') values ("'.implode('","', array_values($data)).'");';
+      $query_string = "insert into ".$table." (".implode(",", array_keys($data)).') values ("'.implode('","', $this->escape(array_values($data))).'");';
       $this->db->exec($query_string);
       return true;
     }
@@ -182,7 +204,7 @@
       if ($result) {
         $result = $result[0];
         if (isset($user) && $user->verify()) {
-          if (isset($user->roles) && in_array("admin", $user->roles))
+          if (isset($user->roles))// && ("admin", $user->roles))
             $this->pn = 3;
           else if ($user->id == $result["user_id"])
             $this->pn = 2;

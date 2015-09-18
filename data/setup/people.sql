@@ -45,6 +45,7 @@ CREATE TABLE profiles (
 	favorite_books text,
 	favorite_food text,
 	pet_peeves text,
+	personality text,
 	views integer,
 	privacy integer,
 	department text,
