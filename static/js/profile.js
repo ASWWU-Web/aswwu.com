@@ -49,10 +49,10 @@ function setProfileData(data,div) {
 						var photos = JSON.parse(data);
 						photos.push(config.defaults.profilePhoto);
 						for (var p in photos) {
-							photoObj.append("<div><label>"+
+							photoObj.append("<label>"+
 								"<input type='radio' name='photo' value='"+photos[p]+"' "+(value == photos[p] ? "checked" : "")+">"+
 								"<img src='"+config.defaults.mediaURL+"img-sm/"+photos[p]+"'>"+
-								"</label></div>");
+								"</label>");
 						}
 					}
 				});

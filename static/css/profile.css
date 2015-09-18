@@ -41,12 +41,17 @@
 	margin: 0;
 }
 
+#updateForm .profile-photo {
+	width: inherit;
+}
+
 #updateForm h1, #updateForm label {
 	color: white;
 }
 
 #updateForm .profile-photo label {
 	width: 8em;
+	display: inline-block;
 }
 
 #updateForm .profile-photo input {
