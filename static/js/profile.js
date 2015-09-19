@@ -43,17 +43,25 @@ function setProfileData(data,div) {
 			if (key == "photo") {
 				var photoObj = obj;
 				$.ajax({
-					url: config.defaults.mediaURL+"listProfilePhotos.php?wwuid="+user.wwuid+"&year="+"1415",//config.defaults.year,
+					url: config.defaults.mediaURL+"listProfilePhotos.php?wwuid="+user.wwuid+"&year="+config.defaults.year,
 					method: "GET",
 					success: function(data) {
+						var label = function(link) {
+							return "<label>"+
+								"<input type='radio' name='photo' value='"+link+"' "+(value == link ? "checked" : "")+">"+
+								"<img src='"+config.defaults.mediaURL+"img-sm/"+link+"'>"+
+								"</label>";
+						}
 						var photos = JSON.parse(data);
 						photos.push(config.defaults.profilePhoto);
 						for (var p in photos) {
-							photoObj.append("<label>"+
-								"<input type='radio' name='photo' value='"+photos[p]+"' "+(value == photos[p] ? "checked" : "")+">"+
-								"<img src='"+config.defaults.mediaURL+"img-sm/"+photos[p]+"'>"+
-								"</label>");
+							photoObj.append(label(photos[p]));
 						}
+						dbSearch(user.username, "archives,"+(config.defaults.year*1-101), function(data) {
+							var p = data.results[0].photo || false;
+							if (p && p.search(config.defaults.profilePhoto.split("/").reverse()[0]))
+								photoObj.append(label(p));
+						});
 					}
 				});
 				return;
@@ -61,7 +69,7 @@ function setProfileData(data,div) {
 			var autocomplete_field = profileFields[key];
 			if (key == "attached_to") {
 				autocomplete_field = function(request, response) {
-						dbSearch(request.term, "archives,1415", response, true);
+						dbSearch(request.term, "profiles", response, true);
 				}
 			}
 			setAutoComplete(obj.find("input.autocomplete"), autocomplete_field);

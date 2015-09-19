@@ -39,12 +39,12 @@ function updateProfileHandler(username) {
 
 function searchHandler(q, y) {
   if (!y)
-    y = 1415;
+    y = config.defaults.year;
   main.html("<div id='searchResults' class='row'></div>");
   var sr = $("#searchResults");
   getProfile(q, y, function(data) {
     if (data.results.length == 1) {
-      window.location.href = "#/profile/"+data.results[0].username+(y ? "/"+y : "");
+      window.location.href = "#/profile/"+data.results[0].username+((y && y != config.defaults.year) ? "/"+y : "");
       return;
     }
     for (d in data.results) {
