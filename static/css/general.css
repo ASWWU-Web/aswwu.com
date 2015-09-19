@@ -11,17 +11,27 @@ main {
   background-color: #222;
   z-index: -1;
   overflow: hidden;
+
+  background-position: center;
+  background-size: cover;
+  background-image: url(https://aswwu.com/media/background.php);
 }
 
-#background img {
-  min-width: 100%;
+#background {
+  /*min-width: 100%;
   min-height: 100%;
-  max-width: 1000%;
+  max-width: 1000%;*/
   -webkit-transition: -webkit-filter 300ms;
+  -moz-transition: -moz-filter 300ms;
+  -o-transition: -o-filter 300ms;
+  transition: filter 300ms;
 }
 
-#background.hash img {
+#background.hash {
   -webkit-filter: saturate(0%) brightness(45%);
+  -moz-filter: saturate(0%) brightness(45%);
+  -o-filter: saturate(0%) brightness(45%);
+  filter: saturate(0%) brightness(45%);
 }
 
 .shadow {

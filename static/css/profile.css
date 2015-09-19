@@ -68,3 +68,12 @@
 #updateForm .profile-photo input:checked + img {
 	border: solid 2px lime;
 }
+
+#searchResults .profile-photo.fill {
+	height: 0;
+	padding-bottom: 100%;
+}
+
+#searchResults .profile-fullname {
+	text-align: center;
+}

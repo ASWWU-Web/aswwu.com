@@ -40,12 +40,12 @@ function hasher() {
 $(document).ready(function() {
 	main = $("main");
 
-	$("#background").html("<img>");
-	$("#background img").hide().load(function() {
-		$(this).fadeIn();
-	}).attr("src",function() {
-		return config.mu.bg;
-	});
+	// $("#background").html("<img>");
+	// $("#background img").hide().load(function() {
+	// 	$(this).fadeIn();
+	// }).attr("src",function() {
+	// 	return config.mu.bg;
+	// });
 
 	checkLogin(function(data) {
 		$("[data-html]").each(function(i,div) {
@@ -114,7 +114,10 @@ function setData() {
 		}
 	});
 
-	$(".autofocus").last().focus();
+	var f = $(".autofocus").last();
+	if (f.attr("id") != $(".top-bar-section .autofocus").last().attr("id") || $("body").width() > 640) {
+		f.focus();
+	}
 }
 
 function loader(div,url,cb) {

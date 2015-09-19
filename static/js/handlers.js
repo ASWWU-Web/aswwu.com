@@ -40,7 +40,7 @@ function updateProfileHandler(username) {
 function searchHandler(q, y) {
   if (!y)
     y = config.defaults.year;
-  main.html("<div id='searchResults' class='row'></div>");
+  main.html("<div class='row'><ul id='searchResults' class='small-block-grid-2 medium-block-grid-3 large-block-grid-4'></ul></div>");
   var sr = $("#searchResults");
   getProfile(q, y, function(data) {
     if (data.results.length == 1) {
@@ -49,7 +49,11 @@ function searchHandler(q, y) {
     }
     for (d in data.results) {
       var tag = data.results[d].username.replace(/\./g,"-");
-      sr.append("<div id='profile-"+tag+"' class='medium-3 small-6 columns'><div class='profile-photo fill'></div></div>");
+      var link = "#/profile/"+data.results[d].username+((y && y != config.defaults.year) ? "/"+y : "");
+      sr.append("<li><a id='profile-"+tag+"' href='"+link+"'>"+
+        "<div class='profile-photo fill'></div>"+
+        "<h5 class='profile-fullname' style='color:white;'></h5>"+
+        "</a></li>");
       setProfileData(data.results[d], $("#profile-"+tag));
     }
   });
