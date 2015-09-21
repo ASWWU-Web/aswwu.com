@@ -8,6 +8,7 @@ function navInit() {
 		accountLinks.prepend("<li class='has-dropdown accountLinks'>"+profile+"<ul class='dropdown'></ul></li>");
 		accountLinks = accountLinks.find(".accountLinks > ul");
 		accountLinks.append("<li><a href='#/profile/"+user.username+"/update'>Update Profile</a></li>");
+		accountLinks.append("<li><a href='#/volunteer'>Get Involved!</a></li>");
 		accountLinks.append("<li><a href='./' onclick='logout();'>Logout</a></li>");
 	} else {
 		accountLinks.prepend("<li class='accountLinks'><a href='#' data-reveal-id='login-modal'>Login</a></li>");

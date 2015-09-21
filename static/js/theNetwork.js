@@ -15,6 +15,7 @@ var handlers = [
 	["/profile/.*/update", updateProfileHandler],
 	["/profile/.*", profileHander],
 	["/search/.*", searchHandler],
+	["/volunteer", volunteerHandler],
 	["/upload/.*", uploadHandler],
 	[".*", indexHandler]
 ];
@@ -39,13 +40,6 @@ function hasher() {
 
 $(document).ready(function() {
 	main = $("main");
-
-	// $("#background").html("<img>");
-	// $("#background img").hide().load(function() {
-	// 	$(this).fadeIn();
-	// }).attr("src",function() {
-	// 	return config.mu.bg;
-	// });
 
 	checkLogin(function(data) {
 		$("[data-html]").each(function(i,div) {

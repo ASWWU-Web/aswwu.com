@@ -8,6 +8,7 @@ var config = {
 		js: [
 			"static/js/navigation.js",
 			"static/js/profile.js",
+			"static/js/volunteer.js",
 			"static/js/fields.js"
 			// "static/js/upload.js"
 		],
