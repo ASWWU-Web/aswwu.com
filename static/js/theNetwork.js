@@ -17,6 +17,7 @@ var handlers = [
 	["/search/.*", searchHandler],
 	["/volunteer", volunteerHandler],
 	["/upload/.*", uploadHandler],
+	["/.*", pageHandler],
 	[".*", indexHandler]
 ];
 

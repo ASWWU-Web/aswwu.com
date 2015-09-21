@@ -33,17 +33,19 @@ function processLogin(newUser) {
 	user = newUser;
 	localStorage.wwuid = user.wwuid;
 	localStorage.token = user.token;
-	// if (typeof navInit == "function")
-	// 	navInit();
 }
 
+var currentlyLoggingIn = false;
 function login(form) {
+	if (currentlyLoggingIn) return;
+	currentlyLoggingIn = true;
 	$.ajax({
 		url: config.server+"?cmd=login",
 		dataType: "JSON",
 		data: form.serialize(),
 		type: "POST",
 		success: function(data) {
+			currentlyLoggingIn = false;
 			$("#login-form").removeClass("loading");
 			if (!data || data.errors) {
 				$("#login-form input[type=text]").focus();
@@ -54,6 +56,7 @@ function login(form) {
 				location.reload();
 			}
 		}, error: function(data) {
+			currentlyLoggingIn = false;
 			console.error(data);
 		}
 	});

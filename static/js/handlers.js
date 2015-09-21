@@ -9,6 +9,11 @@ function indexHandler() {
   }
 }
 
+function pageHandler(path1, path2) {
+  var path = path1+(path2 ? "/"+path2 : "")+".html";
+  loader(main, "static/html/"+path);
+}
+
 function profileHander(username, year) {
   loader(main, "static/html/profile.html #full-profile", function() {
     getProfile(username, year, function(data) {
@@ -43,7 +48,14 @@ function searchHandler(q, y) {
   main.html("<div class='row'><ul id='searchResults' class='small-block-grid-2 medium-block-grid-3 large-block-grid-4'></ul></div>");
   var sr = $("#searchResults");
   getProfile(q, y, function(data) {
-    if (data.results.length == 1) {
+    if (data.results.length == 0) {
+      main.html("<div class='row'><div class='small-10 small-offset-1 columns'><br>"+
+        "<h2 style='color:white;'>Nothing to see here. Try searching again</h2>"+
+        "<input type='text' class='autocomplete-search autofocus' placeholder='Searcheth again!'>"+
+        "</div></div>");
+      setData();
+      return;
+    } else if (data.results.length == 1) {
       window.location.href = "#/profile/"+data.results[0].username+((y && y != config.defaults.year) ? "/"+y : "");
       return;
     }
