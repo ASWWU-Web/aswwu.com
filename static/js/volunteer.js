@@ -18,7 +18,7 @@ function setVolunteerData(div, data) {
 	if (data.volunteer_info) {
 		$.each(data.volunteer_info, function(key, value) {
 			var $obj = div.find(".volunteer-"+key);
-			var ck = key.replace(/_/g," ").capitalize();
+			var ck = key.replace(/_/g," ").capitalize().replace(/ Slash /g,"/");
 			$obj.find("input[type=checkbox]").attr("name",key).prop("checked", (value == 1));
 			$obj.find("input[type=text]").val(value).attr("placeholder",ck).attr("name",key);
 			$obj.find(".key").text(ck);
