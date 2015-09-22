@@ -7,7 +7,7 @@ function au(check) {
 	if (t == "undefined") t = "";
 	if (check && (t == "" || w == ""))
 		return false;
-	return config.server+"?wwuid="+w+"&token="+t;
+	return config.server+"?token="+w+t;
 }
 
 function checkLogin(callback) {
