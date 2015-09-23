@@ -36,8 +36,12 @@ function updateProfileHandler(username) {
       setProfileData(data, main);
     });
     $("#updateForm").submit(function() {
-      updateProfile(name,"send");
+      updateProfile(name);
       return false;
+    });
+    $("#goToVolunteerLink").on("click", function(event) {
+      event.preventDefault();
+      updateProfile(name, true);
     });
   });
 }
@@ -75,7 +79,7 @@ function volunteerHandler() {
   if (!user.wwuid) {
     main.html("<div class='row'><div class='small-12 columns'>"+
       "<h1 style='color:white;'>You must login to access this page</h1><br>"+
-      "<h3><a href='#' data-reveal-id='login-modal' style='color:white;'>Login</a></h3>"+
+      "<h3><a href='#' data-reveal-id='login-modal' style='color: white;'>Login</a></h3>"+
       "</div></div>");
     return;
   }

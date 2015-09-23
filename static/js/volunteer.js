@@ -39,7 +39,7 @@ function setVolunteerData(div, data) {
 			method: "POST",
 			data: {"volunteer_data": JSON.stringify(volunteerData)},
 			success: function(data) {
-				location.reload();
+				window.location.href = "";
 			},
 			error: function(data) {
 				console.error(data);

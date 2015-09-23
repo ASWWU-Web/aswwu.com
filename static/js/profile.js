@@ -109,7 +109,7 @@ function setProfileData(data,div) {
 	});
 }
 
-function updateProfile(name,cmd) {
+function updateProfile(name, goToVolunteer) {
 	var data = $("#updateForm").serializeArray();
 	var profile_data = {};
 	$.each(data, function(i,d) {
@@ -121,8 +121,10 @@ function updateProfile(name,cmd) {
 		data: {profile_data: JSON.stringify(profile_data)},
 		type: "POST",
 		success: function(data) {
-			window.location.href = window.location.href.replace("/update","");
-			// console.log(data);
+			if (goToVolunteer)
+				window.location.href = "#/volunteer";
+			else
+				window.location.href = window.location.href.replace("/update","");
 		}, error: function(data) {
 			console.error(data);
 		}
