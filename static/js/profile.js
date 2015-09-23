@@ -1,10 +1,11 @@
 
-function getProfile(name, year, cb) {
+function getProfile(name, year, cb, p) {
 	var limits = "profiles";
 	if (year && year.toString().length == 4)
 		limits = "archives,"+year;
+	p = (p || window.location.hash.indexOf("/profile/") > -1 ? "&profile" : "");
 	$.ajax({
-		url: au()+"&cmd=search&profile&limits="+limits+"&q="+name,
+		url: au()+"&cmd=search&limits="+limits+"&q="+name+p,
 		dataType: "JSON",
 		type: "GET",
 		success: function(data) {
