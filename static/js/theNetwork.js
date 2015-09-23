@@ -12,11 +12,14 @@ String.prototype.capitalize = function() {
 }
 
 var handlers = [
+	["/department", departmentHandler],
+	["/departments", departmentHandler],
+	["/department/.*", departmentHandler],
 	["/profile/.*/update", updateProfileHandler],
 	["/profile/.*", profileHander],
 	["/search/.*", searchHandler],
-	["/volunteer", volunteerHandler],
 	["/upload/.*", uploadHandler],
+	["/volunteer", volunteerHandler],
 	["/.*", pageHandler],
 	[".*", indexHandler]
 ];
@@ -122,8 +125,8 @@ function loader(div,url,cb) {
 		spinner.append("<div class='rect"+i+"'></div>");
 	};
 	div.append(spinner);
-	div.load(url,function(){
-		if (cb && typeof cb === "function") cb();
+	div.load(url, function(response, status, xhr) {
+		if (cb && typeof cb === "function") cb(xhr);
 		setData();
 	});
 }

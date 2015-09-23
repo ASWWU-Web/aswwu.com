@@ -11,7 +11,10 @@ function indexHandler() {
 
 function pageHandler(path1, path2) {
   var path = path1+(path2 ? "/"+path2 : "")+".html";
-  loader(main, "static/html/"+path);
+  loader(main, "static/html/"+path, function(xhr) {
+    if (xhr.status > 400)
+      window.location.href = "#";
+  });
 }
 
 function profileHander(username, year) {
@@ -87,5 +90,12 @@ function volunteerHandler() {
     getVolunteer(function(data) {
       setVolunteerData($("#volunteerForm .small-12"), data);
     });
+  });
+}
+
+function departmentHandler(department) {
+  if (department == undefined) department = "";
+  loader(main, "static/html/departments/"+department, function(xhr) {
+    if (xhr.status == 404) window.location.href = "#/departments";
   });
 }
