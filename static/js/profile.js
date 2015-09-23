@@ -4,7 +4,7 @@ function getProfile(name, year, cb) {
 	if (year && year.toString().length == 4)
 		limits = "archives,"+year;
 	$.ajax({
-		url: au()+"&cmd=search&limits="+limits+"&q="+name,
+		url: au()+"&cmd=search&profile&limits="+limits+"&q="+name,
 		dataType: "JSON",
 		type: "GET",
 		success: function(data) {
