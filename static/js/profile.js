@@ -59,9 +59,14 @@ function setProfileData(data,div) {
 							photoObj.append(label(photos[p]));
 						}
 						dbSearch(user.username, "archives,"+(config.defaults.year*1-101), function(data) {
-							var p = data.results[0].photo || false;
-							if (p && p.search(config.defaults.profilePhoto.split("/").reverse()[0]))
-								photoObj.append(label(p));
+							for (var i = 0; i < data.results.length; i++) {
+								if (user.username == data.results[i].username) {
+									var p = data.results[i].photo || false;
+									if (p && p.search(config.defaults.profilePhoto.split("/").reverse()[0]))
+										photoObj.append(label(p));
+									break;
+								}
+							}
 						});
 					}
 				});
