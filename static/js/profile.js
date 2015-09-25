@@ -145,9 +145,14 @@ function dbSearch(q, limits, cb, autocomplete) {
 	}
 	var data = {"results": listOfUsers};
 	data = data.results.filter(function(u) {
-		var qu = new RegExp(q.replace(" ","."),'i');
-		var qf = new RegExp(q,'i');
-		return u.username.match(qu) || u.fullname.match(qf);
+		var q1 = q.split(" ")[0];
+		var q2 = q.split(" ")[1] || "";
+		var u1 = u.username.split(".")[0];
+		var u2 = u.username.split(".")[1];
+		var f1 = u.fullname.split(" ")[0] || u1;
+		var f2 = u.fullname.split(" ")[1] || u2;
+		return (u1.indexOf(q1) == 0 || u2.indexOf(q1) == 0 || f1.indexOf(q1) == 0 || f2.indexOf(q1) == 0) &&
+						(u1.indexOf(q2) == 0 || u2.indexOf(q2) == 0 || f1.indexOf(q2) == 0 || f2.indexOf(q2) == 0);
 	}).sort(function(a, b) {
 		if (a.views*1 > b.views*1) return -1;
 		else if (b.views*1 > a.views*1) return 1;
