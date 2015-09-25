@@ -64,6 +64,7 @@ $(document).ready(function() {
 
 });
 
+var listOfUsers = [];
 function initialize() {
 
 	if (loadCount > 1) {
@@ -71,7 +72,21 @@ function initialize() {
 		return false;
 	}
 
-	setData();
+	window.onhashchange = hasher;
+	$.ajax({
+		url: config.server+"?cmd=search&q=.&limits=profiles&list",
+		method: "GET",
+		dataType: "JSON",
+		success: function(data) {
+			listOfUsers = data.results.filter(function(f) { return f != null; });
+			setData();
+			if (window.location.hash.substr(1) !== "")
+				hasher();
+		},
+		error: function(data) {
+			console.error(data);
+		}
+	});
 
 	$("head").append('<meta name="description" content="'+config.title+': '+config.description+'" />');
 	$("head").append('<link rel="icon" href="'+config.favicon+'"  type="image/x-icon">');
@@ -81,10 +96,6 @@ function initialize() {
 
 	$(document).foundation();
 	navInit();
-
-	window.onhashchange = hasher;
-	if (window.location.hash.substr(1) !== "")
-		hasher();
 
 }
 

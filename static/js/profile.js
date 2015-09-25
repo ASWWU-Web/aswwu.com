@@ -137,29 +137,36 @@ function updateProfile(name, goToVolunteer) {
 }
 
 function dbSearch(q, limits, cb, autocomplete) {
-	$.ajax({
-		url: au()+"&cmd=search&q="+q+"&limits="+limits,
-		dataType: "JSON",
-		type: "GET",
-		success: function(data) {
-			if (autocomplete) {
-				var r = [], l = "";
-				if (limits.split(",").length > 1)
-					l = " ["+limits.split(",")[1]+"]";
-				for (var d = 0; d < data.results.length; d++) {
-					var dt = data.results[d];
-					dt.username = dt.username.replace("."," ").capitalize();
-					if (dt.username !== dt.fullname && dt.fullname.length > 5) {
-						r.push({"label": dt.fullname+l, "value": dt.username+l});
-					}
-					r.push({"label": dt.username+l, "value": dt.username+l});
-				}
-				data = r;
-			}
-			if (typeof cb == "function")
-				cb(data);
-		}, error: function(data) {
-			console.error(data);
-		}
+	if (limits == config.defaults.year)
+		limits = "profiles";
+	if (limits !== "profiles") {
+		getProfile(q, limits, cb);
+		return;
+	}
+	var data = {"results": listOfUsers};
+	data = data.results.filter(function(u) {
+		var qu = new RegExp(q.replace(" ","."),'i');
+		var qf = new RegExp(q,'i');
+		return u.username.match(qu) || u.fullname.match(qf);
+	}).sort(function(a, b) {
+		if (a.views*1 > b.views*1) return -1;
+		else if (b.views*1 > a.views*1) return 1;
+		else return 0;
 	});
+	if (autocomplete) {
+		var r = [], l = "";
+		if (limits.split(",").length > 1)
+			l = " ["+limits.split(",")[1]+"]";
+		for (var d = 0; d < data.length; d++) {
+			var dt = {"username": data[d].username, "fullname": data[d].fullname};
+			dt.username = dt.username.replace("."," ").capitalize();
+			if (dt.username !== dt.fullname && dt.username.toLowerCase() !== dt.fullname.toLowerCase() && dt.fullname.length > 5) {
+				r.push({"label": dt.fullname+l, "value": dt.username+l});
+			}
+			r.push({"label": dt.username+l, "value": dt.username+l});
+		}
+		data = r;
+	}
+	if (typeof cb == "function")
+		cb(data);
 }

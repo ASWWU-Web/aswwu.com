@@ -17,7 +17,40 @@ function pageHandler(path1, path2) {
   });
 }
 
+function adminHandler(page) {
+  if (page == undefined || page.length < 4) {
+    var id = "adminPanel";
+  } else {
+    var id = page;
+  }
+  loader(main, "static/html/admin.html #"+id+"Panel", function(xhr) {
+    if (xhr.status == 404) {
+      window.location.href = "#";
+      return;
+    }
+    setData();
+    main.find("form").submit(function(event) {
+      event.preventDefault();
+      $.ajax({
+        url: $(this).attr("action"),
+        method: "POST",
+        data: $(this).serializeArray(),
+        success: function(data) {
+          console.log(data);
+        },
+        error: function(data) {
+          console.error(data);
+        }
+      });
+    });
+  });
+}
+
 function profileHander(username, year) {
+  if (username.split(" ").length > 1) {
+    window.location.href = window.location.href.replace(username,username.replace(" ",".").toLowerCase());
+    return;
+  }
   loader(main, "static/html/profile.html #full-profile", function() {
     getProfile(username, year, function(data) {
       setProfileData(data, main);
@@ -54,27 +87,29 @@ function searchHandler(q, y) {
     y = config.defaults.year;
   main.html("<div class='row'><ul id='searchResults' class='small-block-grid-2 medium-block-grid-3 large-block-grid-4'></ul></div>");
   var sr = $("#searchResults");
-  getProfile(q, y, function(data) {
-    if (data.results.length == 0) {
+  dbSearch(q, y, function(data) {
+    if (data.results) data = data.results;
+    if (data.length == 0) {
       main.html("<div class='row'><div class='small-10 small-offset-1 columns'><br>"+
         "<h2 style='color:white;'>Nothing to see here. Try searching again</h2>"+
         "<input type='text' class='autocomplete-search autofocus' placeholder='Searcheth again!'>"+
         "</div></div>");
       setData();
       return;
-    } else if (data.results.length == 1) {
-      window.location.href = "#/profile/"+data.results[0].username+((y && y != config.defaults.year) ? "/"+y : "");
+    } else if (data.length == 1) {
+      window.location.href = "#/profile/"+data[0].username+((y && y != config.defaults.year) ? "/"+y : "");
       return;
     }
-    for (d in data.results) {
-      var tag = data.results[d].username.replace(/\./g,"-");
-      var link = "#/profile/"+data.results[d].username+((y && y != config.defaults.year) ? "/"+y : "");
+    for (var d = 0; d < data.length; d++) {
+      var tag = data[d].username.replace(/\./g,"-");
+      var link = "#/profile/"+data[d].username+((y && y != config.defaults.year) ? "/"+y : "");
       sr.append("<li><a id='profile-"+tag+"' href='"+link+"'>"+
         "<div class='profile-photo fill'></div>"+
         "<h5 class='profile-fullname' style='color:white;'></h5>"+
         "</a></li>");
-      setProfileData(data.results[d], $("#profile-"+tag));
+      setProfileData(data[d], $("#profile-"+tag));
     }
+    setData();
   });
 }
 
