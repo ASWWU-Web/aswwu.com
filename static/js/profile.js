@@ -62,8 +62,10 @@ function setProfileData(data,div) {
 							for (var i = 0; i < data.results.length; i++) {
 								if (user.username == data.results[i].username) {
 									var p = data.results[i].photo || false;
-									if (p && p.search(config.defaults.profilePhoto.split("/").reverse()[0]))
-										photoObj.append(label(p));
+									if (p && p.search(config.defaults.profilePhoto.split("/").reverse()[0])) {
+										if (!p.search("/"+config.defaults.year+"/"))
+											photoObj.append(label(p));
+									}
 									break;
 								}
 							}
