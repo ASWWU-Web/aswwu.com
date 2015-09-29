@@ -17,26 +17,37 @@ function pageHandler(path1, path2) {
   });
 }
 
-function adminHandler(page) {
-  if (page == undefined || page.length < 4) {
-    var id = "adminPanel";
-  } else {
-    var id = page;
+function rolesHandler(role) {
+  if (role == undefined || role.length < 4)
+    var role = "administrator";
+  if (!user && user.roles.indexOf("administrator") < 0 && user.roles.indexOf(role) < 0) {
+    window.location.hash = "";
+    return;
   }
-  loader(main, "static/html/admin.html #"+id+"Panel", function(xhr) {
+  loader(main, "static/html/roles/"+role+".html", function(xhr) {
     if (xhr.status == 404) {
       window.location.href = "#";
       return;
     }
     setData();
-    main.find("form").submit(function(event) {
+    main.find("form").not(".no-set").submit(function(event) {
       event.preventDefault();
+      var $form = $(this);
       $.ajax({
-        url: $(this).attr("action"),
+        url: au()+"&cmd=roles&role="+role,
         method: "POST",
+        dataType: "JSON",
         data: $(this).serializeArray(),
         success: function(data) {
-          console.log(data);
+          if (data.errors) {
+            $form.find(".errors").text(data.errors.join("<br>")).show().delay(1000).fadeOut();
+          } else if (data.response) {
+            $form.find(".response").text(data.response.capitalize()).show().delay(1000).fadeOut();
+            $form.trigger("reset");
+          } else {
+            $form.trigger("reset");
+            console.log(data);
+          }
         },
         error: function(data) {
           console.error(data);

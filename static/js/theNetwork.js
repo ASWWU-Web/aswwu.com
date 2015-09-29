@@ -17,6 +17,7 @@ var handlers = [
 	["/department/.*", departmentHandler],
 	["/profile/.*/update", updateProfileHandler],
 	["/profile/.*", profileHander],
+	["/roles/.*", rolesHandler],
 	["/search/.*", searchHandler],
 	["/upload/.*", uploadHandler],
 	["/volunteer", volunteerHandler],
@@ -108,6 +109,7 @@ function setData() {
 	} else {
 		$(".hide-for-logged-out").remove();
 	}
+	$(".hide").hide();
 	if (typeof navInit === "function")
 		navInit();
 	$(".datepicker").fdatepicker();
@@ -116,7 +118,7 @@ function setData() {
 		var limits = this.element[0].dataset.searchLimits || "profiles";
 		dbSearch(request.term, limits, response, true);
 	});
-	$("input.autocomplete-search").on("keydown", function(event) {
+	$("input.autocomplete-search").not(".no-search").on("keydown", function(event) {
 		if (event.keyCode == $.ui.keyCode.ENTER) {
 			window.location.href = "#/search/"+$(this).val().replace(" \[","/").replace("]","");
 			event.preventDefault();
@@ -129,12 +131,12 @@ function setData() {
 	}
 }
 
+var spinner = $("<div class='spinner'></div>");
+for (var i = 1; i <= 5; i++) {
+	spinner.append("<div class='rect"+i+"'></div>");
+};
 function loader(div,url,cb) {
 	div.empty();
-	var spinner = $("<div class='spinner'></div>");
-	for (var i = 1; i <= 5; i++) {
-		spinner.append("<div class='rect"+i+"'></div>");
-	};
 	div.append(spinner);
 	div.load(url, function(response, status, xhr) {
 		if (cb && typeof cb === "function") cb(xhr);

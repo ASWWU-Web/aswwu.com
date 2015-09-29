@@ -9,6 +9,12 @@ function navInit() {
 		accountLinks = accountLinks.find(".accountLinks > ul");
 		accountLinks.append("<li><a href='#/profile/"+user.username+"/update'>Update Profile</a></li>");
 		accountLinks.append("<li><a href='./' onclick='logout();'>Logout</a></li>");
+		if (user.roles.length > 0) {
+			accountLinks.append("<li class='divider'></li>");
+			for (var i = 0; i < user.roles.length; i++) {
+				accountLinks.append("<li><a href='#/roles/"+user.roles[i]+"'>"+user.roles[i].capitalize()+" Page</a></li>");
+			}
+		}
 	} else {
 		accountLinks.prepend("<li class='accountLinks'><a href='#' data-reveal-id='login-modal'>Login</a></li>");
 		// sidebar.prepend("<li class='prot'><a href='#/upload/'>Upload Photos</a></li>");
