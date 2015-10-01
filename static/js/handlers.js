@@ -141,7 +141,11 @@ function volunteerHandler() {
 
 function departmentHandler(department) {
   if (department == undefined) department = "";
-  loader(main, "static/html/departments/"+department, function(xhr) {
+  loader(main, "static/html/departments/"+department+"/index.html", function(xhr) {
     if (xhr.status == 404) window.location.href = "#/departments";
   });
+}
+
+function collegianHandler(collegian) {
+  loader(main, "static/html/departments/collegian/index.html");
 }

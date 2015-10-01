@@ -12,9 +12,10 @@ String.prototype.capitalize = function() {
 }
 
 var handlers = [
-	["/department", departmentHandler],
 	["/departments", departmentHandler],
-	["/department/.*", departmentHandler],
+	["/departments/.*", departmentHandler],
+	["/collegian", collegianHandler],
+	["/collegian/.*/.*", collegianHandler],
 	["/profile/.*/update", updateProfileHandler],
 	["/profile/.*", profileHander],
 	["/roles/.*", rolesHandler],
