@@ -3,14 +3,13 @@ var config = {
 	title: "ASWWU",
 	description: "the Associated Student Body of Walla Walla University",
 	favicon: "images/mask_unknown.png",
-	server: "https://aswwu.com/server/",
+	server: "/server/",
 	files: {
 		js: [
 			"static/js/navigation.js",
 			"static/js/profile.js",
 			"static/js/volunteer.js",
 			"static/js/fields.js"
-			// "static/js/upload.js"
 		],
 		css: [
 			"static/css/navigation.css",

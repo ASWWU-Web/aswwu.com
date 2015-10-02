@@ -1,4 +1,38 @@
 
+var handlers = [
+	["/departments", departmentHandler],
+	["/departments/.*", departmentHandler],
+	["/collegian", collegianHandler],
+	["/collegian/.*/.*", collegianHandler],
+	["/profile/.*/update", updateProfileHandler],
+	["/profile/.*", profileHander],
+	["/roles/.*", rolesHandler],
+  ["/search/.*", searchHandler],
+	["/super_search", superSearchHandler],
+	["/upload/.*", uploadHandler],
+	["/volunteer", volunteerHandler],
+	["/.*", pageHandler],
+	[".*", indexHandler]
+];
+
+function hasher() {
+	checkLogin(function() {
+		var hash = window.location.hash.substr(1);
+		for (var h in handlers) {
+			var path = handlers[h][0].replace(/\//g,"\\\/");
+			var r = new RegExp(path);
+			var m = hash.match(path);
+			if (m && m[0] === hash) {
+				m = path.split("\\\/");
+				hash = hash.split("/").filter(function(i) { return m.indexOf(i) < 0; });
+				$("#background").addClass("hash");
+				handlers[h][1].apply(this, hash);
+				return true;
+			}
+		}
+	});
+}
+
 function indexHandler() {
   $("#background").removeClass("hash");
   loader(main, "static/html/home.html", function() {
@@ -121,6 +155,36 @@ function searchHandler(q, y) {
       setProfileData(data[d], $("#profile-"+tag));
     }
     setData();
+  });
+}
+
+function superSearchHandler() {
+  function newRow() {
+    var columns = ["fullname","class_standing"];
+    $("#superSearchForm").append("<div class='row collapse prefix'>"+
+              "<div class='small-4 columns'>"+
+                "<select class='prefix'>"+
+                  columns.map(function(c, i) { return "<option value='"+c+"'>"+c.replace("_"," ").capitalize()+"</option>"})+
+                "</select>"+
+              "</div>"+
+              "<div class='small-8 columns'>"+
+                "<input type='text'>"+
+              "</div>"+
+            "</div>");
+		$("#superSearchForm select").change(function() {
+			$(this).parent().next().find("input").attr("name",$(this).val());
+		});
+  }
+  loader(main, "static/html/super_search.html", function() {
+    newRow();
+    $("#superSearchForm").submit(function(event) {
+      event.preventDefault();
+      var qString = [];
+			$.each($(this).serializeArray(), function(i, obj) {
+				qString.push(obj.name+"="+obj.value);
+			});
+			window.location.href = "#/search/"+qString.join(";");
+    });
   });
 }
 

@@ -11,39 +11,6 @@ String.prototype.capitalize = function() {
 	return words.join(" ");
 }
 
-var handlers = [
-	["/departments", departmentHandler],
-	["/departments/.*", departmentHandler],
-	["/collegian", collegianHandler],
-	["/collegian/.*/.*", collegianHandler],
-	["/profile/.*/update", updateProfileHandler],
-	["/profile/.*", profileHander],
-	["/roles/.*", rolesHandler],
-	["/search/.*", searchHandler],
-	["/upload/.*", uploadHandler],
-	["/volunteer", volunteerHandler],
-	["/.*", pageHandler],
-	[".*", indexHandler]
-];
-
-function hasher() {
-	checkLogin(function() {
-		var hash = window.location.hash.substr(1);
-		for (var h in handlers) {
-			var path = handlers[h][0].replace(/\//g,"\\\/");
-			var r = new RegExp(path);
-			var m = hash.match(path);
-			if (m && m[0] === hash) {
-				m = path.split("\\\/");
-				hash = hash.split("/").filter(function(i) { return m.indexOf(i) < 0; });
-				$("#background").addClass("hash");
-				handlers[h][1].apply(this, hash);
-				return true;
-			}
-		}
-	});
-}
-
 $(document).ready(function() {
 	main = $("main");
 

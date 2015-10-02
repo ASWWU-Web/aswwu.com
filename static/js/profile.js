@@ -106,8 +106,10 @@ function setProfileData(data,div) {
 			obj.html("<a href='mailto:"+value+"'>"+value+"</a>");
 		} else if (key == "website") {
 			obj.html("<a href='"+value+"' target='_blank'>"+value+"</a>");
-		} else {
+		} else if (["fullname","username"].indexOf(key) > -1) {
 			obj.text(value);
+		} else {
+			obj.html("<a href='#/search/"+key+"="+value+"'>"+value+"</a>");
 		}
 
 		if (obj.hasClass("with-label")) {
@@ -139,12 +141,16 @@ function updateProfile(name, goToVolunteer) {
 }
 
 function dbSearch(q, limits, cb, autocomplete) {
+	if ((!q || q.length == 0) && !autocomplete) {
+		q = " ";
+	}
 	if (limits == config.defaults.year)
 		limits = "profiles";
-	if (limits !== "profiles") {
+	if (limits !== "profiles" || q.split("=").length > 1) {
 		getProfile(q, limits, cb);
 		return;
 	}
+
 	var data = {"results": listOfUsers};
 	data = data.results.filter(function(u) {
 		var q1 = q.split(" ")[0];
