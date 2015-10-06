@@ -17,6 +17,32 @@ function getProfile(name, year, cb, p) {
 	});
 }
 
+function setInputByKey(obj, key, value) {
+	if (key == "majors" || key == "minors" || key == "attached_to" || key == "name") var input = $("<input type='text' class='autocomplete'>");
+	else if (profileFields[key] && profileFields[key].length > 1) var input = $("<select></select>");
+	else var input = $("<input type='text'>");
+	obj.find(".insert-input-here").html(input);
+
+	if (profileFields[key] && profileFields[key].length > 1) {
+		obj.find("select").not(".set-key").html(profileFields[key].map(function(v) {
+			v = v.capitalize();
+			return '<option value="'+v+'">'+v+'</option>';
+		}));
+	}
+	var autocomplete_field = profileFields[key];
+	if (key == "attached_to" || key == "name") {
+		autocomplete_field = function(request, response) {
+				dbSearch(request.term, "profiles", response, true);
+		}
+	}
+	setAutoComplete(obj.find("input.autocomplete"), autocomplete_field);
+	setAutoComplete(obj.find("input.autocomplete-multiple"), autocomplete_field,true);
+
+	obj.find("input[type=text], select").not(".set-key").val(value).attr("name",key).attr("placeholder",key.replace("_"," ").capitalize());
+	obj.find(".value").text(value);
+	obj.find(".key").text(key.replace("_"," ").capitalize());
+}
+
 function setProfileData(data,div) {
 	if (user.status == "Student")
 		div.find(".hide-for-students").remove();
@@ -35,12 +61,6 @@ function setProfileData(data,div) {
 	$.each(profile, function(key,value) {
 		var obj = div.find(".profile-"+key);
 		if (obj.hasClass("as-input")) {
-			if (profileFields[key] && profileFields[key].length > 1) {
-				obj.find("select").html(profileFields[key].map(function(v) {
-					v = v.capitalize();
-					return '<option value="'+v+'">'+v+'</option>';
-				}));
-			}
 			if (key == "photo") {
 				var photoObj = obj;
 				$.ajax({
@@ -72,20 +92,9 @@ function setProfileData(data,div) {
 						});
 					}
 				});
-				return;
+			} else {
+					setInputByKey(obj, key, value);
 			}
-			var autocomplete_field = profileFields[key];
-			if (key == "attached_to") {
-				autocomplete_field = function(request, response) {
-						dbSearch(request.term, "profiles", response, true);
-				}
-			}
-			setAutoComplete(obj.find("input.autocomplete"), autocomplete_field);
-			setAutoComplete(obj.find("input.autocomplete-multiple"), autocomplete_field,true);
-
-			obj.find("input[type=text], select").val(value).attr("name",key).attr("placeholder",key.replace("_"," ").capitalize());
-			obj.find(".value").text(value);
-			obj.find(".key").text(key.replace("_"," ").capitalize());
 			return;
 		}
 

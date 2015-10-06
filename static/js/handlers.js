@@ -160,19 +160,22 @@ function searchHandler(q, y) {
 
 function superSearchHandler() {
   function newRow() {
-    var columns = ["fullname","class_standing"];
-    $("#superSearchForm").append("<div class='row collapse prefix'>"+
+    var columns = ["name","gender","birthday","email","phone","website","majors","minors","graduate","preprofessional","class_standing","high_school","class_of","relationship_status","attached_to","quote","quote_author","hobbies","career_goals","favorite_music","favorite_movies","favorite_books","favorite_food","pet_peeves","personality"];
+		// columns = columns.filter(function(a, b) {
+		// 	return a[0] > b[0];
+		// });
+    var newinput = $("<div class='row collapse prefix'>"+
               "<div class='small-4 columns'>"+
-                "<select class='prefix'>"+
+                "<select class='prefix set-key'>"+
                   columns.map(function(c, i) { return "<option value='"+c+"'>"+c.replace("_"," ").capitalize()+"</option>"})+
                 "</select>"+
               "</div>"+
-              "<div class='small-8 columns'>"+
-                "<input type='text'>"+
-              "</div>"+
+              "<div class='small-8 columns insert-input-here'></div>"+
             "</div>");
-		$("#superSearchForm select").change(function() {
-			$(this).parent().next().find("input").attr("name",$(this).val());
+		setInputByKey(newinput, "name");
+		$("#superSearchForm").append(newinput);
+		$("#superSearchForm select.set-key").change(function() {
+			setInputByKey($(this).parent().parent(), $(this).val());
 		});
   }
   loader(main, "static/html/super_search.html", function() {
@@ -181,10 +184,15 @@ function superSearchHandler() {
       event.preventDefault();
       var qString = [];
 			$.each($(this).serializeArray(), function(i, obj) {
-				qString.push(obj.name+"="+obj.value);
+				if (obj.name == "name") qString.push(obj.value);
+				else qString.push(obj.name+"="+obj.value);
 			});
-			window.location.href = "#/search/"+qString.join(";");
+			var year = $("#searchYearInput").val();
+			if (year == config.defaults.year) year = "";
+			window.location.href = "#/search/"+qString.join(";")+"/"+year;
     });
+		$("#addAField").click(function() { newRow(); });
+		$("#searchButton").click(function() { $("#superSearchForm").submit(); });
   });
 }
 

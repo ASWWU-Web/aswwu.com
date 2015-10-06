@@ -8,7 +8,7 @@ function navInit() {
 		accountLinks.prepend("<li class='has-dropdown accountLinks'>"+profile+"<ul class='dropdown'></ul></li>");
 		accountLinks = accountLinks.find(".accountLinks > ul");
 		accountLinks.append("<li><a href='#/profile/"+user.username+"/update'>Update Profile</a></li>");
-		// accountLinks.append("<li><a href='#/super_search'>Super Search</a></li>");
+		accountLinks.append("<li><a href='#/super_search'>Super Search</a></li>");
 		accountLinks.append("<li><a href='./' onclick='logout();'>Logout</a></li>");
 		if (user.roles.length > 0) {
 			accountLinks.append("<li class='divider'></li>");
@@ -18,7 +18,6 @@ function navInit() {
 		}
 	} else {
 		accountLinks.prepend("<li class='accountLinks'><a href='#' data-reveal-id='login-modal'>Login</a></li>");
-		// sidebar.prepend("<li class='prot'><a href='#/upload/'>Upload Photos</a></li>");
 	}
 
 	$("#login-form").submit(function(event) {
