@@ -30,7 +30,7 @@ h5.response {color: green;}
   -webkit-transition: -webkit-filter 300ms;
   -moz-transition: -moz-filter 300ms;
   -o-transition: -o-filter 300ms;
-  transition: filter 300ms;
+  transition: -webkit-filter 300ms ,filter 300ms;
 }
 
 #background.hash {
