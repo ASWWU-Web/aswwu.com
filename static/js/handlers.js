@@ -4,9 +4,11 @@ var handlers = [
 	["/departments/.*", departmentHandler],
 	["/collegian", collegianHandler],
 	["/collegian/.*/.*", collegianHandler],
+	["/download_photos", downloadPhotosHandler],
 	["/profile/.*/update", updateProfileHandler],
 	["/profile/.*", profileHander],
 	["/roles/.*", rolesHandler],
+	["/roles/.*/.*", rolesHandler],
   ["/search/.*", searchHandler],
 	["/super_search", superSearchHandler],
 	["/upload/.*", uploadHandler],
@@ -43,6 +45,32 @@ function indexHandler() {
   }
 }
 
+function collegianHandler(collegian) {
+  loader(main, "static/html/departments/collegian/index.html");
+}
+
+function departmentHandler(department) {
+  if (department == undefined) department = "";
+  loader(main, "static/html/departments/"+department+"/index.html", function(xhr) {
+    if (xhr.status == 404) window.location.href = "#/departments";
+  });
+}
+
+function downloadPhotosHandler() {
+	if (!user) {
+		window.location.href = "#";
+		return;
+	}
+	loader(main, "static/html/roles/download_photos.html", function() {
+		$.get(config.defaults.mediaURL+"listProfilePhotos.php?wwuid="+user.wwuid+"&year="+config.defaults.year).then(function(data) {
+			$.each(JSON.parse(data), function(i, d) {
+				var url = config.defaults.mediaURL+"img-sm/"+d;
+				$("#profilePhotos").append("<li><a href='"+url.replace("img-sm/","")+"' target='_blank'><img src='"+url+"'></a></li>");
+			});
+		});
+	});
+}
+
 function pageHandler(path1, path2) {
   var path = path1+(path2 ? "/"+path2 : "")+".html";
   loader(main, "static/html/"+path, function(xhr) {
@@ -51,10 +79,23 @@ function pageHandler(path1, path2) {
   });
 }
 
-function rolesHandler(role) {
+function profileHander(username, year) {
+  if (username.split(" ").length > 1) {
+    window.location.href = window.location.href.replace(username,username.replace(" ",".").toLowerCase());
+    return;
+  }
+  loader(main, "static/html/profile.html #full-profile", function() {
+    getProfile(username, year, function(data) {
+      setProfileData(data, main);
+    });
+  });
+}
+
+function rolesHandler(role, opt) {
   if (role == undefined || role.length < 4)
     var role = "administrator";
-  if (!user && user.roles.indexOf("administrator") < 0 && user.roles.indexOf(role) < 0) {
+	role = role.replace(" ","_").toLowerCase();
+  if (!user || (user.roles.indexOf("administrator") < 0 && user.roles.indexOf(role) < 0)) {
     window.location.hash = "";
     return;
   }
@@ -88,42 +129,15 @@ function rolesHandler(role) {
         }
       });
     });
-  });
-}
-
-function profileHander(username, year) {
-  if (username.split(" ").length > 1) {
-    window.location.href = window.location.href.replace(username,username.replace(" ",".").toLowerCase());
-    return;
-  }
-  loader(main, "static/html/profile.html #full-profile", function() {
-    getProfile(username, year, function(data) {
-      setProfileData(data, main);
-    });
-  });
-}
-
-function uploadHandler(x, y) {
-  loader(main, "static/html/upload.html");
-}
-
-function updateProfileHandler(username) {
-  if (username !== user.username) {
-    indexHandler();
-    return;
-  }
-  loader(main, "static/html/profile.html #updateForm", function() {
-    getProfile(username, undefined, function(data) {
-      setProfileData(data, main);
-    });
-    $("#updateForm").submit(function() {
-      updateProfile(name);
-      return false;
-    });
-    $("#goToVolunteerLink").on("click", function(event) {
-      event.preventDefault();
-      updateProfile(name, true);
-    });
+		if (role == "download_photos") {
+			if (!opt || opt.length !== 7) opt = user.wwuid;
+			$.get(config.defaults.mediaURL+"listProfilePhotos.php?wwuid="+opt+"&year="+config.defaults.year).then(function(data) {
+				$.each(JSON.parse(data), function(i, d) {
+					var url = config.defaults.mediaURL+"img-sm/"+d;
+					$("#profilePhotos").append("<li><a href='"+url.replace("img-sm/","")+"' target='_blank'><img src='"+url+"'></a></li>");
+				});
+			});
+		}
   });
 }
 
@@ -138,6 +152,7 @@ function searchHandler(q, y) {
       main.html("<div class='row'><div class='small-10 small-offset-1 columns'><br>"+
         "<h2 style='color:white;'>Nothing to see here. Try searching again</h2>"+
         "<input type='text' class='autocomplete-search autofocus' placeholder='Searcheth again!'>"+
+				"<a href='#/super_search' class='button expand warning'>Or try a Super Search!</a>"+
         "</div></div>");
       setData();
       return;
@@ -161,9 +176,6 @@ function searchHandler(q, y) {
 function superSearchHandler() {
   function newRow() {
     var columns = ["name","gender","birthday","email","phone","website","majors","minors","graduate","preprofessional","class_standing","high_school","class_of","relationship_status","attached_to","quote","quote_author","hobbies","career_goals","favorite_music","favorite_movies","favorite_books","favorite_food","pet_peeves","personality"];
-		// columns = columns.filter(function(a, b) {
-		// 	return a[0] > b[0];
-		// });
     var newinput = $("<div class='row collapse prefix'>"+
               "<div class='small-4 columns'>"+
                 "<select class='prefix set-key'>"+
@@ -196,6 +208,30 @@ function superSearchHandler() {
   });
 }
 
+function uploadHandler(x, y) {
+  loader(main, "static/html/upload.html");
+}
+
+function updateProfileHandler(username) {
+  if (username !== user.username) {
+    indexHandler();
+    return;
+  }
+  loader(main, "static/html/profile.html #updateForm", function() {
+    getProfile(username, undefined, function(data) {
+      setProfileData(data, main);
+    });
+    $("#updateForm").submit(function() {
+      updateProfile(name);
+      return false;
+    });
+    $("#goToVolunteerLink").on("click", function(event) {
+      event.preventDefault();
+      updateProfile(name, true);
+    });
+  });
+}
+
 function volunteerHandler() {
   if (!user.wwuid) {
     main.html("<div class='row'><div class='small-12 columns'>"+
@@ -209,15 +245,4 @@ function volunteerHandler() {
       setVolunteerData($("#volunteerForm .small-12"), data);
     });
   });
-}
-
-function departmentHandler(department) {
-  if (department == undefined) department = "";
-  loader(main, "static/html/departments/"+department+"/index.html", function(xhr) {
-    if (xhr.status == 404) window.location.href = "#/departments";
-  });
-}
-
-function collegianHandler(collegian) {
-  loader(main, "static/html/departments/collegian/index.html");
 }
