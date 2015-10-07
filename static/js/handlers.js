@@ -19,6 +19,9 @@ var handlers = [
 
 function hasher() {
 	checkLogin(function() {
+		var title = window.location.hash.substr(1).replace(/\//g," | ").replace(/_/g," ").replace(/\./g," ").capitalize();
+		document.title = config.title + title;
+
 		var hash = window.location.hash.substr(1);
 		for (var h in handlers) {
 			var path = handlers[h][0].replace(/\//g,"\\\/");
@@ -46,7 +49,9 @@ function indexHandler() {
 }
 
 function collegianHandler(collegian) {
-  loader(main, "static/html/departments/collegian/index.html");
+  loader(main, "static/html/departments/collegian/index.html", function() {
+		document.getElementById("collegianFrame").src = config.server+"?cmd=collegian";
+	});
 }
 
 function departmentHandler(department) {

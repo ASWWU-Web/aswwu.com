@@ -6,7 +6,7 @@ String.prototype.capitalize = function() {
 	if (this.length <= 1) return this;
 	var words = this.split(" ");
 	for (var i in words)
-		if (words[i][0].match(/[A-Za-z]/))
+		if (words[i][0] && words[i][0].match(/[A-Za-z]/))
 			words[i] = words[i].replace(new RegExp(words[i][0]),words[i][0].toUpperCase());
 	return words.join(" ");
 }

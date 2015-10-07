@@ -182,7 +182,7 @@ function dbSearch(q, limits, cb, autocomplete) {
 		var r = [], l = "";
 		if (limits.split(",").length > 1)
 			l = " ["+limits.split(",")[1]+"]";
-		for (var d = 0; d < data.length; d++) {
+		for (var d = 0; d < Math.min(data.length,10); d++) {
 			var dt = {"username": data[d].username, "fullname": data[d].fullname};
 			dt.username = dt.username.replace("."," ").capitalize();
 			if (dt.username !== dt.fullname && dt.username.toLowerCase() !== dt.fullname.toLowerCase() && dt.fullname.length > 5) {
