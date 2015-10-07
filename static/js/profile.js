@@ -166,7 +166,7 @@ function dbSearch(q, limits, cb, autocomplete) {
 		var q2 = q.split(" ")[1] || "";
 		q2 = q2.toLowerCase();
 		var u1 = u.username.split(".")[0].toLowerCase();
-		var u2 = u.username.split(".")[1].toLowerCase();
+		var u2 = (u.username.split(".")[1] || "").toLowerCase();
 		var f1 = u.fullname.split(" ")[0] || u1;
 		var f2 = u.fullname.split(" ")[1] || u2;
 		f1 = f1.toLowerCase();
