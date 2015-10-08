@@ -78,6 +78,9 @@ function setData() {
 		$(".hide-for-logged-out").remove();
 	}
 	$(".hide").hide();
+	$('.show-for-role').each(function(i, obj) {
+		if (!user || !user.roles || user.roles.indexOf(obj.data("role")) < 0) obj.remove();
+	});
 	if (typeof navInit === "function")
 		navInit();
 	$(".datepicker").fdatepicker();

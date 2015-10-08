@@ -163,12 +163,12 @@ function dbSearch(q, limits, cb, autocomplete) {
 	var data = {"results": listOfUsers};
 	data = data.results.filter(function(u) {
 		var q1 = q.split(" ")[0].toLowerCase();
-		var q2 = q.split(" ")[1] || "";
+		var q2 = q.split(" ").reverse()[0];
 		q2 = q2.toLowerCase();
 		var u1 = u.username.split(".")[0].toLowerCase();
-		var u2 = (u.username.split(".")[1] || "").toLowerCase();
+		var u2 = u.username.split(".").reverse()[0].toLowerCase();
 		var f1 = u.fullname.split(" ")[0] || u1;
-		var f2 = u.fullname.split(" ")[1] || u2;
+		var f2 = u.fullname.split(" ").reverse()[0] || u2;
 		f1 = f1.toLowerCase();
 		f2 = f2.toLowerCase();
 		return (u1.indexOf(q1) == 0 || u2.indexOf(q1) == 0 || f1.indexOf(q1) == 0 || f2.indexOf(q1) == 0) &&
