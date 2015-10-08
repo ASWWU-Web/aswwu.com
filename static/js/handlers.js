@@ -2,6 +2,7 @@
 var handlers = [
 	["/departments", departmentHandler],
 	["/departments/.*", departmentHandler],
+	["/departments/.*/.*", departmentHandler],
 	["/collegian", collegianHandler],
 	["/collegian/.*/.*", collegianHandler],
 	["/download_photos", downloadPhotosHandler],
@@ -49,14 +50,15 @@ function indexHandler() {
 }
 
 function collegianHandler(collegian) {
-  loader(main, "static/html/departments/collegian/index.html", function() {
+  loader(main, "departments/collegian/index.html", function() {
 		document.getElementById("collegianFrame").src = config.server+"?cmd=collegian";
 	});
 }
 
-function departmentHandler(department) {
+function departmentHandler(department, page) {
   if (department == undefined) department = "";
-  loader(main, "static/html/departments/"+department+"/index.html", function(xhr) {
+	if (page == undefined) page = "index";
+  loader(main, "departments/"+department+"/"+page+".html", function(xhr) {
     if (xhr.status == 404) window.location.href = "#/departments";
   });
 }
