@@ -52,6 +52,7 @@
 	</div>
 	<div class="small-12 columns">
 		<button type="submit" class="button expand">Search</button>
+		<button class="button expand" id='viewPrintOut'>View Printout</button>
 	</div>
 	<div class="small-12 columns">
 		<div data-alert class="hide errors alert-box alert radius"></div>
@@ -69,7 +70,13 @@
 		var name = checkboxes[i].replace(new RegExp("_",'g')," ").capitalize().replace(new RegExp("slash",'ig'),"/");
 		$form.prepend("<div class='small-12 medium-6 columns'><input type='checkbox' name='"+checkboxes[i]+"'> <h4 style='display:inline;'>"+name+"</h4></div>");
 	}
+	document.getElementById("viewPrintOut").onclick = function() {
+		document.getElementById("searchVolunteerForm").action = au()+"&cmd=roles&role=volunteer&viewPrintOut";
+		document.getElementById("searchVolunteerForm").method = "POST";
+		document.getElementById("searchVolunteerForm").submit();
+	}
 	$form.submit(function(event) {
+		console.log(document.getElementById("searchVolunteerForm").method);
 		event.preventDefault();
 		$.ajax({
 			url: au()+"&cmd=roles&role=volunteer",
