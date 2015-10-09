@@ -74,13 +74,14 @@ function setData() {
 	});
 	if (user.wwuid) {
 		$(".hide-for-logged-in").remove();
+		for (var i = 0; i < user.roles.length; i++) {
+			$(".show-for-role.role-"+user.roles[i]).addClass("keepMe");
+		}
 	} else {
 		$(".hide-for-logged-out").remove();
 	}
 	$(".hide").hide();
-	$('.show-for-role').each(function(i, obj) {
-		if (!user || !user.roles || user.roles.indexOf(obj.data("role")) < 0) obj.remove();
-	});
+	$(".show-for-role").not(".keepMe").remove();
 	if (typeof navInit === "function")
 		navInit();
 	$(".datepicker").fdatepicker();
