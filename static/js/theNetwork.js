@@ -85,6 +85,7 @@ function setData() {
 	if (typeof navInit === "function")
 		navInit();
 	$(".datepicker").fdatepicker();
+	$(".slickSlider").not(".slick-initialized").slick({autoplay: true, nextArrow: "", prevArrow: ""});
 
 	setAutoComplete($("input.autocomplete-search"), function(request, response) {
 		var limits = this.element[0].dataset.searchLimits || "profiles";
