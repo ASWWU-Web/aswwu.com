@@ -10,7 +10,6 @@ function au(check) {
 	return config.server+"?token="+w+t;
 }
 
-var checking = false;
 function checkLogin(callback) {
 	if (!au(true)) {
 		processLogin("");
@@ -18,19 +17,21 @@ function checkLogin(callback) {
 			callback("");
 		return;
 	}
-	if (checking) {
-		processLogin(user);
-		if (typeof callback == "function")
-			callback(data);
-		return;
+	if (localStorage.user && localStorage.user.length > 10) {
+		var data = JSON.parse(localStorage.user);
+		if (localStorage.loginTime*1 > (new Date()).getTime()-600000) {
+			processLogin(data);
+			if (typeof callback == "function") callback(data);
+			return;
+		}
 	}
-	checking = true;
 	$.ajax({
 		url: au()+"&verify",
 		dataType: "JSON",
 		type: "GET",
 		success: function(data) {
-			checking = false;
+			localStorage.loginTime = (new Date()).getTime();
+			localStorage.user = JSON.stringify(data);
 			processLogin(data);
 			if (typeof callback == "function")
 				callback(data);
