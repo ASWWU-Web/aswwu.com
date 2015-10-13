@@ -78,16 +78,15 @@ function setProfileData(data,div) {
 						for (var p in photos) {
 							photoObj.append(label(photos[p]));
 						}
-						dbSearch(user.username, "archives,"+(config.defaults.year*1-101), function(data) {
-							console.log(data);
+						dbSearch(user.username, config.defaults.year*1-101, function(data) {
 							for (var i = 0; i < data.results.length; i++) {
 								if (user.username == data.results[i].username) {
-									var p = data.results[i].photo || false;
-									if (p && p.search(config.defaults.profilePhoto.split("/").reverse()[0])) {
-										if (!p.search("/"+config.defaults.year+"/"))
+									var p = data.results[i].photo || "";
+									if (p.length > 1 && p.search(config.defaults.profilePhoto.split("/").reverse()[0]) < 0) {
+										if (p.search("/"+config.defaults.year+"/") < 0)
 											photoObj.append(label(p));
 									}
-									break;
+									return;
 								}
 							}
 						});

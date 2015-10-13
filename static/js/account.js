@@ -31,7 +31,6 @@ function checkLogin(callback) {
 		type: "GET",
 		success: function(data) {
 			localStorage.loginTime = (new Date()).getTime();
-			localStorage.user = JSON.stringify(data);
 			processLogin(data);
 			if (typeof callback == "function")
 				callback(data);
@@ -43,6 +42,7 @@ function processLogin(newUser) {
 	user = newUser;
 	localStorage.wwuid = user.wwuid;
 	localStorage.token = user.token;
+	localStorage.user = JSON.stringify(newUser);
 }
 
 var currentlyLoggingIn = false;
