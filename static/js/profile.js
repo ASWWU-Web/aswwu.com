@@ -165,6 +165,7 @@ function dbSearch(q, limits, cb, autocomplete) {
 		return;
 	}
 
+	q = q.replace("%20"," ");
 	var data = {"results": listOfUsers};
 	data = data.results.filter(function(u) {
 		var q1 = q.split(" ")[0].toLowerCase();
