@@ -11,7 +11,7 @@ var handlers = [
 	["/roles/.*", rolesHandler],
 	["/roles/.*/.*", rolesHandler],
   ["/search/.*", searchHandler],
-	["/super_search", superSearchHandler],
+	["/super_search.*", superSearchHandler],
 	["/upload/.*", uploadHandler],
 	["/volunteer", volunteerHandler],
 	["/.*", pageHandler],

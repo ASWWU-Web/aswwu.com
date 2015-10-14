@@ -20,6 +20,7 @@ function getProfile(name, year, cb, p) {
 function setInputByKey(obj, key, value) {
 	if (key == "majors" || key == "minors" || key == "attached_to" || key == "name") var input = $("<input type='text' class='autocomplete'>");
 	else if (profileFields[key] && profileFields[key].length > 1) var input = $("<select></select>");
+	else if (key == "birthday") var input = $('<input type="text" class="datepicker" data-date-format="mm-dd">');
 	else var input = $("<input type='text'>");
 	obj.find(".insert-input-here").html(input);
 
@@ -41,6 +42,7 @@ function setInputByKey(obj, key, value) {
 	obj.find("input[type=text], select").not(".set-key").val(value).attr("name",key).attr("placeholder",key.replace("_"," ").capitalize());
 	obj.find(".value").text(value);
 	obj.find(".key").text(key.replace("_"," ").capitalize());
+	obj.find("input.datepicker").fdatepicker();
 }
 
 function setProfileData(data,div) {
@@ -114,7 +116,10 @@ function setProfileData(data,div) {
 		} else if (key == "email") {
 			obj.html("<a href='mailto:"+value+"'>"+value+"</a>");
 		} else if (key == "website") {
-			obj.html("<a href='"+value+"' target='_blank'>"+value+"</a>");
+			obj.html("<a href='http://"+value.replace(/http:\/\/|https:\/\//, "")+"' target='_blank'>"+value+"</a>");
+		} else if (key == "birthday") {
+			var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+			obj.html("<a href='#/search/birthday="+value+"'>"+months[value.split("-")[0]*1-1]+" "+value.split("-")[1]+"</a>");
 		} else if (["fullname","username"].indexOf(key) > -1) {
 			obj.text(value);
 		} else {
