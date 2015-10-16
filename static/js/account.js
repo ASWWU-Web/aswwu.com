@@ -47,6 +47,7 @@ function processLogin(newUser) {
 
 var currentlyLoggingIn = false;
 function login(form) {
+	$("#login-modal .errors h5").text("");
 	if (currentlyLoggingIn) return;
 	currentlyLoggingIn = true;
 	$.ajax({

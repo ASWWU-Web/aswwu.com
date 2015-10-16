@@ -140,3 +140,9 @@ h5.response {color: green;}
     margin-top: 12px;
     line-height: 1;
 }
+#logo {
+  -webkit-filter: drop-shadow(0 0 50px rgba(0,0,0,0.7));
+  -moz-filter: drop-shadow(0 0 50px rgba(0,0,0,0.7));
+  -o-filter: drop-shadow(0 0 50px rgba(0,0,0,0.7));
+  filter: drop-shadow(0 0 50px rgba(0,0,0,0.7));
+}
