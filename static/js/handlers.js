@@ -229,7 +229,7 @@ function uploadHandler(x, y) {
 }
 
 function updateProfileHandler(username) {
-  if (username !== user.username) {
+  if (!user || (username !== user.username && user.roles.indexOf("administrator") < -1)) {
     indexHandler();
     return;
   }
