@@ -109,11 +109,15 @@ for (var i = 1; i <= 5; i++) {
 	spinner.append("<div class='rect"+i+"'></div>");
 };
 function loader(div,url,cb) {
-	div.empty();
-	div.append(spinner);
-	div.load(url, function(response, status, xhr) {
-		if (cb && typeof cb === "function") cb(xhr);
-		setData();
+	$(div).animate({opacity:0}, function() {
+		div.empty();
+		div.append(spinner);
+		div.load(url, function(response, status, xhr) {
+			if (cb && typeof cb === "function") cb(xhr);
+			setData();
+			$(div).animate({opacity:1});
+		});
+
 	});
 }
 
