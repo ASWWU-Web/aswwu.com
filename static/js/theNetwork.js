@@ -85,6 +85,7 @@ function setData() {
 	if (typeof navInit === "function")
 		navInit();
 	$(".datepicker").fdatepicker();
+	if(!$('.slickSlider').is(':visible'))console.log("Attemped Initialize slick while not visible");
 	$(".slickSlider").not(".slick-initialized").slick({autoplay: true, nextArrow: "", prevArrow: ""});
 
 	setAutoComplete($("input.autocomplete-search"), function(request, response) {
@@ -104,21 +105,19 @@ function setData() {
 	}
 }
 
-var spinner = $("<div class='spinner'></div>");
-for (var i = 1; i <= 5; i++) {
-	spinner.append("<div class='rect"+i+"'></div>");
-};
 function loader(div,url,cb) {
-	$(div).animate({opacity:0}, function() {
+	$('#spinner').fadeIn();
+	$(div).fadeOut(function() {
 		div.empty();
-		div.append(spinner);
 		div.load(url, function(response, status, xhr) {
 			if (cb && typeof cb === "function") cb(xhr);
-			setData();
-			$(div).animate({opacity:1});
+			$('#spinner').fadeOut();
+			$(div).fadeIn(setData);
+
 		});
 
 	});
+
 }
 
 function setAutoComplete($obj, source, multiple) {

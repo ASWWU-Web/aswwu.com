@@ -1,4 +1,13 @@
-/* Bar Loader */
+/* Magical Bar Loader */
+/*This is for the main loader*/
+#spinner {
+  z-index: -1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -115px;
+  margin-left: -25px;
+}
 .spinner {
   margin: 100px auto;
   width: 50px;
