@@ -8,11 +8,11 @@ function navInit() {
 		accountLinks.prepend("<li class='has-dropdown accountLinks'>"+profile+"<ul class='dropdown'></ul></li>");
 		accountLinks = accountLinks.find(".accountLinks > ul");
 		accountLinks.append("<li><a href='#/profile/"+user.username+"/update'>Update Profile</a></li>");
-		accountLinks.append("<li><a href='#/download_photos'>Download Photos</a></li>");
 		var d = new Date();
 		var birthdate = ("0"+(d.getMonth()+1)).substr(-2)+"-"+("0"+d.getDate()).substr(-2);
 		accountLinks.append("<li><a href='#/search/birthday="+birthdate+"'>Birthdays</a></li>");
 		accountLinks.append("<li><a href='#/super_search/'>Super Search</a></li>");
+		accountLinks.append("<li><a href='#/download_photos'>Download Photos</a></li>");
 		accountLinks.append("<li><a href='./' onclick='logout();'>Logout</a></li>");
 		if (user.roles.length > 0) {
 			accountLinks.append("<li class='divider'></li>");
