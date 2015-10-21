@@ -122,7 +122,7 @@ function setProfileData(data,div) {
 		} else if (key == "birthday") {
 			var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 			obj.html("<a href='#/search/birthday="+value+"'>"+months[value.split("-")[0]*1-1]+" "+value.split("-")[1]+"</a>");
-		} else if (key.search("favorite") > -1) {
+		} else if (key.search("favorite") > -1 || key.search("hobbies") > -1) {
 			obj.html(value.split(", ").map(function(v) {
 				return "<a href='#/search/"+key+"="+v+"'>"+v+"</a>";
 			}).join(", "));
