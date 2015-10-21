@@ -117,6 +117,8 @@ function setProfileData(data,div) {
 			obj.html("<a href='mailto:"+value+"'>"+value+"</a>");
 		} else if (key == "website") {
 			obj.html("<a href='http://"+value.replace(/http:\/\/|https:\/\//, "")+"' target='_blank'>"+value+"</a>");
+		} else if (key == "attached_to") {
+			obj.html("<a href='#/search/"+value+"'>"+value+"</a>");
 		} else if (key == "birthday") {
 			var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 			obj.html("<a href='#/search/birthday="+value+"'>"+months[value.split("-")[0]*1-1]+" "+value.split("-")[1]+"</a>");
