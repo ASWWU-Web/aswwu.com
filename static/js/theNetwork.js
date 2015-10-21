@@ -84,8 +84,7 @@ function setData() {
 	$(".show-for-role").not(".keepMe").remove();
 	if (typeof navInit === "function")
 		navInit();
-	$(".datepicker").fdatepicker();
-	if(!$('.slickSlider').is(':visible'))console.log("Attemped Initialize slick while not visible");
+	$(".datepicker").not(".profile").fdatepicker();
 	$(".slickSlider").not(".slick-initialized").slick({autoplay: true, nextArrow: "", prevArrow: ""});
 
 	setAutoComplete($("input.autocomplete-search"), function(request, response) {

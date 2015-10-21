@@ -66,7 +66,7 @@ function setProfileData(data,div) {
 			if (key == "photo") {
 				var photoObj = obj;
 				$.ajax({
-					url: config.defaults.mediaURL+"listProfilePhotos.php?wwuid="+user.wwuid+"&year="+config.defaults.year,
+					url: config.defaults.mediaURL+"listProfilePhotos.php?wwuid="+profile.wwuid+"&year="+config.defaults.year,
 					method: "GET",
 					success: function(data) {
 						var label = function(link) {
@@ -80,9 +80,9 @@ function setProfileData(data,div) {
 						for (var p in photos) {
 							photoObj.append(label(photos[p]));
 						}
-						dbSearch(user.username, config.defaults.year*1-101, function(data) {
+						dbSearch(profile.username, config.defaults.year*1-101, function(data) {
 							for (var i = 0; i < data.results.length; i++) {
-								if (user.username == data.results[i].username) {
+								if (profile.username == data.results[i].username) {
 									var p = data.results[i].photo || "";
 									if (p.length > 1 && p.search(config.defaults.profilePhoto.split("/").reverse()[0]) < 0) {
 										if (p.search("/"+config.defaults.year+"/") < 0)
@@ -117,10 +117,12 @@ function setProfileData(data,div) {
 			obj.html("<a href='mailto:"+value+"'>"+value+"</a>");
 		} else if (key == "website") {
 			obj.html("<a href='http://"+value.replace(/http:\/\/|https:\/\//, "")+"' target='_blank'>"+value+"</a>");
+		} else if (key == "attached_to") {
+			obj.html("<a href='#/search/"+value+"'>"+value+"</a>");
 		} else if (key == "birthday") {
 			var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 			obj.html("<a href='#/search/birthday="+value+"'>"+months[value.split("-")[0]*1-1]+" "+value.split("-")[1]+"</a>");
-		} else if (key.search("favorite") > -1) {
+		} else if (key.search("favorite") > -1 || key.search("hobbies") > -1) {
 			obj.html(value.split(", ").map(function(v) {
 				return "<a href='#/search/"+key+"="+v+"'>"+v+"</a>";
 			}).join(", "));

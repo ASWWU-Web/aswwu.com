@@ -72,7 +72,7 @@ function downloadPhotosHandler() {
 		$.get(config.defaults.mediaURL+"listProfilePhotos.php?wwuid="+user.wwuid+"&year="+config.defaults.year).then(function(data) {
 			$.each(JSON.parse(data), function(i, d) {
 				var url = config.defaults.mediaURL+"img-sm/"+d;
-				$("#profilePhotos").append("<li><a href='"+url.replace("img-sm/","")+"' target='_blank'><img src='"+url+"'></a></li>");
+				$("#profilePhotos").append("<li><a href='"+url.replace("img-sm/","")+"' download='"+url.split("/").reverse()[0]+"' target='_blank'><img src='"+url+"'></a></li>");
 			});
 		});
 	});
@@ -229,7 +229,7 @@ function uploadHandler(x, y) {
 }
 
 function updateProfileHandler(username) {
-  if (username !== user.username) {
+  if (!user || (username !== user.username && user.roles.indexOf("administrator") < -1)) {
     indexHandler();
     return;
   }
