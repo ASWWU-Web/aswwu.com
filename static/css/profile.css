@@ -11,8 +11,8 @@
 	display: block;
 	background-position: top center;
 	background-size: cover;
-	animation-name: fadeIn;
-	animation-duration: .3s;
+	/*animation-name: fadeIn;
+	animation-duration: .3s;*/
 }
 
 .profile-photo.fill {
