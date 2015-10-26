@@ -2,17 +2,12 @@
 #full-profile * {
 	color: white;
 }
-@keyframes fadeIn {
-	from {opacity: 0;}
-	to {opacity: 1;}
-}
+
 .profile-photo {
 	width: 3em;
 	display: block;
 	background-position: top center;
 	background-size: cover;
-	/*animation-name: fadeIn;
-	animation-duration: .3s;*/
 }
 
 .profile-photo.fill {
