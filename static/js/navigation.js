@@ -2,14 +2,14 @@ function navInit() {
 
 	var accountLinks = $(".top-bar-section .right, #homeLinks");
 	accountLinks.find(".accountLinks").remove();
+	var d = new Date();
+	var birthdate = ("0"+(d.getMonth()+1)).substr(-2)+"-"+("0"+d.getDate()).substr(-2);
 
 	if (user.username) {
 		var profile = "<a href='#/profile/"+user.username+"'><div class='profile-photo inline' style='background-image:url("+config.mu.xs+(user.photo || config.defaults.profilePhoto)+");'></div>"+user.fullname+"</a>";
 		accountLinks.prepend("<li class='has-dropdown accountLinks'>"+profile+"<ul class='dropdown'></ul></li>");
 		accountLinks = accountLinks.find(".accountLinks > ul");
 		accountLinks.append("<li><a href='#/profile/"+user.username+"/update'>Update Profile</a></li>");
-		var d = new Date();
-		var birthdate = ("0"+(d.getMonth()+1)).substr(-2)+"-"+("0"+d.getDate()).substr(-2);
 		accountLinks.append("<li><a href='#/search/birthday="+birthdate+"'>Birthdays</a></li>");
 		accountLinks.append("<li><a href='#/super_search/'>Super Search</a></li>");
 		accountLinks.append("<li><a href='#/download_photos'>Download Photos</a></li>");
@@ -22,7 +22,10 @@ function navInit() {
 			}
 		}
 	} else {
-		accountLinks.prepend("<li class='accountLinks'><a href='#' data-reveal-id='login-modal'>Login</a></li>");
+		accountLinks.prepend("<li class='has-dropdown accountLinks'><a href='#' data-reveal-id='login-modal'>Login</a><ul class='dropdown'></ul></li>");
+		accountLinks = accountLinks.find(".accountLinks > ul");
+		accountLinks.append("<li><a href='#/search/birthday="+birthdate+"'>Birthdays</a></li>");
+		accountLinks.append("<li><a href='#/super_search/'>Super Search</a></li>");
 	}
 
 
