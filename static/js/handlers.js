@@ -97,7 +97,7 @@ function profileHander(username, year) {
 			$("#getVolunteerData").click(function() {
 				$.post(au()+"&cmd=roles&role=volunteer&getData", {cmd: "search", wwuid: data.results[0].wwuid}, function(data) {
 					$("#getVolunteerData").replaceWith("<br><h4>Volunteer Data</h4><ul id='volunteerData'></ul>");
-					$.each(JSON.parse(data).results[0], function(key, value) {
+					$.each(data.results[0], function(key, value) {
 						if (value !== "" && value !== "0" && ["id","user_id","wwuid","updated_at"].indexOf(key) < 0)
 							$("#volunteerData").append("<li>"+key+" = "+(value == "1" ? "True" : value)+"</li>");
 					});
