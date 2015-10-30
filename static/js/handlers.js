@@ -10,7 +10,7 @@ var handlers = [
 	["/profile/.*", profileHander],
 	["/roles/.*", rolesHandler],
 	["/roles/.*/.*", rolesHandler],
-  ["/search/.*", searchHandler],
+    ["/search/.*", searchHandler],
 	["/super_search.*", superSearchHandler],
 	["/upload/.*", uploadHandler],
 	["/volunteer", volunteerHandler],
@@ -87,24 +87,24 @@ function pageHandler(path1, path2) {
 }
 
 function profileHander(username, year) {
-  if (username.split(" ").length > 1) {
-    window.location.href = window.location.href.replace(username,username.replace(" ",".").toLowerCase());
-    return;
-  }
-  loader(main, "static/html/profile.html #full-profile", function() {
-    getProfile(username, year, function(data) {
-      setProfileData(data, main);
-			$("#getVolunteerData").click(function() {
-				$.post(au()+"&cmd=roles&role=volunteer&getData", {cmd: "search", wwuid: data.results[0].wwuid}, function(data) {
-					$("#getVolunteerData").replaceWith("<br><h4>Volunteer Data</h4><ul id='volunteerData'></ul>");
-					$.each(data.results[0], function(key, value) {
-						if (value !== "" && value !== "0" && ["id","user_id","wwuid","updated_at"].indexOf(key) < 0)
-							$("#volunteerData").append("<li>"+key+" = "+(value == "1" ? "True" : value)+"</li>");
-					});
-				});
-			});
+    if (username.split(" ").length > 1) {
+        window.location.href = window.location.href.replace(username,username.replace(" ",".").toLowerCase());
+        return;
+    }
+    loader(main, "static/html/profile.html #full-profile", function() {
+        getProfile(username, year, function(data) {
+            setProfileData(data, main);
+            $("#getVolunteerData").click(function() {
+                $.post(au()+"&cmd=roles&role=volunteer&getData", {cmd: "search", wwuid: data.results[0].wwuid}, function(data) {
+                    $("#getVolunteerData").replaceWith("<br><h4>Volunteer Data</h4><ul id='volunteerData'></ul>");
+                    $.each(data.results[0], function(key, value) {
+                        if (value !== "" && value !== "0" && ["id","user_id","wwuid","updated_at"].indexOf(key) < 0)
+                        $("#volunteerData").append("<li>"+key+" = "+(value == "1" ? "True" : value)+"</li>");
+                    });
+                });
+            });
+        });
     });
-  });
 }
 
 function rolesHandler(role, opt) {
@@ -229,23 +229,23 @@ function uploadHandler(x, y) {
 }
 
 function updateProfileHandler(username) {
-  if (!user || (username !== user.username && user.roles.indexOf("administrator") < -1)) {
-    indexHandler();
-    return;
-  }
-  loader(main, "static/html/profile.html #updateForm", function() {
-    getProfile(username, undefined, function(data) {
-      setProfileData(data, main);
+    if (!user || (username !== user.username && user.roles.indexOf("administrator") < -1)) {
+        indexHandler();
+        return;
+    }
+    loader(main, "static/html/profile.html #updateForm", function() {
+        getProfile(username, undefined, function(data) {
+            setProfileData(data, main);
+        });
+        $("#updateForm").submit(function() {
+            updateProfile(name);
+            return false;
+        });
+        $("#goToVolunteerLink").on("click", function(event) {
+            event.preventDefault();
+            updateProfile(name, true);
+        });
     });
-    $("#updateForm").submit(function() {
-      updateProfile(name);
-      return false;
-    });
-    $("#goToVolunteerLink").on("click", function(event) {
-      event.preventDefault();
-      updateProfile(name, true);
-    });
-  });
 }
 
 function volunteerHandler() {

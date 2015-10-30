@@ -2,18 +2,52 @@
 <style>
   #outdoors a {color: white;}
   #outdoors a:hover {color: #abc;}
+  #slidebg, #outdoors > div {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #222;
+    background-position: center;
+    background-size: cover;
+    -webkit-filter: saturate(50%) brightness(75%);
+    -moz-filter: saturate(50%) brightness(75%);
+    -o-filter: saturate(50%) brightness(75%);
+    filter: saturate(50%) brightness(75%);
+  }
 </style>
 <div class="row" id="outdoors">
-  <div class="small-12 columns">
-    <h1>ASWWU Outdoors</h1>
-  </div>
-  <hr>
-  <div class="hide-for-small medium-3 columns">
-    <img src="https://aswwu.com/media/img-sm/images/background/atlas.jpg">
-  </div>
-  <div class="small-12 medium-9 columns">
-    <h4>ASWWU Outdoors provides students with a variety of outdoor recreational trips, educational courses, and rental gear for outdoor adventures. We believe that being outside is one of the best ways to relieve stress, make friends, and grow closer to God. We have trips that cater to both first-timers and seasoned veterans, but every trip is focused on safety and fun. We hope to see you out there!</h4>
-    <br>
-    <h4>If you have any questions feel free to email us at <a href="mailto:ASWWU.Outdoors@wallawalla.edu">ASWWU.Outdoors@wallawalla.edu</a> or call <a href="#/profile/andrew.rapp">Andrew Rapp</a> at <a href="tel:(303) 621-5131">(303) 621-5131</a></h4>
-  </div>
+    <div id='slidebg'></div>
+    <section class="small-12 columns">
+        <h1>ASWWU Outdoors</h1>
+    </section>
+    <hr>
+    <section class="small-12 columns">
+        <h4>ASWWU Outdoors provides students with a variety of outdoor recreational trips, educational courses, and rental gear for outdoor adventures. We believe that being outside is one of the best ways to relieve stress, make friends, and grow closer to God. We have trips that cater to both first-timers and seasoned veterans, but every trip is focused on safety and fun. We hope to see you out there!</h4>
+        <hr>
+        <h2>Mt. Rents</h2>
+        <div class='small-12 medium-6 columns'>
+            <h4>For a list of prices and items available at Mt. Rents, please visit <a href='departments/aswwu_outdoors/Mt Rents Price List.pdf' target='_blank'>this link</a></h4>
+            <h4>For anything else regarding Mt. Rents, contact Elizabeth Schlinsog <a href='tel:913-558-9529'>(913) 558-9529</a></h4>
+            <br>
+        </div>
+        <table class='small-12 medium-6 columns'>
+            <tr><th colspan="2">Hours</th></tr>
+            <tr><td>Monday</td><td>5:30-7:30 pm</td></tr>
+            <tr><td>Tuesday</td><td>9:00-10:50 am</td></tr>
+            <tr><td>Thursday</td><td>5:30-7:30 pm</td></tr>
+            <tr><td>Friday</td><td>10:00-10:50 am</td></tr>
+        </table>
+        <hr>
+        <h4>If you have any other questions feel free to email us at <a href="mailto:ASWWU.Outdoors@wallawalla.edu">ASWWU.Outdoors@wallawalla.edu</a> or call <a href="#/profile/andrew.rapp">Andrew Rapp</a> at <a href="tel:(303) 621-5131">(303) 621-5131</a></h4>
+    </section>
 </div>
+
+<script>
+    $("#slidebg").bgswitcher({
+        images: ["departments/aswwu_outdoors/backpacking1.jpg","departments/aswwu_outdoors/backpacking2.jpg","departments/aswwu_outdoors/backpacking3.jpg","departments/aswwu_outdoors/surf1.jpg"],
+        effect: "fade"
+    });
+    $("#outdoors > div:first").css("position","fixed");
+</script>
