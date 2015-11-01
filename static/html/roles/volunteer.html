@@ -7,7 +7,7 @@
 </div>
 <div class="row panel">
 	<form class="small-12 columns">
-		<input type="hidden" name="cmd" value="roles">
+		<input type="hidden" name="cmd" value="set_role">
 		<div class="row">
 			<h3>Grant Volunteer Permissions</h3>
 		</div>
@@ -71,15 +71,17 @@
 		$form.prepend("<div class='small-12 medium-6 columns'><input type='checkbox' name='"+checkboxes[i]+"'> <h4 style='display:inline;'>"+name+"</h4></div>");
 	}
 	document.getElementById("viewPrintOut").onclick = function() {
-		document.getElementById("searchVolunteerForm").action = au()+"&cmd=roles&role=volunteer&viewPrintOut";
+		$("#searchVolunteerForm input[name='cmd']").val('viewPrintOut');
+		$("#searchVolunteerForm").append("<input name='token' value='"+getToken()+"'>");
+		document.getElementById("searchVolunteerForm").action = config.server+"role/volunteer";
 		document.getElementById("searchVolunteerForm").method = "POST";
 		document.getElementById("searchVolunteerForm").submit();
 	}
 	$form.submit(function(event) {
-		console.log(document.getElementById("searchVolunteerForm").method);
 		event.preventDefault();
 		$.ajax({
-			url: au()+"&cmd=roles&role=volunteer",
+			url: config.server+"role/volunteer",
+			beforeSend: setAuthHeaders,
 			data: $(this).serializeArray(),
 			method: "POST",
 			dataType: "JSON",
@@ -90,19 +92,19 @@
 						$form.find(".errors").text(data.errors.join("<br>")).show().delay(1000).fadeOut();
 						$("#results .row").html("");
 					} else {
-						var fullnames = data.results.map(function(d) {return d.fullname;});
+						var full_names = data.results.map(function(d) {return d.full_name;});
 						var emails = data.results.map(function(d) {return d.email;});
 						$("#results .row").html("<div class='small-12 columns'><h3>("+emails.length+") Results:</h3></div>"+
 							"<div class='small-12 medium-6 columns'><button class='button expand emails'>View Emails</button></div>"+
-							"<div class='small-12 medium-6 columns'><button class='button expand fullnames'>View Full Names</button></div>"
+							"<div class='small-12 medium-6 columns'><button class='button expand full_names'>View Full Names</button></div>"
 						);
 						$form.find("button.emails").click(function(event) {
 							event.preventDefault();
 							prompt("Results: (Emails)", emails);
 						});
-						$form.find("button.fullnames").click(function(event) {
+						$form.find("button.full_names").click(function(event) {
 							event.preventDefault();
-							prompt("Results: (Full Names)", fullnames);
+							prompt("Results: (Full Names)", full_names);
 						});
 					}
 				}, 500);

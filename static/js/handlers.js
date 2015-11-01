@@ -10,7 +10,7 @@ var handlers = [
 	["/profile/.*", profileHander],
 	["/roles/.*", rolesHandler],
 	["/roles/.*/.*", rolesHandler],
-    ["/search/.*", searchHandler],
+  ["/search/.*", searchHandler],
 	["/super_search.*", superSearchHandler],
 	["/upload/.*", uploadHandler],
 	["/volunteer", volunteerHandler],
@@ -51,7 +51,7 @@ function indexHandler() {
 
 function collegianHandler(collegian) {
   loader(main, "departments/collegian/index.html", function() {
-		document.getElementById("collegianFrame").src = config.server+"?cmd=collegian";
+		document.getElementById("collegianFrame").src = "https://aswwu.com/c_archives";
 	});
 }
 
@@ -181,6 +181,11 @@ function searchHandler(q, y) {
       window.location.href = "#/profile/"+data[0].username+((y && y != config.defaults.year) ? "/"+y : "");
       return;
     }
+		data = data.sort(function(a, b) {
+			if (a.views*1 > b.views*1) return -1;
+			else if (b.views*1 > a.views*1) return 1;
+			else return 0;
+		});
     for (var d = 0; d < data.length; d++) {
       var tag = data[d].username.replace(/\./g,"-");
       var link = "#/profile/"+data[d].username+((y && y != config.defaults.year) ? "/"+y : "");
@@ -241,7 +246,7 @@ function updateProfileHandler(username) {
     loader(main, "static/html/profile.html #updateForm", function() {
         getProfile(username, undefined, function(data) {
             setProfileData(data, main);
-        });
+        }, true);
         $("#updateForm").submit(function() {
             updateProfile(username);
             return false;
