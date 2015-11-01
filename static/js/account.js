@@ -12,7 +12,7 @@ function au(check) {
 
 function getToken() {
 	var t = localStorage.token || "";
-	if (t == "undefined") t = "";
+	if (t == "undefined" || t.split("|").length < 3) t = "";
 	return t;
 }
 
