@@ -1,7 +1,8 @@
 
 function getVolunteer(cb) {
 	$.ajax({
-		url: au()+"&cmd=volunteers",
+		url: config.server+"volunteer/"+user.wwuid,
+		beforeSend: setAuthHeaders,
 		method: "GET",
 		dataType: "JSON",
 		success: function(data) {
@@ -15,11 +16,11 @@ function getVolunteer(cb) {
 }
 
 function setVolunteerData(div, data) {
-	if (data.volunteer_info) {
-		$.each(data.volunteer_info, function(key, value) {
+	if (data) {
+		$.each(data, function(key, value) {
 			var $obj = div.find(".volunteer-"+key);
 			var ck = key.replace(/_/g," ").capitalize().replace(/ Slash /g,"/");
-			$obj.find("input[type=checkbox]").attr("name",key).prop("checked", (value == 1));
+			$obj.find("input[type=checkbox]").attr("name",key).prop("checked", (value == 'True'));
 			$obj.find("input[type=text]").val(value).attr("placeholder",ck).attr("name",key);
 			$obj.find(".key").text(ck);
 		});
@@ -35,9 +36,10 @@ function setVolunteerData(div, data) {
 			volunteerData[k.name] = k.value;
 		});
 		$.ajax({
-			url: au()+"&cmd=volunteers",
+			url: config.server+"volunteer",
+			beforeSend: setAuthHeaders,
 			method: "POST",
-			data: {"volunteer_data": JSON.stringify(volunteerData)},
+			data: volunteerData,
 			success: function(data) {
 				window.location.href = "";
 			},

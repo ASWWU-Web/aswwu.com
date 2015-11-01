@@ -10,39 +10,43 @@ function au(check) {
 	return config.server+"?token="+w+t;
 }
 
+function getToken() {
+	var t = localStorage.token || "";
+	if (t == "undefined") t = "";
+	return t;
+}
+
+function setAuthHeaders(request) {
+	request.setRequestHeader("token",getToken());
+}
+
 function checkLogin(callback) {
-	if (!au(true)) {
+	if (getToken() == "") {
 		processLogin("");
 		if (typeof callback == "function")
 			callback("");
 		return;
 	}
-	if (localStorage.user && localStorage.user.length > 10) {
-		var data = JSON.parse(localStorage.user);
-		if (localStorage.loginTime*1 > (new Date()).getTime()-600000) {
-			processLogin(data);
-			if (typeof callback == "function") callback(data);
-			return;
-		}
-	}
 	$.ajax({
-		url: au()+"&verify",
+		url: config.server+"verify",
+		beforeSend: setAuthHeaders,
 		dataType: "JSON",
 		type: "GET",
 		success: function(data) {
-			localStorage.loginTime = (new Date()).getTime();
-			processLogin(data);
+			if (data.error) processLogin("","");
+			processLogin(data, getToken());
 			if (typeof callback == "function")
 				callback(data);
 		}
 	});
 }
 
-function processLogin(newUser) {
-	user = newUser;
-	localStorage.wwuid = user.wwuid;
-	localStorage.token = user.token;
-	localStorage.user = JSON.stringify(newUser);
+function processLogin(new_user, token) {
+	if (new_user.roles)
+		new_user.roles = new_user.roles.split(",");
+	user = new_user;
+	localStorage.token = token;
+	localStorage.user = JSON.stringify(new_user);
 }
 
 var currentlyLoggingIn = false;
@@ -51,7 +55,7 @@ function login(form) {
 	if (currentlyLoggingIn) return;
 	currentlyLoggingIn = true;
 	$.ajax({
-		url: config.server+"?cmd=login",
+		url: config.server+"login",
 		dataType: "JSON",
 		data: form.serialize(),
 		type: "POST",
@@ -63,7 +67,7 @@ function login(form) {
 				$("#login-modal .errors h5").text(data.errors);
 			} else {
 				$("#login-modal").foundation("reveal","close");
-				processLogin(data.user);
+				processLogin(data.user,data.token);
 				location.reload();
 			}
 		}, error: function(data) {
@@ -74,6 +78,6 @@ function login(form) {
 }
 
 function logout() {
-	processLogin("");
+	processLogin("","");
 	location.reload();
 }

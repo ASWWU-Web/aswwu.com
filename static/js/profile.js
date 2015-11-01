@@ -1,11 +1,10 @@
 
 function getProfile(name, year, cb, p) {
-	var limits = "profiles";
-	if (year && year.toString().length == 4)
-		limits = "archives,"+year;
-	p = (p || window.location.hash.indexOf("/profile/") > -1 ? "&profile" : "");
+	if (!year || year.toString().length != 4)
+		year = config.defaults.year;
 	$.ajax({
-		url: au()+"&cmd=search&limits="+limits+"&q="+name+p,
+		url: config.server+(p ? "/profile/" : "/search/")+year+"/"+name,
+		beforeSend: setAuthHeaders,
 		dataType: "JSON",
 		type: "GET",
 		success: function(data) {
@@ -49,18 +48,19 @@ function setProfileData(data,div) {
 	if (user.status == "Student")
 		div.find(".hide-for-students").remove();
 	if (!data.results && !data.username)
-		var profile = {"fullname": "Profile Not Found", "photo": null};
+		var profile = {"full_name": "Profile Not Found", "photo": null};
 	else if (data.results && data.results.length > 1) {
-		var profile = {"fullname": "Too Many Profiles Found","photo": null};
+		var profile = {"full_name": "Too Many Profiles Found","photo": null};
 	} else if (data.results) {
 		var profile = data.results[0];
 	} else {
 		var profile = data;
 	}
-	if (!profile.fullname || profile.fullname.length < 5)
-		profile.fullname = profile.username.replace(/\./g," ");
+	if (!profile.full_name || profile.full_name.length < 5)
+		profile.full_name = profile.username.replace(/\./g," ");
 
 	$.each(profile, function(key,value) {
+		if (value == "None") value = "";
 		var obj = div.find(".profile-"+key);
 		if (obj.hasClass("as-input")) {
 			if (key == "photo") {
@@ -126,7 +126,7 @@ function setProfileData(data,div) {
 			obj.html(value.split(", ").map(function(v) {
 				return "<a href='#/search/"+key+"="+v+"'>"+v+"</a>";
 			}).join(", "));
-		} else if (["fullname","username"].indexOf(key) > -1) {
+		} else if (["full_name","username"].indexOf(key) > -1) {
 			obj.text(value);
 		} else {
 			obj.html("<a href='#/search/"+key+"="+value+"'>"+value+"</a>");
@@ -145,9 +145,10 @@ function updateProfile(name, goToVolunteer) {
 		profile_data[d.name] = d.value;
 	});
 	$.ajax({
-		url: au()+"&cmd=search&limits=profiles&q="+name,
+		url: config.server+"update/"+name,
+		beforeSend: setAuthHeaders,
 		dataType: "JSON",
-		data: {profile_data: JSON.stringify(profile_data)},
+		data: profile_data,
 		type: "POST",
 		success: function(data) {
 			if (goToVolunteer)
@@ -179,8 +180,8 @@ function dbSearch(q, limits, cb, autocomplete) {
 		q2 = q2.toLowerCase();
 		var u1 = u.username.split(".")[0].toLowerCase();
 		var u2 = u.username.split(".").reverse()[0].toLowerCase();
-		var f1 = u.fullname.split(" ")[0] || u1;
-		var f2 = u.fullname.split(" ").reverse()[0] || u2;
+		var f1 = u.full_name.split(" ")[0] || u1;
+		var f2 = u.full_name.split(" ").reverse()[0] || u2;
 		f1 = f1.toLowerCase();
 		f2 = f2.toLowerCase();
 		return (u1.indexOf(q1) == 0 || u2.indexOf(q1) == 0 || f1.indexOf(q1) == 0 || f2.indexOf(q1) == 0) &&
@@ -195,10 +196,10 @@ function dbSearch(q, limits, cb, autocomplete) {
 		if (limits.split(",").length > 1)
 			l = " ["+limits.split(",")[1]+"]";
 		for (var d = 0; d < Math.min(data.length,10); d++) {
-			var dt = {"username": data[d].username, "fullname": data[d].fullname};
+			var dt = {"username": data[d].username, "full_name": data[d].full_name};
 			dt.username = dt.username.replace("."," ").capitalize();
-			if (dt.username !== dt.fullname && dt.username.toLowerCase() !== dt.fullname.toLowerCase() && dt.fullname.length > 5) {
-				r.push({"label": dt.fullname+l, "value": dt.username+l});
+			if (dt.username !== dt.full_name && dt.username.toLowerCase() !== dt.full_name.toLowerCase() && dt.full_name.length > 5) {
+				r.push({"label": dt.full_name+l, "value": dt.username+l});
 			}
 			r.push({"label": dt.username+l, "value": dt.username+l});
 		}

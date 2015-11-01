@@ -6,7 +6,7 @@ function navInit() {
 	var birthdate = ("0"+(d.getMonth()+1)).substr(-2)+"-"+("0"+d.getDate()).substr(-2);
 
 	if (user.username) {
-		var profile = "<a href='#/profile/"+user.username+"'><div class='profile-photo inline' style='background-image:url("+config.mu.xs+(user.photo || config.defaults.profilePhoto)+");'></div>"+user.fullname+"</a>";
+		var profile = "<a href='#/profile/"+user.username+"'><div class='profile-photo inline' style='background-image:url("+config.mu.xs+(user.photo || config.defaults.profilePhoto)+");'></div>"+user.full_name+"</a>";
 		accountLinks.prepend("<li class='has-dropdown accountLinks'>"+profile+"<ul class='dropdown'></ul></li>");
 		accountLinks = accountLinks.find(".accountLinks > ul");
 		accountLinks.append("<li><a href='#/profile/"+user.username+"/update'>Update Profile</a></li>");

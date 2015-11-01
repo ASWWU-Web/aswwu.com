@@ -95,15 +95,19 @@ function profileHander(username, year) {
         getProfile(username, year, function(data) {
             setProfileData(data, main);
             $("#getVolunteerData").click(function() {
-                $.post(au()+"&cmd=roles&role=volunteer&getData", {cmd: "search", wwuid: data.results[0].wwuid}, function(data) {
+                $.ajax({
+									url: config.server+"volunteer/"+data.wwuid,
+									beforeSend: setAuthHeaders,
+									success: function(data) {
                     $("#getVolunteerData").replaceWith("<br><h4>Volunteer Data</h4><ul id='volunteerData'></ul>");
-                    $.each(data.results[0], function(key, value) {
-                        if (value !== "" && value !== "0" && ["id","user_id","wwuid","updated_at"].indexOf(key) < 0)
+                    $.each(data, function(key, value) {
+                        if (value !== "" && value !== "0" && value !== "False" && ["id","user_id","wwuid","updated_at"].indexOf(key) < 0)
                         $("#volunteerData").append("<li>"+key+" = "+(value == "1" ? "True" : value)+"</li>");
                     });
+									}
                 });
             });
-        });
+        }, true);
     });
 }
 
@@ -125,8 +129,9 @@ function rolesHandler(role, opt) {
       event.preventDefault();
       var $form = $(this);
       $.ajax({
-        url: au()+"&cmd=roles&role="+role,
+        url: config.server+"role/"+role,
         method: "POST",
+				beforeSend: setAuthHeaders,
         dataType: "JSON",
         data: $(this).serializeArray(),
         success: function(data) {
@@ -181,7 +186,7 @@ function searchHandler(q, y) {
       var link = "#/profile/"+data[d].username+((y && y != config.defaults.year) ? "/"+y : "");
       sr.append("<li><a id='profile-"+tag+"' href='"+link+"'>"+
         "<div class='profile-photo fill'></div>"+
-        "<h5 class='profile-fullname' style='color:white;'></h5>"+
+        "<h5 class='profile-full_name' style='color:white;'></h5>"+
         "</a></li>");
       setProfileData(data[d], $("#profile-"+tag));
     }
@@ -238,12 +243,12 @@ function updateProfileHandler(username) {
             setProfileData(data, main);
         });
         $("#updateForm").submit(function() {
-            updateProfile(name);
+            updateProfile(username);
             return false;
         });
         $("#goToVolunteerLink").on("click", function(event) {
             event.preventDefault();
-            updateProfile(name, true);
+            updateProfile(username, true);
         });
     });
 }

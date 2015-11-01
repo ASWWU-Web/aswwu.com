@@ -14,7 +14,7 @@ String.prototype.capitalize = function() {
 $(document).ready(function() {
 	main = $("main");
 
-	checkLogin(function(data) {
+	checkLogin(function() {
 		$("[data-html]").each(function(i,div) {
 			loadCount++;
 			var url = div.getAttribute("data-html");
@@ -43,8 +43,9 @@ function initialize() {
 
 	window.onhashchange = hasher;
 	$.ajax({
-		url: config.server+"?cmd=search&q=.&limits=profiles&list",
+		url: config.server+"search/all",
 		method: "GET",
+		beforeSend: setAuthHeaders,
 		dataType: "JSON",
 		success: function(data) {
 			listOfUsers = data.results.filter(function(f) { return f != null; });
