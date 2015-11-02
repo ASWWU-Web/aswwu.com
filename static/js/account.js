@@ -62,9 +62,9 @@ function login(form) {
 		success: function(data) {
 			currentlyLoggingIn = false;
 			$("#login-form").removeClass("loading");
-			if (!data || data.errors) {
+			if (!data || data.error) {
 				$("#login-form input[type=text]").focus();
-				$("#login-modal .errors h5").text(data.errors);
+				$("#login-modal .errors h5").text(data.error);
 			} else {
 				$("#login-modal").foundation("reveal","close");
 				processLogin(data.user,data.token);
