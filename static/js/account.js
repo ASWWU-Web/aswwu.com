@@ -37,7 +37,11 @@ function checkLogin(callback) {
 			processLogin(data, getToken());
 			if (typeof callback == "function")
 				callback(data);
-		}
+		}, error: function(data) {
+            processLogin("","");
+			if (typeof callback == "function")
+				callback({});
+        }
 	});
 }
 
