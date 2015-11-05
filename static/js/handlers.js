@@ -80,9 +80,18 @@ function downloadPhotosHandler() {
 }
 
 function formHandler(id) {
+    var knownForms = [
+        {"id": "e668070a-cff1-4999-8c42-32fa060d2f5b", "name": "district3"}
+    ];
     if (!user) {
         window.location.href = "#";
         return;
+    }
+    for (var k in knownForms) {
+        if (knownForms[k].name == id) {
+            window.location.href = "#/form/"+knownForms[k].id;
+            return;
+        }
     }
     getForm(id, main);
 }
