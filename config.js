@@ -9,6 +9,7 @@ var config = {
 			"static/js/navigation.js",
 			"static/js/profile.js",
 			"static/js/volunteer.js",
+            "static/js/forms.js",
 			"static/js/fields.js"
 		],
 		css: [

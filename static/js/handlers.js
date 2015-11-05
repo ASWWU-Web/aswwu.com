@@ -6,11 +6,12 @@ var handlers = [
 	["/collegian", collegianHandler],
 	["/collegian/.*/.*", collegianHandler],
 	["/download_photos", downloadPhotosHandler],
+    ["/form/.*", formHandler],
 	["/profile/.*/update", updateProfileHandler],
 	["/profile/.*", profileHander],
 	["/roles/.*", rolesHandler],
 	["/roles/.*/.*", rolesHandler],
-  ["/search/.*", searchHandler],
+    ["/search/.*", searchHandler],
 	["/super_search.*", superSearchHandler],
 	["/upload/.*", uploadHandler],
 	["/volunteer", volunteerHandler],
@@ -76,6 +77,14 @@ function downloadPhotosHandler() {
 			});
 		});
 	});
+}
+
+function formHandler(id) {
+    if (!user) {
+        window.location.href = "#";
+        return;
+    }
+    getForm(id, main);
 }
 
 function pageHandler(path1, path2) {
