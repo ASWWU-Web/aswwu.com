@@ -7,6 +7,7 @@ function getProfile(name, year, cb, p) {
 		beforeSend: setAuthHeaders,
 		dataType: "JSON",
 		type: "GET",
+        cache: false,
 		success: function(data) {
 			if (typeof cb == "function")
 				cb(data);
@@ -72,7 +73,7 @@ function setProfileData(data,div) {
 						var label = function(link) {
 							return "<label>"+
 								"<input type='radio' name='photo' value='"+link+"' "+(value == link ? "checked" : "")+">"+
-								"<img src='"+config.defaults.mediaURL+"img-sm/"+link+"'>"+
+								"<img src='"+config.defaults.mediaURL+"img-sm/"+link+"' onclick='this.previousElementSibling.checked = true;'>"+
 								"</label>";
 						}
 						var photos = JSON.parse(data);

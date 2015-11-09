@@ -47,6 +47,7 @@ function initialize() {
 		method: "GET",
 		beforeSend: setAuthHeaders,
 		dataType: "JSON",
+        cache: false,
 		success: function(data) {
 			listOfUsers = data.results.filter(function(f) { return f != null; });
 			setData();

@@ -32,6 +32,7 @@ function checkLogin(callback) {
 		beforeSend: setAuthHeaders,
 		dataType: "JSON",
 		type: "GET",
+        cache: false,
 		success: function(data) {
 			if (data.error) processLogin("","");
 			processLogin(data, getToken());

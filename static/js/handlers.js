@@ -114,15 +114,15 @@ function profileHander(username, year) {
             setProfileData(data, main);
             $("#getVolunteerData").click(function() {
                 $.ajax({
-									url: config.server+"volunteer/"+data.wwuid,
-									beforeSend: setAuthHeaders,
-									success: function(data) {
-                    $("#getVolunteerData").replaceWith("<br><h4>Volunteer Data</h4><ul id='volunteerData'></ul>");
-                    $.each(data, function(key, value) {
-                        if (value !== "" && value !== "0" && value !== "False" && ["id","user_id","wwuid","updated_at"].indexOf(key) < 0)
-                        $("#volunteerData").append("<li>"+key+" = "+(value == "1" ? "True" : value)+"</li>");
-                    });
-									}
+					url: config.server+"volunteer/"+data.wwuid,
+					beforeSend: setAuthHeaders,
+					success: function(data) {
+                        $("#getVolunteerData").replaceWith("<br><h4>Volunteer Data</h4><ul id='volunteerData'></ul>");
+                        $.each(data, function(key, value) {
+                            if (value !== "" && value !== "0" && value !== "False" && ["id","user_id","wwuid","updated_at"].indexOf(key) < 0)
+                            $("#volunteerData").append("<li>"+key+" = "+(value == "1" ? "True" : value)+"</li>");
+                        });
+                    }
                 });
             });
         }, true);
