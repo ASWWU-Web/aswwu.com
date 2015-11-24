@@ -89,7 +89,7 @@ function collegianHandler(collegian) {
             var ic = $("#collegianArchives");
             for (var i = 0; i < issues.length; i++) {
                 if ((i > 0 && issues[i].volume != issues[i-1].volume) || i == 0) {
-                    ic.append("<hr><h4>Volume "+issues[i].volume+"</h4><hr>");
+                    ic.append("<hr><h4>&nbsp;&nbsp;Volume "+issues[i].volume+"</h4><hr>");
                 }
                 var block = $("<li id='issue_"+i+"'><img src='"+issues[i].thumb+"'><h5>Issue "+issues[i].issue+"</h5></li>")
                 block.click(function() {
