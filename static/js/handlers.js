@@ -51,17 +51,63 @@ function indexHandler() {
 }
 
 function collegianHandler(collegian) {
-  loader(main, "departments/collegian/index.html", function() {
-		document.getElementById("collegianFrame").src = "https://aswwu.com/c_archives";
+    function getYearByIssue(volume) {
+        var s = 1915+(volume*1);
+        return s+"-"+(s+1);
+    }
+    function setIssue(issue) {
+        var cf = $("#collegianFrame").addClass("loading").find("iframe").attr("src",issue.url);
+        document.getElementById("viewCollegianFullscreen").href = issue.url;
+        document.getElementById("viewCollegianPDF").href = issue.pdf;
+    }
+
+    loader(main, "departments/collegian/index.html", function() {
+        $("#collegianFrame iframe").load(function() {
+            $(this).parent().removeClass("loading");
+        }).parent().prepend(spinner);
+        $.get(config.defaults.collegianURL+"?list", function(data) {
+            data = JSON.parse(data);
+            var issues = [];
+            for (i in data) {
+                var issue = {
+                    name: data[i],
+                    url: config.defaults.collegianURL+data[i],
+                    volume: data[i].split("_")[2].substr(1)*1,
+                    issue: data[i].split("_")[3].substr(1)*1,
+                    thumb: config.defaults.collegianURL+data[i]+"/pageflipdata/page0_th.jpg",
+                    cover: config.defaults.collegianURL+data[i]+"/pageflipdata/page0.jpg"
+                }
+                issue.pdf = config.defaults.collegianURL.replace("archives","pdfs")+getYearByIssue(issue.volume)+"/"+issue.name+".pdf";
+                issues.push(issue);
+            }
+            issues = issues.sort(function(a,b) {
+                if (a.volume == b.volume) return a.issue < b.issue;
+                else return a.volume < b.volume;
+            });
+
+            setIssue(issues[0]);
+            var ic = $("#collegianArchives");
+            for (var i = 0; i < issues.length; i++) {
+                if ((i > 0 && issues[i].volume != issues[i-1].volume) || i == 0) {
+                    ic.append("<hr><h4>Volume "+issues[i].volume+"</h4><hr>");
+                }
+                var block = $("<li id='issue_"+i+"'><img src='"+issues[i].thumb+"'><h5>Issue "+issues[i].issue+"</h5></li>")
+                block.click(function() {
+                    var issue = issues[$(this).attr("id").replace("issue_","")];
+                    setIssue(issue);
+                });
+                ic.append(block);
+            }
+        });
 	});
 }
 
 function departmentHandler(department, page) {
-  if (department == undefined) department = "";
-	if (page == undefined) page = "index";
-  loader(main, "departments/"+department+"/"+page+".html", function(xhr) {
-    if (xhr.status == 404) window.location.href = "#/departments";
-  });
+    if (department == undefined) department = "";
+    if (page == undefined) page = "index";
+    loader(main, "departments/"+department+"/"+page+".html", function(xhr) {
+        if (xhr.status == 404) window.location.href = "#/departments";
+    });
 }
 
 function downloadPhotosHandler() {

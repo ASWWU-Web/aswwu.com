@@ -3,7 +3,7 @@ var config = {
 	title: "ASWWU",
 	description: "the Associated Student Body of Walla Walla University",
 	favicon: "images/mask_unknown.png",
-	server: "/python_server/",
+	server: "/server/",
 	files: {
 		js: [
 			"static/js/navigation.js",
@@ -20,6 +20,7 @@ var config = {
 		]
 	},
 	defaults: {
+        collegianURL: "https://aswwu.com/c_archives/",
 		profilePhoto: "images/mask_unknown.png",
 		mediaURL: "https://aswwu.com/media/",
 		uploadPath: "uploads/",
