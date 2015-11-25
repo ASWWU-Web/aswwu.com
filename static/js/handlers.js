@@ -68,6 +68,7 @@ function collegianHandler(collegian) {
         $.get(config.defaults.collegianURL+"?list", function(data) {
             data = JSON.parse(data);
             var issues = [];
+            var current = "";
             for (i in data) {
                 var issue = {
                     name: data[i],
@@ -79,13 +80,15 @@ function collegianHandler(collegian) {
                 }
                 issue.pdf = config.defaults.collegianURL.replace("archives","pdfs")+getYearByIssue(issue.volume)+"/"+issue.name+".pdf";
                 issues.push(issue);
+                if (current == "" || (issue.volume >= current.volume && issue.issue >= current.issue))
+                    current = issue;
             }
             issues = issues.sort(function(a,b) {
                 if (a.volume == b.volume) return a.issue < b.issue;
                 else return a.volume < b.volume;
             });
 
-            setIssue(issues[0]);
+            setIssue(current);
             var ic = $("#collegianArchives");
             for (var i = 0; i < issues.length; i++) {
                 if ((i > 0 && issues[i].volume != issues[i-1].volume) || i == 0) {
