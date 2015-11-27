@@ -30,6 +30,7 @@ $(document).ready(function() {
 	$.each(config.files.css, function(i,cssUrl) {
 		$("head").append("<link href='"+cssUrl+"' rel='stylesheet'>");
 	});
+	letItSnow();
 
 });
 
