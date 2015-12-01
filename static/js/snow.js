@@ -2,7 +2,7 @@
 var ctx;
 var W;
 var H;
-var mp = 30; //max particles
+var mp = Math.floor((window.innerHeight*window.innerWidth)/31762); //max particles based on screen size
 var particles = [];
 var timeout;
 function letItSnow() {
@@ -18,18 +18,18 @@ function letItSnow() {
 
   //Slowly add the flakes
 	timeout = window.setInterval(function(){
-	for(var i = 0; i < 3; i++)
-	{
+	//for(var i = 0; i < 3; i++)
+	//{
 		particles.push({
 			x: Math.random()*W, //x-coordinate
 			y: -4, //y-coordinate
 			r: Math.random()*4+1, //radius
 			d: Math.random()*mp //density
 		})
-	}
+	//}
   if(particles.length > mp)
     clearInterval(timeout);
-	},1500);
+	},500);
 
 	//animation loop
 	setInterval(draw, 33);
@@ -73,7 +73,7 @@ function update()
 		//Lets make it a bit more organic and let flakes enter from the left and right also.
 		if(p.x > W+5 || p.x < -5 || p.y > H)
 		{
-			if(i%3 > 0) //66.67% of the flakes
+			if(i%6 > 0) //66.67% of the flakes
 			{
 				particles[i] = {x: Math.random()*W, y: -10, r: p.r, d: p.d};
 			}
