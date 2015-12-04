@@ -16,23 +16,38 @@ function letItSnow() {
 	canvas.width = W;
 	canvas.height = H;
 
-  //Slowly add the flakes
-	timeout = window.setInterval(function(){
-	//for(var i = 0; i < 3; i++)
-	//{
-		particles.push({
-			x: Math.random()*W, //x-coordinate
-			y: -4, //y-coordinate
-			r: Math.random()*4+1, //radius
-			d: Math.random()*mp //density
-		})
-	//}
-  if(particles.length > mp)
-    clearInterval(timeout);
-	},500);
+  addFlakes();
+  window.addEventListener('resize', resizeCanvas);
 
 	//animation loop
 	setInterval(draw, 33);
+}
+
+function resizeCanvas() {
+  var canvas = document.getElementById("snow");
+  mp = Math.floor((window.innerHeight*window.innerWidth)/31762); //max particles based on screen size
+  //canvas dimensions
+  W = window.innerWidth;
+  H = window.innerHeight;
+  canvas.width = W;
+  canvas.height = H;
+  addFlakes();
+}
+function addFlakes() {
+  clearInterval(timeout);
+  if(particles.length >= mp)
+  return;
+  //Slowly add the flakes
+  timeout = window.setInterval(function(){
+    particles.push({
+      x: Math.random()*W, //x-coordinate
+      y: -4, //y-coordinate
+      r: Math.random()*4+1, //radius
+      d: Math.random()*mp //density
+    });
+    if(particles.length >= mp)
+      clearInterval(timeout);
+  },500);
 }
 
 //Lets draw the flakes
