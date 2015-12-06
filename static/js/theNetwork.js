@@ -4,11 +4,14 @@ var main;
 
 String.prototype.capitalize = function() {
 	if (this.length <= 1) return this;
-	var words = this.split(" ");
+    var words = this.replace("/"," s/s ");
+	words = words.split(" ");
 	for (var i in words)
 		if (words[i][0] && words[i][0].match(/[A-Za-z]/))
 			words[i] = words[i].replace(new RegExp(words[i][0]),words[i][0].toUpperCase());
-	return words.join(" ");
+	words = words.join(" ");
+    words = words.replace(" S/s ","/");
+    return words;
 }
 
 $(document).ready(function() {
@@ -105,6 +108,23 @@ function setData() {
 	if (f.attr("id") != $(".top-bar-section .autofocus").last().attr("id") || $("body").width() > 640) {
 		f.focus();
 	}
+
+    $(".profile").each(function(i) {
+        var $div = $(this);
+        var name = $div.data('name');
+        if (!name) {
+            $div.remove();
+            return;
+        }
+        dbSearch(name, config.defaults.year, function(list) {
+            if (list.length == 0) list = [{'full_name': name.capitalize(), 'username': name.capitalize(), 'photo': null}];
+            var profile = list[0];
+            setProfileData(profile, $div);
+            if (profile.views && $div.prop('tagName') == 'A') {
+                $div.attr('href', '#/profile/'+profile.username);
+            }
+        });
+    });
 }
 
 var spinner = $("<div class='spinner'></div>");

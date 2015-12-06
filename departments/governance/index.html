@@ -5,7 +5,7 @@
 	</div>
     <hr>
     <div class="small-12 columns">
-        <h4>Governance Documents</h4>
+        <h3>Governance Documents</h3>
         <a href="https://aswwu.com/uploads/ASWWU/Updated ASWWU Bylaws 05-03-2015.pdf" target="_blank">ASWWU Bylaws</a><br>
         <a href="https://aswwu.com/uploads/ASWWU/ASWWU Constitution.pdf" target="_blank">ASWWU Constitution</a><br>
         <a href="https://aswwu.com/uploads/ASWWU/Senate Procedural Rules 1 May 2014 - Revised.pdf" target="_blank">Senate Procedures</a><br>
@@ -13,6 +13,17 @@
     </div>
     <hr>
     <div class="small-12 columns">
-        <h4>ASWWU Senators</h4>
+        <h3>ASWWU Senators</h3>
+        <ul id="searchResults" class='small-block-grid-2 medium-block-grid-3 large-block-grid-4'></ul>
     </div>
 </div>
+
+<script>
+    var $div = $("#searchResults");
+    var names = ["joshua bendezu","kyle lambert","reginald richardson jr","william johnson","kristi debruin","zlatko benko","andreea hutuleac","alexandra nordby","kisa mcclosky","natalie wolske","chris ghazal","jason logan","deanna origas","timothy kosaka","micah hall","ryan thornton","faith hoyt","elizabeth wolske","sharleen bouit","tommy dalrymple","shirley anderson","debbie muthersbaugh","amanda eldevik","tyler steffanson","peter flores","zackary brenes"];
+    var districts = ["sittner north","sittner south","meske","conard","foreman","mountain view/birch","hallmark/university housing","off-campus male","off-campus female","portland campus","faculty","staff","student missions/ACA"];
+    for (var i = 0; i < names.length; i++) {
+        var d = Math.floor(i/2);
+        $div.append("<li><a class='profile' data-name='"+names[i]+"'><div class='profile-photo fill'></div><h5 class='profile-full_name'></h5><h5>Disctrict "+(d+1)+" - "+districts[d].capitalize()+"</h5></a></li>");
+    }
+</script>
