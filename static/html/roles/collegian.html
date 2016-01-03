@@ -4,3 +4,156 @@
     </div>
     <hr>
 </div>
+<div class="row panel">
+    <div class="small-12 columns">
+        <h2>Find Articles</h2>
+    </div>
+    <hr>
+    <form class="small-12 columns no-set" id="findCollegianArticlesForm">
+        <div class="row collapse prefix-radius">
+            <div class="small-4 columns">
+                <span class="prefix">Volume</span>
+            </div>
+            <div class="small-8 columns">
+                <input type="text" name="volume" placeholder="e.g. '100'">
+            </div>
+        </div>
+        <div class="row collapse prefix-radius">
+            <div class="small-4 columns">
+                <span class="prefix">Issue</span>
+            </div>
+            <div class="small-8 columns">
+                <input type="text" name="issue" placeholder="e.g. '1'">
+            </div>
+        </div>
+        <div class="row collapse prefix-radius">
+            <div class="small-4 columns">
+                <span class="prefix">Title</span>
+            </div>
+            <div class="small-8 columns">
+                <input type="text" name="title">
+            </div>
+        </div>
+        <div class="row collapse prefix-radius">
+			<div class="small-4 columns">
+				<span class="prefix">Author</span>
+			</div>
+			<div class="small-8 columns">
+				<input type="text" class="autocomplete-search no-search not-pretty" name="author">
+			</div>
+		</div>
+        <div class="row collapse prefix-radius">
+            <div class="small-4 columns">
+                <span class="prefix">Section</span>
+            </div>
+            <div class="small-8 columns">
+                <select name="section">
+                    <option value="">Any Section</option>
+                    <option value="ACA/SM">ACA/SM</option>
+                    <option value="Art">Art</option>
+                    <option value="Backpage">Backpage</option>
+                    <option value="Columns">Columns</option>
+                    <option value="Diversions">Diversions</option>
+                    <option value="Feature">Feature</option>
+                    <option value="Food">Food</option>
+                    <option value="Humor">Humor</option>
+                    <option value="News">News</option>
+                    <option value="Opinion">Opinion</option>
+                    <option value="Portrait">Portrait</option>
+                    <option value="Religion">Religion</option>
+                    <option value="Science and Tech">Science and Tech</option>
+                    <option value="Sports">Sports</option>
+                </select>
+            </div>
+        </div>
+		<div class="row">
+			<div class="small-12 columns">
+				<button type="submit" class="button expand">Find Articles</button>
+			</div>
+			<div class="small-12 columns">
+				<div data-alert class="hide errors alert-box alert radius"></div>
+				<div data-alert class="hide response alert-box success radius"></div>
+			</div>
+		</div>
+    </form>
+    <div class="small-12 columns" id="results">
+    </div>
+</div>
+<div class="row panel" id="addOrUpdate">
+    <div class="small-12 columns">
+        <h2>Add/Update Collegian Article</h2>
+    </div>
+    <hr>
+    <form class="small-12 columns">
+        <input type="hidden" name="id">
+        <div class="row collapse prefix-radius">
+            <div class="small-4 columns">
+                <span class="prefix">Volume</span>
+            </div>
+            <div class="small-8 columns">
+                <input type="text" name="volume" placeholder="e.g. '100'">
+            </div>
+        </div>
+        <div class="row collapse prefix-radius">
+            <div class="small-4 columns">
+                <span class="prefix">Issue</span>
+            </div>
+            <div class="small-8 columns">
+                <input type="text" name="issue" placeholder="e.g. '1'">
+            </div>
+        </div>
+        <div class="row collapse prefix-radius">
+            <div class="small-4 columns">
+                <span class="prefix">Title</span>
+            </div>
+            <div class="small-8 columns">
+                <input type="text" name="title">
+            </div>
+        </div>
+        <div class="row collapse prefix-radius">
+			<div class="small-4 columns">
+				<span class="prefix">Author</span>
+			</div>
+			<div class="small-8 columns">
+				<input type="text" class="autocomplete-search no-search not-pretty" name="author">
+			</div>
+		</div>
+        <div class="row collapse prefix-radius">
+            <div class="small-4 columns">
+                <span class="prefix">Section</span>
+            </div>
+            <div class="small-8 columns">
+                <select name="section">
+                    <option value="ACA/SM">ACA/SM</option>
+                    <option value="Art">Art</option>
+                    <option value="Backpage">Backpage</option>
+                    <option value="Columns">Columns</option>
+                    <option value="Diversions">Diversions</option>
+                    <option value="Feature">Feature</option>
+                    <option value="Food">Food</option>
+                    <option value="Humor">Humor</option>
+                    <option value="News">News</option>
+                    <option value="Opinion">Opinion</option>
+                    <option value="Portrait">Portrait</option>
+                    <option value="Religion">Religion</option>
+                    <option value="Science and Tech">Science and Tech</option>
+                    <option value="Sports">Sports</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 columns">
+                <textarea name='content' class='tinymce' id='contentTinyMCE' placeholder="Article Content"></textarea>
+            </div>
+        </div>
+		<div class="row">
+			<div class="small-12 columns">
+				<button type="submit" class="button expand">Save Article</button>
+			</div>
+			<div class="small-12 columns">
+				<div data-alert class="hide errors alert-box alert radius"></div>
+				<div data-alert class="hide response alert-box success radius"></div>
+			</div>
+		</div>
+    </form>
+</div>
