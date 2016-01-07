@@ -229,7 +229,11 @@ function rolesHandler(role, opt) {
   });
 }
 
+var searchResults;
+var searchYear;
 function searchHandler(q, y) {
+	searchResults = null;
+	searchYear = y;
   if (!y)
     y = config.defaults.year;
   main.html("<div class='row'><ul id='searchResults' class='small-block-grid-2 medium-block-grid-3 large-block-grid-4'></ul></div>");
@@ -239,6 +243,7 @@ function searchHandler(q, y) {
     if (data.length == 0) {
       main.html("<div class='row'><div class='small-10 small-offset-1 columns'><br>"+
         "<h2 style='color:white;'>Nothing to see here. Try searching again</h2>"+
+				"<p style='color:white'>'" + q + "' isn't the person you're looking for...</p>" +
         "<input type='text' class='autocomplete-search autofocus' placeholder='Searcheth again!'>"+
 				"<a href='#/super_search' class='button expand warning'>Or try a Super Search!</a>"+
         "</div></div>");
@@ -253,17 +258,65 @@ function searchHandler(q, y) {
 			else if (b.views*1 > a.views*1) return 1;
 			else return 0;
 		});
-    for (var d = 0; d < data.length; d++) {
-      var tag = data[d].username.replace(/\./g,"-");
-      var link = "#/profile/"+data[d].username+((y && y != config.defaults.year) ? "/"+y : "");
-      sr.append("<li><a id='profile-"+tag+"' href='"+link+"'>"+
-        "<div class='profile-photo fill'></div>"+
-        "<h5 class='profile-full_name' style='color:white;'></h5>"+
-        "</a></li>");
-      setProfileData(data[d], $("#profile-"+tag));
-    }
+		searchResults = data;
+		nextProfile = 0;
+		$(window).off("scroll");
+		$(window).scrollStopped(checkBottom);
+  	addMoreProfiles();
     setData();
   });
+}
+
+var nextProfile = 0;
+function addMoreProfiles() {
+	var y = searchYear;
+	var sr = $("#searchResults");
+	if(sr.length ==0) {
+		$(window).off("scroll");
+		return;
+	}
+	var countTo = nextProfile + 23;
+	for (var d = nextProfile; d <= countTo; d++) {
+		if(d >= searchResults.length) {
+			//delete event listener
+			$(window).off("scroll");
+			return;
+		}
+		nextProfile++;
+		var tag = searchResults[d].username.replace(/\./g,"-");
+		var link = "#/profile/"+searchResults[d].username+((y && y != config.defaults.year) ? "/"+y : "");
+		sr.append("<li><a id='profile-"+tag+"' href='"+link+"'>"+
+			"<div class='profile-photo fill'></div>"+
+			"<h5 class='profile-full_name' style='color:white;'></h5>"+
+			"</a></li>");
+		setProfileData(searchResults[d], $("#profile-"+tag));
+	}
+}
+$.fn.scrollStopped = function(callback) {
+  var that = this, $this = $(that);
+  $this.scroll(function(ev) {
+    clearTimeout($this.data('scrollTimeout'));
+    $this.data('scrollTimeout', setTimeout(callback.bind(that), 250, ev));
+  });
+};
+
+
+
+
+function checkBottom() {
+	console.log("checkBottom()s");
+	var totalHeight, currentScroll, visibleHeight;
+	if (document.documentElement.scrollTop)
+		{ currentScroll = document.documentElement.scrollTop; }
+	else
+		{ currentScroll = document.body.scrollTop; }
+	totalHeight = $("#searchResults").height();
+	visibleHeight = document.documentElement.clientHeight;
+
+	if (totalHeight <= currentScroll + visibleHeight )
+	{
+		addMoreProfiles();
+	}
 }
 
 function superSearchHandler() {
