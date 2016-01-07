@@ -283,6 +283,7 @@ function searchHandler(q, y) {
     			else if (b.views*1 > a.views*1) return 1;
     			else return 0;
     		});
+        main.append(spinner);
     		searchResults = data;
     		nextProfile = 0;
     		$(window).off("scroll");
@@ -303,7 +304,7 @@ function addMoreProfiles() {
 	var countTo = nextProfile + 23;
 	for (var d = nextProfile; d <= countTo; d++) {
 		if(d >= searchResults.length) {
-			//delete event listener
+			$(".spinner").remove();
 			$(window).off("scroll");
 			return;
 		}
