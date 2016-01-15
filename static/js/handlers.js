@@ -84,8 +84,8 @@ function collegianHandler(collegian) {
                     current = issue;
             }
             issues = issues.sort(function(a,b) {
-                if (a.volume == b.volume) return a.issue < b.issue;
-                else return a.volume < b.volume;
+                if (a.volume == b.volume) return b.issue - a.issue;
+                else return b.volume - a.volume;
             });
 
             setIssue(current);
@@ -278,11 +278,11 @@ function searchHandler(q, y) {
             window.location.href = "#/profile/"+data[0].username+((y && y != config.defaults.year) ? "/"+y : "");
             return;
         }
-    		data = data.sort(function(a, b) {
-    			if (a.views*1 > b.views*1) return -1;
-    			else if (b.views*1 > a.views*1) return 1;
-    			else return 0;
-    		});
+		data = data.sort(function(a, b) {
+			if (a.views*1 > b.views*1) return -1;
+			else if (b.views*1 > a.views*1) return 1;
+			else return 0;
+		});
         main.append(spinner);
     		searchResults = data;
     		nextProfile = 0;
