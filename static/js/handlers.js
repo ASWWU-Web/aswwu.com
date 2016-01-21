@@ -5,6 +5,7 @@ var handlers = [
     ["/departments/.*/.*", departmentHandler],
     ["/collegian", collegianHandler],
     ["/collegian/.*/.*", collegianHandler],
+    ["/collegian_article/.*/.*/.*/.*", collegianArticleHandler],
     ["/download_photos", downloadPhotosHandler],
     ["/form/.*", formHandler],
     ["/profile/.*/update", updateProfileHandler],
@@ -50,7 +51,8 @@ function indexHandler() {
     }
 }
 
-function collegianHandler(collegian) {
+function collegianHandler(sv,si) {
+    var sections = ["ACA/SM", "Art", "Backpage", "Columns", "Diversions", "Feature", "Food", "Humor", "News", "Opinion", "Portrait", "Religion", "Science and Tech", "Sports"];
     function getYearByIssue(volume) {
         var s = 1915+(volume*1);
         return s+"-"+(s+1);
@@ -59,6 +61,27 @@ function collegianHandler(collegian) {
         var cf = $("#collegianFrame").addClass("loading").find("iframe").attr("src",issue.url);
         document.getElementById("viewCollegianFullscreen").href = issue.url;
         document.getElementById("viewCollegianPDF").href = issue.pdf;
+        var $toc = $("#tableOfContents");
+        $toc.html('<h4>Table of Contents</h4>');
+        $.each(sections, function(i,section) {
+            var $div = $("<div class='large-12 medium-4 small-6 columns'></div>")
+            $div.append("<button data-dropdown='"+section.replace(/ /g,'_').replace(/\//g,'')+"-links' class='button tiny dropdown'>"+section+"</button>");
+            $div.append("<ul id='"+section.replace(/ /g,'_').replace(/\//g,'')+"-links' data-dropdown-content class='f-dropdown'></ul>");
+            $toc.append($div);
+        });
+        $.get(config.server+"collegian_search/?volume="+issue.volume+"&issue="+issue.issue, function(data) {
+            $.each(data.articles, function(i,d) {
+                $("#"+d.section.replace(/ /g,"_").replace(/\//g,'')+"-links").append(
+                    "<li><a href='#/collegian_article/"+d.volume+"/"+d.issue+"/"+d.section+"/"+d.title+"'>"+d.title+"</a></li>"
+                );
+            });
+            $.each(sections, function(i,s) {
+                if ($("#"+s.replace(/ /g,"_").replace(/\//g,"")+"-links").children().length == 0) {
+                    $("#"+s.replace(/ /g,"_").replace(/\//g,"")+"-links").append("<li><a>No articles, yet!</a></li>");
+                }
+            })
+            $(document).foundation('dropdown', 'reflow');
+        });
     }
 
     loader(main, "departments/collegian/index.html", function() {
@@ -88,6 +111,13 @@ function collegianHandler(collegian) {
                 else return b.volume - a.volume;
             });
 
+            if (sv && si) {
+                sv = sv.replace("v","");
+                si = si.replace("i","");
+                var selected = issues.filter(function(a) {return a.volume == sv && a.issue == si;});
+                if (selected.length == 1) current = selected[0];
+            }
+
             setIssue(current);
             var ic = $("#collegianArchives");
             for (var i = 0; i < issues.length; i++) {
@@ -103,6 +133,18 @@ function collegianHandler(collegian) {
             }
         });
 	});
+}
+
+function collegianArticleHandler(volume,issue,section,title) {
+    loader(main, "departments/collegian/article.html", function(xhr) {
+        $.get(config.server+"collegian_search/?volume="+volume+"&issue="+issue+"&section="+section+"&title="+title, function(data) {
+            if (data.articles && data.articles.length == 1) {
+                $.each(data.articles[0], function(key, value) {
+                    $("#collegian-"+key).html(value);
+                });
+            }
+        });
+    });
 }
 
 function departmentHandler(department, page) {
@@ -186,6 +228,10 @@ function rolesHandler(role, opt) {
         window.location.hash = "";
         return;
     }
+    if (role == "collegian_admin") {
+        role = "collegian";
+        var collegianAdmin = true;
+    }
     loader(main, "static/html/roles/"+role+".html", function(xhr) {
         if (xhr.status == 404) {
             window.location.href = "#";
@@ -235,6 +281,7 @@ function rolesHandler(role, opt) {
                 var data_string = $(this).serializeArray().map(function(a) {
                     return a.name+"="+a.value;
                 }).join("&");
+                if (!collegianAdmin) data_string += "&author="+user.full_name;
                 $.get(config.server+"collegian_search/?"+data_string, function(data) {
                     $("#results").html('');
                     $.each(data.articles, function(i, ca) {

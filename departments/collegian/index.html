@@ -8,19 +8,34 @@
     #collegianFrame.loading iframe { display: none; }
     .spinner { display: none; }
     #collegianFrame.loading .spinner { display: block; }
+    #tableOfContents {color:white;}
+    #tableOfContents button.dropdown {
+        margin: 0.25em;
+        font-size: 1em;
+        width: 100%;
+    }
 </style>
 
-<div class="row">
+<div class="row" style="background-color: #444;">
 	<div class="small-12 columns">
 		<h2>The Collegian</h2>
+        <hr>
 	</div>
-	<div class="small-12 columns" id="collegianFrame" class="loading">
-		<iframe></iframe>
-	</div>
-    <div class="small-12 medium-6 columns"><a id="viewCollegianFullscreen" target='_blank' class='button expand'>View Fullscreen</a></div>
-    <div class="small-12 medium-6 columns"><a id="viewCollegianPDF" target='_blank' class='button expand'>Download PDF</a></div>
+    <div class="small-12 columns">
+        <div class="row">
+            <div class="small-12 large-4 columns" id="tableOfContents"></div>
+        	<div class="small-12 large-8 columns" id="collegianFrame" class="loading">
+        		<iframe></iframe>
+        	</div>
+        </div>
+        <div class="row">
+            <br>
+            <div class="small-12 medium-6 columns"><a id="viewCollegianFullscreen" target='_blank' class='button expand'>View Fullscreen</a></div>
+            <div class="small-12 medium-6 columns"><a id="viewCollegianPDF" target='_blank' class='button expand'>Download PDF</a></div>
+        </div>
+    </div>
 </div>
-<div class="row" style="padding: 1em;">
+<div class="row" style="margin-top: 1em;">
     <div class="small-12 columns" style="background-color: #444;">
         <h3 style="text-align: center; width: 100%;">Collegian Archives</h3>
         <h6 style="text-align: center; width: 100%;">Click To View Above</h6>
