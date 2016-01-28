@@ -52,7 +52,7 @@ function indexHandler() {
 }
 
 function collegianHandler(sv,si) {
-    var sections = ["ACA/SM", "Art", "Backpage", "Columns", "Diversions", "Feature", "Food", "Humor", "News", "Opinion", "Portrait", "Religion", "Science and Tech", "Sports"];
+    var sections = ["ACA/SM", "Art", "Backpage", "Columns", "Diversions", "Feature", "Food", "Humor", "News", "Opinion", "We of WWU", "Religion", "Science and Tech", "Sports"];
     function getYearByIssue(volume) {
         var s = 1915+(volume*1);
         return s+"-"+(s+1);
