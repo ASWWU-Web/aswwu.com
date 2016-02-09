@@ -64,24 +64,47 @@ function collegianHandler(sv,si) {
         var $toc = $("#tableOfContents");
         $toc.html('<h4>Table of Contents</h4>');
         $.each(sections, function(i,section) {
-            var $div = $("<div class='large-12 medium-4 small-6 columns'></div>")
-            $div.append("<button data-dropdown='"+section.replace(/ /g,'_').replace(/\//g,'')+"-links' class='button tiny dropdown'>"+section+"</button>");
-            $div.append("<ul id='"+section.replace(/ /g,'_').replace(/\//g,'')+"-links' data-dropdown-content class='f-dropdown'></ul>");
+            var $div = $("<div class='large-12 medium-4 small-6 columns'></div>");
+            $div.append($("<button class='button tiny' style='width:100%;'>"+section+"</button>").click(function() {
+              $('#section-title').html('<h4 style="color: black;">'+section+' <small><i>in Volume '+issue.volume+', Issue '+issue.issue+'</h4>');
+              $.get(config.server+"collegian_search/?volume="+issue.volume+"&issue="+issue.issue, function(data) {
+                  $('#article-list').html('<ul></ul>');
+                  $.each(data.articles, function(i,d) {
+                      $('#article-list ul').append(
+                          "<li><a href='#/collegian_article/"+d.volume+"/"+d.issue+"/"+d.section.replace(/\//g,'|')+"/"+d.title+"'>"+d.title+"</a></li>"
+                      );
+                  });
+                  if ($("#article-list ul").children().length == 0) {
+                      $("#article-list").append("<li><a>No articles, yet!</a></li>");
+                  }
+                  $('#article-modal a').click(function() {
+                    $('#article-modal').foundation('reveal','close');
+                  })
+                  $('#article-modal').foundation('reveal','open');
+              });
+            }));
+            // $div.append("<button data-dropdown='"+section.replace(/ /g,'_').replace(/\//g,'')+"-links' class='button tiny dropdown'>"+section+"</button>");
+            // $div.append("<ul id='"+section.replace(/ /g,'_').replace(/\//g,'')+"-links' data-dropdown-content class='f-dropdown'></ul>");
             $toc.append($div);
         });
-        $.get(config.server+"collegian_search/?volume="+issue.volume+"&issue="+issue.issue, function(data) {
-            $.each(data.articles, function(i,d) {
-                $("#"+d.section.replace(/ /g,"_").replace(/\//g,'')+"-links").append(
-                    "<li><a href='#/collegian_article/"+d.volume+"/"+d.issue+"/"+d.section+"/"+d.title+"'>"+d.title+"</a></li>"
-                );
-            });
-            $.each(sections, function(i,s) {
-                if ($("#"+s.replace(/ /g,"_").replace(/\//g,"")+"-links").children().length == 0) {
-                    $("#"+s.replace(/ /g,"_").replace(/\//g,"")+"-links").append("<li><a>No articles, yet!</a></li>");
-                }
-            })
-            $(document).foundation('dropdown', 'reflow');
-        });
+        // $.get(config.server+"collegian_search/?volume="+issue.volume+"&issue="+issue.issue, function(data) {
+        //     $('#article-list').html('<ul></ul>');
+        //     $.each(data.articles, function(i,d) {
+        //         // $("#"+d.section.replace(/ /g,"_").replace(/\//g,'')+"-links").append(
+        //         $('#article-list ul').append(
+        //             "<li><a href='#/collegian_article/"+d.volume+"/"+d.issue+"/"+d.section.replace(/\//g,'|')+"/"+d.title+"'>"+d.title+"</a></li>"
+        //         );
+        //     });
+        //     $.each(sections, function(i,s) {
+        //         // if ($("#"+s.replace(/ /g,"_").replace(/\//g,"")+"-links").children().length == 0) {
+        //         //     $("#"+s.replace(/ /g,"_").replace(/\//g,"")+"-links").append("<li><a>No articles, yet!</a></li>");
+        //         // }
+        //         if ($("#article-list ul").children().length == 0) {
+        //             $("#article-list").append("<li><a>No articles, yet!</a></li>");
+        //         }
+        //     });
+        //     $(document).foundation('dropdown', 'reflow');
+        // });
     }
 
     loader(main, "departments/collegian/index.html", function() {
@@ -127,7 +150,8 @@ function collegianHandler(sv,si) {
                 var block = $("<li id='issue_"+i+"'><img src='"+issues[i].thumb+"'><h5>Issue "+issues[i].issue+"</h5></li>")
                 block.click(function() {
                     var issue = issues[$(this).attr("id").replace("issue_","")];
-                    setIssue(issue);
+                    window.location = '#/collegian/'+issue.volume+'/'+issue.issue;
+                    // setIssue(issue);
                 });
                 ic.append(block);
             }
@@ -137,7 +161,7 @@ function collegianHandler(sv,si) {
 
 function collegianArticleHandler(volume,issue,section,title) {
     loader(main, "departments/collegian/article.html", function(xhr) {
-        $.get(config.server+"collegian_search/?volume="+volume+"&issue="+issue+"&section="+section+"&title="+title, function(data) {
+        $.get(config.server+"collegian_search/?volume="+volume+"&issue="+issue+"&section="+section.replace(/\|/g,'/')+"&title="+title, function(data) {
             if (data.articles && data.articles.length == 1) {
                 $.each(data.articles[0], function(key, value) {
                     $("#collegian-"+key).html(value);

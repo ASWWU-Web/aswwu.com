@@ -9,7 +9,7 @@
     .spinner { display: none; }
     #collegianFrame.loading .spinner { display: block; }
     #tableOfContents {color:white;}
-    #tableOfContents button.dropdown {
+    #tableOfContents button {
         margin: 0.25em;
         font-size: 1em;
         width: 100%;
@@ -43,4 +43,12 @@
     <div class="small-12 columns" style="background-color: #444;">
         <ul id="collegianArchives" class="small-block-grid-2 medium-block-grid-3 large-block-grid-4"></ul>
     </div>
+</div>
+
+<div id='article-modal' class='reveal-modal' data-reveal>
+  <h2 style="color: #333;"><span id='section-title'></span></h2>
+  <div class='row'>
+    <div class="col-xs-12" id="article-list">
+    </div>
+  </div>
 </div>
