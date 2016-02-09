@@ -67,7 +67,7 @@ function collegianHandler(sv,si) {
             var $div = $("<div class='large-12 medium-4 small-6 columns'></div>");
             $div.append($("<button class='button tiny' style='width:100%;'>"+section+"</button>").click(function() {
               $('#section-title').html('<h4 style="color: black;">'+section+' <small><i>in Volume '+issue.volume+', Issue '+issue.issue+'</h4>');
-              $.get(config.server+"collegian_search/?volume="+issue.volume+"&issue="+issue.issue+"&section="+encodeURI(issue.section), function(data) {
+              $.get(config.server+"collegian_search/?volume="+issue.volume+"&issue="+issue.issue+"&section="+issue.section, function(data) {
                   $('#article-list').html('<ul></ul>');
                   $.each(data.articles, function(i,d) {
                       $('#article-list ul').append(
