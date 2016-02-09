@@ -71,7 +71,7 @@ function collegianHandler(sv,si) {
                   $('#article-list').html('<ul></ul>');
                   $.each(data.articles, function(i,d) {
                       $('#article-list ul').append(
-                          "<li><a href='#/collegian_article/"+d.volume+"/"+d.issue+"/"+d.section.replace(/\//g,'|')+"/"+d.title+"'>"+d.title+"</a></li>"
+                          "<li><a href='#/collegian_article/"+d.volume+"/"+d.issue+"/"+d.section.replace(/\//g,'|')+"/"+encodeURI(d.title)+"'>"+d.title+"</a></li>"
                       );
                   });
                   if ($("#article-list ul").children().length == 0) {
