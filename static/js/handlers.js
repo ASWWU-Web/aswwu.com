@@ -6,6 +6,7 @@ var handlers = [
     ["/collegian", collegianHandler],
     ["/collegian/.*/.*", collegianHandler],
     ["/collegian_article/.*/.*/.*/.*", collegianArticleHandler],
+    ["/election", electionHandler],
     ["/download_photos", downloadPhotosHandler],
     ["/form/.*", formHandler],
     ["/profile/.*/update", updateProfileHandler],
@@ -192,6 +193,70 @@ function downloadPhotosHandler() {
 			});
 		});
 	});
+}
+
+function electionHandler() {
+  if (!user.wwuid) {
+      main.html("<div class='row'><div class='small-12 columns'>"+
+                  "<h1 style='color:white;'>You must login to access this page</h1><br>"+
+                  "<h3><a href='#' data-reveal-id='login-modal' style='color: white;'>Login</a></h3>"+
+                  "</div></div>");
+      return;
+  }
+  loader(main, "static/html/election.html", function() {
+    var electionData = {president: '', executive_vp: '', social_vp: '', spiritual_vp: ''};
+    function setElectionSelects() {
+      $(".selected").removeClass('selected');
+      $('.profile').each(function() {
+        if (electionData[$(this).data('position')].indexOf($(this).data('name')) > -1)
+          $(this).addClass('selected');
+      });
+    }
+    $('.profile').click(function() {
+      var position = $(this).data('position');
+      var name = $(this).data('name');
+      electionData[position] = electionData[position].split('; ').filter(function(a) {return a.length > 1;});
+      if (electionData[position].indexOf(name) > -1) {
+        electionData[position] = electionData[position].filter(function(a) { return a != name; });
+      } else {
+        electionData[position].push(name);
+      }
+      if (electionData[position].length > 2) {
+        electionData[position].shift();
+      }
+      electionData[position] = electionData[position].join('; ');
+      setElectionSelects();
+    });
+    $.ajax({
+      url: config.server+"election",
+      beforeSend: setAuthHeaders,
+      method: "GET",
+      success: function(data) {
+        if (data.vote) {
+          electionData = data.vote;
+          setElectionSelects();
+        }
+      }
+    });
+    $("#electionForm").submit(function(event) {
+      event.preventDefault();
+      $.ajax({
+        url: config.server+"election",
+        beforeSend: setAuthHeaders,
+        method: "POST",
+        data: electionData,
+        success: function(data) {
+          if (data.vote) {
+            $(".response").text("Thank you for your vote!").show().delay(2500).fadeOut();
+            electionData = data.vote;
+            setElectionSelects();
+          } else {
+            $(".errors").text(data.error.capitalize()).show().delay(2500).fadeOut();
+          }
+        }
+      });
+    });
+  });
 }
 
 function formHandler(id) {
