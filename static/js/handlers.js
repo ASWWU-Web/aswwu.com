@@ -207,25 +207,28 @@ function electionHandler() {
     var electionData = {president: '', executive_vp: '', social_vp: '', spiritual_vp: ''};
     function setElectionSelects() {
       $(".selected").removeClass('selected');
-      $('.profile').each(function() {
-        if (electionData[$(this).data('position')].indexOf($(this).data('name')) > -1)
-          $(this).addClass('selected');
+      $.each(electionData, function(k, v) {
+        if ($('[data-name="'+v+'"]').length == 0) {
+          $('input[data-position="'+k+'"]').val(v.capitalize());
+        } else {
+          $('input[data-position="'+k+'"]').val('');
+          $('[data-name="'+v+'"]').addClass('selected');
+        }
       });
     }
     $('.profile').click(function() {
       var position = $(this).data('position');
       var name = $(this).data('name');
-      electionData[position] = electionData[position].split('; ').filter(function(a) {return a.length > 1;});
-      if (electionData[position].indexOf(name) > -1) {
-        electionData[position] = electionData[position].filter(function(a) { return a != name; });
-      } else {
-        electionData[position].push(name);
-      }
-      if (electionData[position].length > 2) {
-        electionData[position].shift();
-      }
-      electionData[position] = electionData[position].join('; ');
+      electionData[position] = name;
       setElectionSelects();
+    });
+    $("input").blur(function() {
+      var position = $(this).data('position');
+      var value = $(this).val();
+      if (value != "" && position != "") {
+        electionData[position] = value.toLowerCase();
+        setElectionSelects();
+      }
     });
     $.ajax({
       url: config.server+"election",
