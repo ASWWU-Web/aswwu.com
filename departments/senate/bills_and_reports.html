@@ -1,0 +1,27 @@
+
+<div class="row">
+  <div class="small-12 columns">
+    <h2>Project Reports and Passed Bills</h2>
+  </div>
+  <hr>
+  <div class="small-12 medium-6 columns" style="color: white;">
+    <h3>Passed Bills</h3>
+    <hr>
+    <h5>Below are the official Campus Improvement Bills passed this year by Senate, and signed by the president of the ASWWU.</h5>
+    <hr>
+    <ul id="passed_bills"></ul>
+  </div>
+  <div class="small-12 medium-6 columns" style="color: white;">
+    <h3>Project Reports</h3>
+    <hr>
+    <h5>At the completion of any project, wether passed or failed by senate, each senator is required to submit a report detailing their work and certifying that improvements have been implemented. This ensures transparency to the student body, and allows future Senators to understand the research and reasoning behind each bill and to be able to easily pick up where others left off.</h5>
+    <hr>
+  </div>
+</div>
+
+<script>
+  var passed_bills = ["F.L. 1 - ASWWU 2015-2016 Budget Approval.pdf", "F.L. 6 - Printer for the Atlas.pdf", "F.L. 7 - Portland Campus FOB access and Security Camera.pdf", "F.L. 8 - New Climbing Shoes and Harnesses for the Climbing Wall in the WEC.pdf"];
+  for (var i = 0; i < passed_bills.length; i++) {
+    $('#passed_bills').append('<li><a href="https://aswwu.com/uploads/ASWWU/'+passed_bills[i]+'" target="_blank"><u style="color: white;">'+passed_bills[i]+'</u></a></li>');
+  }
+</script>

@@ -1,0 +1,40 @@
+
+<div class="row">
+    <div class="small-12 columns">
+        <h2>ASWWU Administration</h2>
+    </div>
+    <hr>
+    <div class="small-12 columns" style="color: white;">
+      <ul id="searchResults" class='small-block-grid-2 medium-block-grid-3 large-block-grid-4'></ul>
+    </div>
+    <hr>
+</div>
+
+<script>
+    var $div = $("#searchResults");
+    var names = {
+      "President": "randall folkenberg",
+      "Executive Vice President": "derek glatts",
+      "Financial Vice President": "grant gustavsen",
+      "Marketing Vice President": "frank ramirez",
+      "Religious Vice President": "stephen farr",
+      "Social Vice President": "kathryn schwartzkopf",
+      "Atlas": "elliot berger",
+      "Collegian": "lauren lewis",
+      "Global Service": "justin mock",
+      "ASWWU Outdoors": "andrew rapp",
+      "ASWWU Photo": "tyler macphee",
+      "Tread Shed": "jonathan spracklen",
+      "ASWWU Web Team": "brock haugen",
+      "ASWWU Video": "austin mock",
+      "ASWWU Sponsor & Dean of Students": "hilary catlet"
+    };
+    for (var key in names) {
+        $div.append("<li><a class='profile' data-name='"+names[key]+"'>"+
+                      "<div class='profile-photo fill'></div>"+
+                      "<h5 class='profile-full_name'></h5>"+
+                      "<h5>"+key+"</h5>"+
+                      "<h6 class='profile-email'></h6>"+
+                    "</a></li>");
+    }
+</script>
