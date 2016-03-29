@@ -17,7 +17,7 @@ function navInit() {
 		if (user.roles.length > 0) {
 			accountLinks.append("<li class='divider'></li>");
 			for (var i = 0; i < user.roles.length; i++) {
-                if (user.roles[i] == 'collegian' && user.roles.indexOf('collegian_admin') > -1) continue;
+        if (user.roles[i] == 'collegian' && user.roles.indexOf('collegian_admin') > -1) continue;
 				if (user.roles[i].length > 5)
 					accountLinks.append("<li><a href='#/roles/"+user.roles[i].replace(" ","_").toLowerCase()+"'>"+user.roles[i].replace("_"," ").capitalize()+" Page</a></li>");
 			}

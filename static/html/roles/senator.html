@@ -1,0 +1,35 @@
+
+<div class="row">
+  <div class="small-12 columns">
+    <h2>Senators Only Page</h2>
+  </div>
+  <hr>
+  <div class="small-12 columns" id="templates">
+    <h4>Templates</h4>
+  </div>
+  <br><br><br><br><hr>
+  <div class="small-12 columns" id="tips">
+    <h4>Tips</h4>
+  </div>
+  <br><br><br><br><hr>
+  <div class="small-12 columns" id="other">
+    <h4>Other</h4>
+  </div>
+</div>
+
+<script>
+  var files = {
+    "BillTemplate.doc": "templates",
+    // "flbilltemp": "templates",
+    // "plbilltemp": "templates",
+    // "glbilltemp": "templates",
+    // "srbilltemp": "templates",
+    "Project Report Template.docx": "templates",
+    "Duties of a Senator.docx": "tips",
+    "Writing a Bill.docx": "tips",
+    "Master Suggestion List.docx": "other"
+  };
+  for (var key in files) {
+    $('#'+files[key]).append('<a href="https://aswwu.com/uploads/ASWWU/'+key+'" target="_blank"><u style="color: white;">'+key.capitalize()+'</u></a><br>');
+  }
+</script>
