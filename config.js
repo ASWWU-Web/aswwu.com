@@ -20,7 +20,7 @@ var config = {
 		]
 	},
 	defaults: {
-        collegianURL: "https://aswwu.com/c_archives/",
+    collegianURL: "https://aswwu.com/c_archives/",
 		profilePhoto: "images/mask_unknown.png",
 		mediaURL: "https://aswwu.com/media/",
 		uploadPath: "uploads/",

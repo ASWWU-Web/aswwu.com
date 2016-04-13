@@ -6,6 +6,7 @@ var handlers = [
     ["/collegian", collegianHandler],
     ["/collegian/.*/.*", collegianHandler],
     ["/collegian_article/.*/.*/.*/.*", collegianArticleHandler],
+    ["/collegian_articles_by_section/.*", collegianFindArticleHandler],
     ["/election", electionHandler],
     ["/download_photos", downloadPhotosHandler],
     ["/form/.*", formHandler],
@@ -67,22 +68,23 @@ function collegianHandler(sv,si) {
         $.each(sections, function(i,section) {
             var $div = $("<div class='large-12 medium-4 small-6 columns'></div>");
             $div.append($("<button class='button tiny' style='width:100%;'>"+section+"</button>").click(function() {
-              $('#section-title').html('<h4 style="color: black;">'+section+' <small><i>in Volume '+issue.volume+', Issue '+issue.issue+'</h4>');
-              $.get(config.server+"collegian_search/?volume="+issue.volume+"&issue="+issue.issue+"&section="+section, function(data) {
-                  $('#article-list').html('<ul></ul>');
-                  $.each(data.articles, function(i,d) {
-                      $('#article-list ul').append(
-                          "<li><a href='#/collegian_article/"+d.volume+"/"+d.issue+"/"+d.section.replace(/\//g,'|')+"/"+encodeURI(d.title)+"'>"+d.title+"</a></li>"
-                      );
-                  });
-                  if ($("#article-list ul").children().length == 0) {
-                      $("#article-list").append("<li><a>No articles, yet!</a></li>");
-                  }
-                  $('#article-modal a').click(function() {
-                    $('#article-modal').foundation('reveal','close');
-                  })
-                  $('#article-modal').foundation('reveal','open');
-              });
+              window.location.href = '#/collegian_articles_by_section/'+section;
+              // $('#section-title').html('<h4 style="color: black;">'+section+' <small><i>in Volume '+issue.volume+', Issue '+issue.issue+'</h4>');
+              // $.get(config.server+"collegian_search/?volume="+issue.volume+"&issue="+issue.issue+"&section="+section, function(data) {
+              //     $('#article-list').html('<ul></ul>');
+              //     $.each(data.articles, function(i,d) {
+              //         $('#article-list ul').append(
+              //             "<li><a href='#/collegian_article/"+d.volume+"/"+d.issue+"/"+d.section.replace(/\//g,'|')+"/"+encodeURI(d.title)+"'>"+d.title+"</a></li>"
+              //         );
+              //     });
+              //     if ($("#article-list ul").children().length == 0) {
+              //         $("#article-list").append("<li><a>No articles, yet!</a></li>");
+              //     }
+              //     $('#article-modal a').click(function() {
+              //       $('#article-modal').foundation('reveal','close');
+              //     })
+              //     $('#article-modal').foundation('reveal','open');
+              // });
             }));
             // $div.append("<button data-dropdown='"+section.replace(/ /g,'_').replace(/\//g,'')+"-links' class='button tiny dropdown'>"+section+"</button>");
             // $div.append("<ul id='"+section.replace(/ /g,'_').replace(/\//g,'')+"-links' data-dropdown-content class='f-dropdown'></ul>");
@@ -170,6 +172,20 @@ function collegianArticleHandler(volume,issue,section,title) {
             }
         });
     });
+}
+
+function collegianFindArticleHandler(section) {
+  main.html('<div class="row"><h2>Articles in '+section.capitalize()+'</h2><hr><ul></ul></div>');
+  var div = "<div class='small-12 columns'><h3><span class='article-title'></span><i style='font-size: 0.75em;'> by: </i><span class='article-author'></span> (Volume <span class='article-volume'></span>, Issue <span class='article-issue'></span>)</h3></div>";
+  $.get(config.server+"collegian_search/?section="+section.replace(/\|/g,'/'), function(data) {
+    $.each(data.articles, function(i, article) {
+      var articleDiv = $("<li><a href='#/collegian_article/"+article.volume+"/"+article.issue+"/"+article.section.replace(/\//g,'|')+"/"+encodeURI(article.title)+"'>"+div+"</a></li>");
+      $.each(article, function(key, value) {
+        articleDiv.find('.article-'+key).html(value);
+      });
+      $('main ul').append(articleDiv);
+    });
+  });
 }
 
 function departmentHandler(department, page) {
