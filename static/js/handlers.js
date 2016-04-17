@@ -54,7 +54,7 @@ function indexHandler() {
 }
 
 function collegianHandler(sv,si) {
-    var sections = ["ACA/SM", "Alumni Note", "Art", "Backpage", "Blast from the Past", "Creative Writing", "Columns", "Culture", "Diversions", "Editor's Node", "Feature", "Food", "Humor", "News", "Opinion", "We of WWU", "Religion", "Science and Tech", "Sports"];
+    var sections = ["ACA/SM", "Alumni Note", "Art", "Backpage", "Blast from the Past", "Creative Writing", "Columns", "Culture", "Diversions", "Editor's Note", "Feature", "Food", "Humor", "News", "Opinion", "We of WWU", "Religion", "Science and Tech", "Sports"];
     function getYearByIssue(volume) {
         var s = 1915+(volume*1);
         return s+"-"+(s+1);
@@ -184,7 +184,7 @@ function collegianFindArticleHandler(section) {
   var div = "<div class='small-12 columns'><h3><span class='article-title'></span><i style='font-size: 0.75em;'> by: </i><span class='article-author'></span> (Volume <span class='article-volume'></span>, Issue <span class='article-issue'></span>)</h3></div>";
   $.get(config.server+"collegian_search/?section="+section.replace(/\|/g,'/'), function(data) {
     data.articles = data.articles.sort(function(a,b) {
-      return +a.issue < +b.issue;
+      return a.issue*1 < b.issue*1;
     });
     $.each(data.articles, function(i, article) {
       var articleDiv = $("<li><a href='#/collegian_article/"+article.volume+"/"+article.issue+"/"+article.section.replace(/\//g,'|')+"/"+encodeURI(article.title)+"'>"+div+"</a></li>");
