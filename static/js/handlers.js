@@ -54,7 +54,7 @@ function indexHandler() {
 }
 
 function collegianHandler(sv,si) {
-    var sections = ["ACA/SM", "Alumni Note", "Art", "Backpage", "Blast from the Past", "Creative Writing", "Columns", "Culture", "Diversions", "Feature", "Food", "Humor", "News", "Opinion", "We of WWU", "Religion", "Science and Tech", "Sports"];
+    var sections = ["ACA/SM", "Alumni Note", "Art", "Backpage", "Blast from the Past", "Creative Writing", "Columns", "Culture", "Diversions", "Editor's Node", "Feature", "Food", "Humor", "News", "Opinion", "We of WWU", "Religion", "Science and Tech", "Sports"];
     function getYearByIssue(volume) {
         var s = 1915+(volume*1);
         return s+"-"+(s+1);
@@ -166,9 +166,13 @@ function collegianArticleHandler(volume,issue,section,title) {
     loader(main, "departments/collegian/article.html", function(xhr) {
         $.get(config.server+"collegian_search/?volume="+volume+"&issue="+issue+"&section="+section.replace(/\|/g,'/')+"&title="+title, function(data) {
             if (data.articles && data.articles.length == 1) {
-                $.each(data.articles[0], function(key, value) {
+                var article = data.articles[0];
+                $.each(article, function(key, value) {
                     $("#collegian-"+key).html(value);
                 });
+                var link = encodeURIComponent(window.location.href);
+                document.getElementById('fb-link').href += link;
+                document.getElementById('tw-link').href += link;
             }
         });
     });
@@ -179,6 +183,9 @@ function collegianFindArticleHandler(section) {
   main.html('<div class="row"><h2>Articles in '+section.capitalize()+'</h2><hr><ul></ul></div>');
   var div = "<div class='small-12 columns'><h3><span class='article-title'></span><i style='font-size: 0.75em;'> by: </i><span class='article-author'></span> (Volume <span class='article-volume'></span>, Issue <span class='article-issue'></span>)</h3></div>";
   $.get(config.server+"collegian_search/?section="+section.replace(/\|/g,'/'), function(data) {
+    data.articles = data.articles.sort(function(a,b) {
+      return +a.issue < +b.issue;
+    });
     $.each(data.articles, function(i, article) {
       var articleDiv = $("<li><a href='#/collegian_article/"+article.volume+"/"+article.issue+"/"+article.section.replace(/\//g,'|')+"/"+encodeURI(article.title)+"'>"+div+"</a></li>");
       $.each(article, function(key, value) {
