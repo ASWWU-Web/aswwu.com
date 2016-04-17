@@ -175,6 +175,7 @@ function collegianArticleHandler(volume,issue,section,title) {
 }
 
 function collegianFindArticleHandler(section) {
+  if (section == "ACA") section = "ACA/SM";
   main.html('<div class="row"><h2>Articles in '+section.capitalize()+'</h2><hr><ul></ul></div>');
   var div = "<div class='small-12 columns'><h3><span class='article-title'></span><i style='font-size: 0.75em;'> by: </i><span class='article-author'></span> (Volume <span class='article-volume'></span>, Issue <span class='article-issue'></span>)</h3></div>";
   $.get(config.server+"collegian_search/?section="+section.replace(/\|/g,'/'), function(data) {

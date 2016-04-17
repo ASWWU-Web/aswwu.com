@@ -48,7 +48,7 @@ function initialize() {
 	$.ajax({
 		url: config.server+"search/all",
 		method: "GET",
-		beforeSend: setAuthHeaders,
+		// beforeSend: setAuthHeaders,
 		dataType: "JSON",
         cache: false,
 		success: function(data) {
