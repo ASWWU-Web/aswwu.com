@@ -184,9 +184,8 @@ function collegianFindArticleHandler(section) {
   var div = "<div class='small-12 columns'><h3><span class='article-title'></span><i style='font-size: 0.75em;'> by: </i><span class='article-author'></span> (Volume <span class='article-volume'></span>, Issue <span class='article-issue'></span>)</h3></div>";
   $.get(config.server+"collegian_search/?section="+section.replace(/\|/g,'/'), function(data) {
     data.articles = data.articles.sort(function(a,b) {
-      return a.issue*1 < b.issue*1;
+      return b.issue*1-a.issue*1;
     });
-    console.log(data.articles);
     $.each(data.articles, function(i, article) {
       var articleDiv = $("<li><a href='#/collegian_article/"+article.volume+"/"+article.issue+"/"+article.section.replace(/\//g,'|')+"/"+encodeURI(article.title)+"'>"+div+"</a></li>");
       $.each(article, function(key, value) {
