@@ -186,6 +186,7 @@ function collegianFindArticleHandler(section) {
     data.articles = data.articles.sort(function(a,b) {
       return a.issue*1 < b.issue*1;
     });
+    console.log(data.articles);
     $.each(data.articles, function(i, article) {
       var articleDiv = $("<li><a href='#/collegian_article/"+article.volume+"/"+article.issue+"/"+article.section.replace(/\//g,'|')+"/"+encodeURI(article.title)+"'>"+div+"</a></li>");
       $.each(article, function(key, value) {
