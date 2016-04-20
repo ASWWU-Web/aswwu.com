@@ -288,7 +288,7 @@ function electionHandler() {
 
 function formHandler(id) {
     var knownForms = [
-        {"id": "7844d505-18d6-43ad-8c2c-a24df3ba7de0", "name": "raft_trip"}
+        {"id": "e814923b-2c36-43ca-883b-f0875941ee1e", "name": "raft_trip"}
     ];
     if (!user) {
         window.location.href = "#";
