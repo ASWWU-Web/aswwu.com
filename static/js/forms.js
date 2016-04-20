@@ -11,15 +11,15 @@ function getForm(id, div) {
                 div.html('');
                 div.html("<form id='form_"+id+"' class='small-12 columns'><div class='row'><h2>"+data.form.title.replace(/_/g, " ").capitalize()+"</h2></div><hr></form>");
                 if (data.questions.length == 0) {
-                  div.find('form').append('<h4>Sorry this form has been closed</h4>');
+                  div.find('form').append('<div class="row"><h4>Sorry this form has been closed</h4></div>');
                   return;
                 }
                 if (data.form.details.length > 4)
-                  div.find("form").append(data.form.details+"<hr>");
+                  div.find("form").append("<div class='row'>"+data.form.details+"<hr></div>");
                 var questions = data.questions;
                 for (var i=0; i<questions.length; i++)
                     addQuestion(questions[i]);
-                div.find("form").append("<br><div class='row'><button class='success expand' type='submit'>Save and Close!</button></div>");
+                div.find("form").append("<br><div class='row'><button class='success expand' type='submit'>Save and Close!</button></div><br>");
                 $("#form_"+id).submit(function(e) {
                     e.preventDefault();
                     var data = {};
