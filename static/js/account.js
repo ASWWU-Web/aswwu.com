@@ -32,18 +32,18 @@ function checkLogin(callback) {
 		beforeSend: setAuthHeaders,
 		dataType: "JSON",
 		type: "GET",
-        cache: false,
+    cache: false,
 		success: function(data) {
 			if (data.error) processLogin("","");
 			processLogin(data, getToken());
 			if (typeof callback == "function")
 				callback(data);
 		},
-        error: function(data) {
+    error: function(data) {
 			processLogin("","");
 			if (typeof callback == "function")
 				callback({});
-        }
+    }
 	});
 }
 

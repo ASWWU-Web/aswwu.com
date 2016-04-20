@@ -9,11 +9,17 @@ function getForm(id, div) {
                 console.error(data.error);
             } else {
                 div.html('');
-                div.html("<form id='form_"+id+"' class='small-12 columns'><div class='row'><h2>"+data.form.title+"</h2></div></form>");
+                div.html("<form id='form_"+id+"' class='small-12 columns'><div class='row'><h2>"+data.form.title.replace(/_/g, " ").capitalize()+"</h2></div><hr></form>");
+                if (data.questions.length == 0) {
+                  div.find('form').append('<h4>Sorry this form has been closed</h4>');
+                  return;
+                }
+                if (data.form.details.length > 4)
+                  div.find("form").append(data.form.details+"<hr>");
                 var questions = data.questions;
                 for (var i=0; i<questions.length; i++)
                     addQuestion(questions[i]);
-                div.find("form").append("<div class='row'><button class='success expand' type='submit'>Save and Close!</button></div>");
+                div.find("form").append("<br><div class='row'><button class='success expand' type='submit'>Save and Close!</button></div>");
                 $("#form_"+id).submit(function(e) {
                     e.preventDefault();
                     var data = {};
@@ -26,24 +32,20 @@ function getForm(id, div) {
                         else
                             data[name] = a.value;
                     });
+                    var success = 0;
                     $.each(data, function(key, value) {
-                        var success = 0;
-                        $.ajax({
-                            url: config.server+"answer/"+key,
-                            beforeSend: setAuthHeaders,
-                            method: "PUT",
-                            data: {'value': value},
-                            dataType: "JSON",
-                            success: function(data) {
-                                success++;
-                                if (success == questions.length) {
-                                    window.location.href = "#";
-                                }
-                            },
-                            error: function(data) {
-                                console.error(data);
-                            }
-                        });
+                      $.ajax({
+                        url: config.server+"answer/"+key,
+                        beforeSend: setAuthHeaders,
+                        method: "PUT",
+                        data: {'value': value},
+                        dataType: "JSON",
+                        success: function(data) {
+                          success++;
+                          if (success == questions.length) { window.location.href = "#"; }
+                        },
+                        error: function(data) { console.error(data); }
+                      });
                     });
                 });
             }
@@ -60,13 +62,14 @@ function addQuestion(question) {
         if (opts.length == 2)
             limits[opts[0]] = opts[1];
     });
-    if (question.type == "radio" || question.type == "checkbox") {
+    if (question.type == "radio" || question.type == "checkbox" || question.type) {
+        if (question.possible_values == 'None') question.possible_values = '';
         var pv = question.possible_values.split(",").map(function(a) {
             return $.trim(a);
         });
-        $q.append("<div class='small-12 columns'><label><h3>"+question.label+"</h3>"+(question.placeholder.length > 4 ? "<h5>("+question.placeholder+")</h5>" : "")+"</label></div>");
+        $q.append("<div class='small-12 columns'><label><h4>"+question.label.capitalize()+"</h4>"+(question.placeholder.length > 4 ? "<h5>("+question.placeholder+")</h5>" : "")+"</label></div>");
         for (var i = 0; i < pv.length; i++) {
-            $q.find("div").append("<input type='"+question.type+"' value='"+pv[i]+"' name='question_"+question.id+"' id='question_"+question.id+i+"'><label for='question_"+question.id+i+"'><h4>"+pv[i]+"</h4></label>");
+          $q.find("div").append("<input type='"+question.type+"' value='"+pv[i]+"' name='question_"+question.id+"' id='question_"+question.id+i+"'><label for='question_"+question.id+i+"'><h4>"+pv[i]+"</h4></label>");
         }
         if (question.type == "checkbox" && limits["max"] !== undefined) {
             var selected = [];
@@ -82,6 +85,18 @@ function addQuestion(question) {
                 }
             });
         }
+        $.ajax({
+            url: config.server+"question/"+question.id,
+            beforeSend: setAuthHeaders,
+            method: "GET",
+            dataType: "JSON",
+            success: function(data) {
+              data.answers.map(function(a, i) {
+                $('#question_'+data.question.id+i).val(a.value);
+              });
+            },
+            error: function(data) { console.error(data); }
+        });
     }
     $form.append($q);
 }
