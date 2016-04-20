@@ -15,7 +15,7 @@ function getForm(id, div) {
                   return;
                 }
                 var limits = data.form.limits.split(';').map(function(a) { return a.split('='); });
-                if (data.submissions <= (limits.filter(function(a) { return a[0] == 'max'; })[0] || [,99999])[1]*1) {
+                if (data.submissions >= (limits.filter(function(a) { return a[0] == 'max'; })[0] || [,99999])[1]*1) {
                   div.find('form').append('<div class="row"><h4>All spots for this form have been filled. You will now be placed on a waitlist and receive an email if a spot opens up.</h4><hr></div>');
                 }
                 if (data.form.details.length > 4)
