@@ -10,6 +10,7 @@ function getForm(id, div) {
             } else {
                 div.html('');
                 div.html("<form id='form_"+id+"' class='small-12 columns'><div class='row'><h2>"+data.form.title.replace(/_/g, " ").capitalize()+"</h2></div><hr></form>");
+
                 if (data.questions.length == 0) {
                   div.find('form').append('<div class="row"><h4>Sorry this form has been closed</h4></div>');
                   return;
@@ -18,8 +19,14 @@ function getForm(id, div) {
                 if (data.submissions >= (limits.filter(function(a) { return a[0] == 'max'; })[0] || [,99999])[1]*1) {
                   div.find('form').append('<div class="row"><h4>All spots for this form have been filled. You will now be placed on a waitlist and receive an email if a spot opens up.</h4><hr></div>');
                 }
-                if (data.form.details.length > 4)
+                if (data.form.details.length > 4) {
                   div.find("form").append("<div class='row'>"+data.form.details+"<hr></div>");
+                }
+                if (!user) {
+                  div.find('form').append("<div class='row align-center'><button class='success' data-reveal-id='login-modal'>Login To Continue</button></div>");
+                  return;
+                }
+
                 var questions = data.questions;
                 for (var i=0; i<questions.length; i++)
                     addQuestion(questions[i]);

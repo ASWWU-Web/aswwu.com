@@ -290,10 +290,6 @@ function formHandler(id) {
     var knownForms = [
         {"id": "e814923b-2c36-43ca-883b-f0875941ee1e", "name": "raft_trip"}
     ];
-    if (!user) {
-        window.location.href = "#";
-        return;
-    }
     for (var k in knownForms) {
         if (knownForms[k].name == id) {
             window.location.href = "#/form/"+knownForms[k].id;
