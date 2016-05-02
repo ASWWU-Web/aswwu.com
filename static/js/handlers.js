@@ -288,7 +288,8 @@ function electionHandler() {
 
 function formHandler(id) {
     var knownForms = [
-        {"id": "e814923b-2c36-43ca-883b-f0875941ee1e", "name": "raft_trip"}
+      {"id": "e814923b-2c36-43ca-883b-f0875941ee1e", "name": "raft_trip"},
+      {"id": "685ba151-fab4-4aa9-9c0e-a71bef33dfb4", "name": "surf_trip"}
     ];
     for (var k in knownForms) {
         if (knownForms[k].name == id) {
