@@ -119,6 +119,10 @@ function collegianHandler(sv,si) {
             var issues = [];
             var current = "";
             for (i in data) {
+                var inum = data[i].split('i')[1];
+                if (inum.length == 1) {
+                  data[i].replace("i"+inum, "i0"+inum);
+                }
                 var issue = {
                     name: data[i],
                     url: config.defaults.collegianURL+data[i],
