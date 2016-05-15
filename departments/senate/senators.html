@@ -34,6 +34,6 @@
   var districts = ["sittner north","sittner south","meske","conard","foreman","mountain view/birch","hallmark/university housing","off-campus male","off-campus female","portland campus","faculty","staff","student missions/ACA"];
   for (var i = 0; i < names.length; i++) {
     var d = Math.floor(i/2);
-    $div.append("<li><a class='profile' data-name='"+names[i]+"'><div class='profile-photo fill'></div><h5 class='profile-full_name'></h5><h5>Disctrict "+(d+1)+" - "+districts[d].capitalize()+"</h5></a></li>");
+    $div.append("<li><a class='profile' data-name='"+names[i]+"'><div class='profile-photo fill'></div><h5 class='profile-full_name'></h5><h5>District "+(d+1)+" - "+districts[d].capitalize()+"</h5></a></li>");
   }
 </script>
