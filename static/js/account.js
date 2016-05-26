@@ -16,8 +16,12 @@ function getToken() {
 	return t;
 }
 
+function setToken(token) {
+	localStorage.setItem("token", token);
+}
+
 function setAuthHeaders(request) {
-	request.setRequestHeader("token",getToken());
+	request.setRequestHeader("Authorization", "HMAC "+getToken());
 }
 
 function checkLogin(callback) {
@@ -35,7 +39,7 @@ function checkLogin(callback) {
     cache: false,
 		success: function(data) {
 			if (data.error) processLogin("","");
-			processLogin(data, getToken());
+			processLogin((data.user ? data.user : data), (data.token ? data.token : getToken()));
 			if (typeof callback == "function")
 				callback(data);
 		},
@@ -51,7 +55,7 @@ function processLogin(new_user, token) {
 	if (new_user.roles)
 		new_user.roles = new_user.roles.split(",");
 	user = new_user;
-	localStorage.token = token;
+	setToken(token);
 	localStorage.user = JSON.stringify(new_user);
 }
 

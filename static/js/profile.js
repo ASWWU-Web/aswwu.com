@@ -3,7 +3,7 @@ function getProfile(name, year, cb, p) {
 	if (!year || year.toString().length != 4)
 		year = config.defaults.year;
 	$.ajax({
-		url: config.server+(p ? "/profile/" : "/search/")+year+"/"+name,
+		url: config.server+(p ? "profile/" : "search/")+year+"/"+name,
 		beforeSend: setAuthHeaders,
 		dataType: "JSON",
 		type: "GET",
