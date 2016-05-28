@@ -1,0 +1,40 @@
+
+<div class="row">
+  <div class="small-12 columns">
+    <h2>Senate Minutes</h2>
+  </div>
+  <hr>
+  <div class="small-12 medium-6 columns" style="color: white;">
+    <!-- <h3>Passed Bills</h3> -->
+    <!-- <hr> -->
+    <h5>Below are the official Minutes from the most recent Senate meetings</h5>
+    <hr>
+    <ul id="minutes"></ul>
+  </div>
+
+<script>
+  var minutes = [
+    "Senate Minutes 10.15.15.docx",
+    "Senate Minutes 10.22.15.docx",
+    "Senate Minutes 10.29.15.docx",
+    "Senate Minutes 11.12.15.docx",
+    "Senate Minutes 11.19.15.docx",
+    "Senate Minutes 1.14.16.docx",
+    "Senate Minutes 11.5.15.docx",
+    "Senate Minutes 12.10.15.docx",
+    "Senate Minutes 12.3.15.docx",
+    "Senate Minutes 1.28. 16.docx",
+    "Senate Minutes  2.11.16.docx",
+    "Senate Minutes 2.25.16.docx",
+    "Senate Minutes 2.4.2016 .docx",
+    "Senate Minutes 28.4.16.docx",
+    "Senate Minutes 3.31.16.docx",
+    "Senate Minutes 3.3.16.docx",
+    "Senate Minutes 4.7.16.docx",
+    "Senate Minutes 5.12.16.docx",
+    "Senate Minutes 5.5.16.docx"
+  ].reverse();
+  for (var i = 0; i < minutes.length; i++) {
+    $('#minutes').append('<li><a href="https://aswwu.com/uploads/ASWWU/Senate/'+minutes[i]+'" target="_blank"><u style="color: white;">'+minutes[i]+'</u></a></li>');
+  }
+</script>
