@@ -3,8 +3,8 @@ var config = {
 	title: "ASWWU",
 	description: "the Associated Student Body of Walla Walla University",
 	favicon: "images/mask_unknown.png",
-	// server: "http://127.0.0.1:8888/",
-	server: "https://aswwu.com/server/",
+	 server: "http://127.0.0.1:8888/",
+	//server: "https://aswwu.com/server/",
 	files: {
 		js: [
 			"static/js/navigation.js",
@@ -25,7 +25,7 @@ var config = {
 		profilePhoto: "images/mask_unknown.png",
 		mediaURL: "https://aswwu.com/media/",
 		uploadPath: "uploads/",
-		year: 1516
+		year: 1617
 	},
 };
 config.favicon = config.defaults.mediaURL+"img-xs/"+config.favicon;
