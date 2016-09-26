@@ -65,7 +65,7 @@
       var smallMatch = matchMedia(Foundation.media_queries.small).matches;
       var medMatch   = matchMedia(Foundation.media_queries.medium).matches;
       var lrgMatch   = matchMedia(Foundation.media_queries.large).matches;
-      
+
        if (sticky && settings.sticky_on === 'all') {
           return true;
        }
@@ -367,12 +367,19 @@
         var $link = self.S(this),
             $dropdown = $link.siblings('.dropdown'),
             url = $link.attr('href'),
+            dataAttr = $link.attr('data-reveal-id'),
             $titleLi;
 
         if (!$dropdown.find('.title.back').length) {
 
           if (settings.mobile_show_parent_link == true && url) {
-            $titleLi = $('<li class="title back js-generated"><h5><a href="javascript:void(0)"></a></h5></li><li class="parent-link hide-for-large-up"><a class="parent-link js-generated" href="' + url + '">' + $link.html() +'</a></li>');
+            //TODO: This is so that the login modal can work with the links properly. 
+            if(dataAttr)
+              $titleLi = $('<li class="title back js-generated"><h5><a href="javascript:void(0)"></a></h5></li><li class="parent-link hide-for-large-up"><a class="parent-link js-generated" data-reveal-id="' + dataAttr + '" href="' + url + '">' + $link.html() +'</a></li>');
+            else {
+              $titleLi = $('<li class="title back js-generated"><h5><a href="javascript:void(0)"></a></h5></li><li class="parent-link hide-for-large-up"><a class="parent-link js-generated" href="' + url + '">' + $link.html() +'</a></li>');
+
+            }
           } else {
             $titleLi = $('<li class="title back js-generated"><h5><a href="javascript:void(0)"></a></h5>');
           }
