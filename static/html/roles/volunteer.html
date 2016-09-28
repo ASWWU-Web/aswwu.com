@@ -100,12 +100,27 @@
 						);
 						$form.find("button.emails").click(function(event) {
 							event.preventDefault();
-							prompt("Results: (Emails)", emails);
+							prompt("Results: (Emails)", emails.filter(function(v) {return v}));
 						});
 						$form.find("button.full_names").click(function(event) {
 							event.preventDefault();
-							prompt("Results: (Full Names)", full_names);
+							prompt("Results: (Full Names)", full_names.filter(function(v) {return v}));
 						});
+
+						//display the results.
+						console.log(data);
+						for (var e in data.results) {
+							var photoLink;
+							if(data.results[e].photo){
+								photoLink = config.defaults.mediaURL + "/img-sm/profiles" + data.results[e].photo;
+							}else {
+								photoLink = config.defaults.mediaURL + config.defaults.profilePhoto;
+							}
+							$("#results").append("<div class='row'>"+
+							"<div class='small-12 medium-4 columns'><img src='https://aswwu.com/media/" + data.results[e].photo + "' /></div>"+
+							"<div class='small-12 medium-8 columns'><h3>" + data.results[e].full_name + "</h3><a href='" + config.server + "#/search/" + data.results[e].full_name + "' target='_blank'>Open Profile</a></div>"+
+							"</div>");
+						}
 					}
 				}, 500);
 			},
