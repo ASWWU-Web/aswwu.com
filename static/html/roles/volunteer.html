@@ -14,7 +14,7 @@
 		<hr>
 		<div class="row collapse prefix-radius">
 			<div class="small-4 columns">
-				<span class="prefix">User's Name</span>
+				<span class="prefix">Username</span>
 			</div>
 			<div class="small-8 columns">
 				<input type="text" class="autocomplete-search no-search" name="username">
@@ -52,13 +52,14 @@
 	</div>
 	<div class="small-12 columns">
 		<button type="submit" class="button expand">Search</button>
-		<button class="button expand" id='viewPrintOut'>View Printout</button>
+		<!-- <button class="button expand" id='viewPrintOut'>View Printout</button> -->
 	</div>
 	<div class="small-12 columns">
 		<div data-alert class="hide errors alert-box alert radius"></div>
 	</div>
 	<div class='small-12 columns' id='results'>
-		<div class='row'></div>
+		<div id='resultsButtons' class='row'></div>
+		<div id='resultsIcons' class='row'></div>
 	</div>
 </form>
 
@@ -70,13 +71,13 @@
 		var name = checkboxes[i].replace(new RegExp("_",'g')," ").capitalize().replace(new RegExp("slash",'ig'),"/");
 		$form.prepend("<div class='small-12 medium-6 columns'><input type='checkbox' name='"+checkboxes[i]+"'> <h4 style='display:inline;'>"+name+"</h4></div>");
 	}
-	document.getElementById("viewPrintOut").onclick = function() {
-		$("#searchVolunteerForm input[name='cmd']").val('viewPrintOut');
-		$("#searchVolunteerForm").append("<input name='token' value='"+getToken()+"'>");
-		document.getElementById("searchVolunteerForm").action = config.server+"role/volunteer";
-		document.getElementById("searchVolunteerForm").method = "POST";
-		document.getElementById("searchVolunteerForm").submit();
-	}
+	// document.getElementById("viewPrintOut").onclick = function() {
+	// 	$("#searchVolunteerForm input[name='cmd']").val('viewPrintOut');
+	// 	$("#searchVolunteerForm").append("<input name='token' value='"+getToken()+"'>");
+	// 	document.getElementById("searchVolunteerForm").action = config.server+"role/volunteer";
+	// 	document.getElementById("searchVolunteerForm").method = "POST";
+	// 	document.getElementById("searchVolunteerForm").submit();
+	// }
 	$form.submit(function(event) {
 		event.preventDefault();
 		$.ajax({
@@ -86,15 +87,15 @@
 			method: "POST",
 			dataType: "JSON",
 			success: function(data) {
-				$("#results .row").html(spinner);
+				$("#resultsButtons").html(spinner);
 				setTimeout(function() {
 					if (data.errors) {
 						$form.find(".errors").text(data.errors.join("<br>")).show().delay(1000).fadeOut();
-						$("#results .row").html("");
+						$("#resultsButtons").html("");
 					} else {
 						var full_names = data.results.map(function(d) {return d.full_name;});
 						var emails = data.results.map(function(d) {return d.email;});
-						$("#results .row").html("<div class='small-12 columns'><h3>("+emails.length+") Results:</h3></div>"+
+						$("#resultsButtons").html("<div class='small-12 columns'><h3>("+emails.length+") Results:</h3></div>"+
 							"<div class='small-12 medium-6 columns'><button class='button expand emails'>View Emails</button></div>"+
 							"<div class='small-12 medium-6 columns'><button class='button expand full_names'>View Full Names</button></div>"
 						);
@@ -108,18 +109,16 @@
 						});
 
 						//display the results.
-						console.log(data);
+						$("#resultsIcons").html("");
 						for (var e in data.results) {
 							var photoLink;
-							if(data.results[e].photo){
-								photoLink = config.defaults.mediaURL + "/img-sm/profiles" + data.results[e].photo;
+							if(data.results[e].photo ){
+								photoLink = config.defaults.mediaURL + "img-sm/" + data.results[e].photo;
 							}else {
+								console.info(config.defaults.profilePhoto)
 								photoLink = config.defaults.mediaURL + config.defaults.profilePhoto;
 							}
-							$("#results").append("<div class='row'>"+
-							"<div class='small-12 medium-4 columns'><img src='https://aswwu.com/media/" + data.results[e].photo + "' /></div>"+
-							"<div class='small-12 medium-8 columns'><h3>" + data.results[e].full_name + "</h3><a href='" + config.server + "#/search/" + data.results[e].full_name + "' target='_blank'>Open Profile</a></div>"+
-							"</div>");
+							$("#resultsIcons").append("<div class='small-12 medium-4 columns'><img src='" + photoLink + "' style='height:200px;' /><br /><a href='https://aswwu.com/#/profile/" + data.results[e].username + "' target='_blank'><h3>" + data.results[e].full_name + "</h3></a></div>");
 						}
 					}
 				}, 500);
