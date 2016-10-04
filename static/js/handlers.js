@@ -8,6 +8,7 @@ var handlers = [
     ["/collegian_article/.*/.*/.*/.*", collegianArticleHandler],
     ["/collegian_articles_by_section/.*", collegianFindArticleHandler],
     ["/election", electionHandler],
+    ["/senate_election", senateElectionHandler],
     ["/download_photos", downloadPhotosHandler],
     ["/form/.*", formHandler],
     ["/profile/.*/update", updateProfileHandler],
@@ -287,6 +288,19 @@ function electionHandler() {
         }
       });
     });
+  });
+}
+
+function senateElectionHandler() {
+   if (!user.wwuid) {
+      main.html("<div class='row'><div class='small-12 columns'>"+
+                  "<h1 style='color:white;'>You must login to access this page</h1><br>"+
+                  "<h3><a href='#' data-reveal-id='login-modal' style='color: white;'>Login</a></h3>"+
+                  "</div></div>");
+      return;
+  }
+  loader(main, "static/html/senate_election.html", function() {
+    $('.testing').html("HELLO WORLD");
   });
 }
 
