@@ -61,8 +61,8 @@ function collegianHandler(sv,si) {
     }
     function setIssue(issue) {
         var cf = $("#collegianFrame").addClass("loading").find("iframe").attr("src",issue.url);
-        document.getElementById("viewCollegianFullscreen").href = issue.url;
-        document.getElementById("viewCollegianPDF").href = issue.pdf;
+        // document.getElementById("viewCollegianFullscreen").href = issue.url;
+        // document.getElementById("viewCollegianPDF").href = issue.pdf;
         var $toc = $("#tableOfContents");
         $toc.html('<h4>Table of Contents</h4>');
         $.each(sections, function(i,section) {
