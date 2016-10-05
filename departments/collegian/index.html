@@ -24,31 +24,30 @@
     <div class="small-12 columns">
         <div class="row">
           <!-- <div class="small-12 large-4 columns" id="tableOfContents"></div> -->
-        	<div class="small-12 large-12 columns" id="collegianFrame" class="loading">
+        	<!-- <div class="small-12 large-12 columns" id="collegianFrame" class="loading">
         		<iframe></iframe>
-        	</div>
+        	</div> -->
+          <div id="collegianContainer" class="flex-video">
+
+          </div>
         </div>
         <div class="row">
             <br>
-            <div class="small-12 medium-6 columns"><a id="viewCollegianFullscreen" target='_blank' class='button expand'>View Fullscreen</a></div>
-            <div class="small-12 medium-6 columns"><a id="viewCollegianPDF" target='_blank' class='button expand'>Download PDF</a></div>
+            <div class="small-12 columns"><a href="https://issuu.com/aswwucollegian" class='button expand'>Read More</a></div>
         </div>
     </div>
 </div>
-<div class="row" style="margin-top: 1em;">
-    <div class="small-12 columns" style="background-color: #444;">
-        <h3 style="text-align: center; width: 100%;">Collegian Archives</h3>
-        <h6 style="text-align: center; width: 100%;">Click To View Above</h6>
-    </div>
-    <div class="small-12 columns" style="background-color: #444;">
-        <ul id="collegianArchives" class="small-block-grid-2 medium-block-grid-3 large-block-grid-4"></ul>
-    </div>
-</div>
 
-<div id='article-modal' class='reveal-modal' data-reveal>
-  <h2 style="color: #333;"><span id='section-title'></span></h2>
-  <div class='row'>
-    <div class="col-xs-12" id="article-list">
-    </div>
-  </div>
-</div>
+<script>
+$(document).ready(function(){
+  $.getJSON("https://aswwu.com/server/feed?name=issuu", function(data) {
+    if(data.response.docs[0].docname)
+      $("#collegianContainer").prepend("<div class='embed-responsive embed-responsive-16by9'><div data-url='https://issuu.com/aswwucollegian/docs/" + data.response.docs[0].docname + "' class='issuuembed embed-responsive-item'></div><script type='text/javascript' src='//e.issuu.com/embed.js' async='true'>\<\/script\></div>");
+    else
+      $("#collegianContainer").prepend("<p class='text-danger'>Couldn't get the latest Collegian. :(</p>");
+  }).fail(function() {
+    $("#collegianContainer").prepend("<p class='text-danger'>Couldn't get the latest Collegian. :(</p>");
+  });
+});
+
+</script>
