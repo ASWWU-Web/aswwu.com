@@ -300,7 +300,11 @@ function senateElectionHandler() {
       return;
   }
   loader(main, "static/html/senate_election.html", function() {
-    $('.testing').html("HELLO WORLD");
+    $('.district').hide();
+    $('#districtChoice').change(function () {
+      $('.district').hide();
+      $('#'+$(this).val()).show();
+    })
   });
 }
 
