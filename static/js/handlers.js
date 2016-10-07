@@ -300,11 +300,47 @@ function senateElectionHandler() {
       return;
   }
   loader(main, "static/html/senate_election.html", function() {
+    var votes = [];
+    var SMvotes = [];
+    var votePos, SMPos = 0;
     $('.district').hide();
     $('#districtChoice').change(function () {
       $('.district').hide();
       $('#'+$(this).val()).show();
-    })
+    });
+    $('.profile').click(function() {
+      var name = $(this).data('name');
+      var district = $(this).data('district');
+      //UNTESTED SM DISTRICT STUFF
+      if(district == 13) {
+        SMvotes.unshift({'name': name});
+        if(SMvotes.length > 2) {
+          SMvotes.pop();
+        }
+        if(SMvotes.length == 2) {
+          if(SMvotes[0].name == SMvotes[1].name) {
+            SMvotes.pop();
+          }
+        }  //SLIGHTLY TESTED OTHER DISTRICT STUFF
+        console.log('SM District votes:');
+        console.log(votes);
+      } else {
+        votes.unshift({'name': name, 'district': district});
+        // if you've voted more than twice, remove the first selection
+        if(votes.length > 2) {
+          votes.pop();
+        }
+        // if you've got two votes in
+        if(votes.length == 2) {
+          // remove the first selection if they are different districts or if you chose the same person twice
+          if((votes[0].district != votes[1].district) || (votes[0].name == votes[1].name)) {
+            votes.pop();
+          }
+        }
+        console.log('District 1-12 votes:');
+        console.log(votes);
+      }
+    });
   });
 }
 
