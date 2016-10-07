@@ -302,13 +302,14 @@ function senateElectionHandler() {
   loader(main, "static/html/senate_election.html", function() {
     var votes = [];
     var SMvotes = [];
-    var votePos, SMPos = 0;
+    
     $('.district').hide();
     $('#districtChoice').change(function () {
       $('.district').hide();
       $('#'+$(this).val()).show();
     });
     $('.profile').click(function() {
+      $(".selected").removeClass('selected');
       var name = $(this).data('name');
       var district = $(this).data('district');
       //UNTESTED SM DISTRICT STUFF
@@ -321,9 +322,10 @@ function senateElectionHandler() {
           if(SMvotes[0].name == SMvotes[1].name) {
             SMvotes.pop();
           }
-        }  //SLIGHTLY TESTED OTHER DISTRICT STUFF
+        }  
         console.log('SM District votes:');
         console.log(votes);
+        //SLIGHTLY TESTED OTHER DISTRICT STUFF
       } else {
         votes.unshift({'name': name, 'district': district});
         // if you've voted more than twice, remove the first selection
@@ -340,6 +342,14 @@ function senateElectionHandler() {
         console.log('District 1-12 votes:');
         console.log(votes);
       }
+      // go through the votes and SMvotes array, highlighting each person selected
+      $.each(votes, function(k, v) {
+        $(".profile[data-name='"+v.name+"']").addClass('selected');
+      });
+      $.each(SMvotes, function(k, v) {
+        $(".profile[data-name='"+v.name+"']").addClass('selected');
+      });
+      
     });
   });
 }
