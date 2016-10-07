@@ -334,9 +334,15 @@ function senateElectionHandler() {
         }
         // if you've got two votes in
         if(votes.length == 2) {
-          // remove the first selection if they are different districts or if you chose the same person twice
-          if((votes[0].district != votes[1].district) || (votes[0].name == votes[1].name)) {
+          // only allow a person to be selected once
+          if(votes[0].name == votes[1].name) {
             votes.pop();
+          }
+          // only allow two votes from the same district
+          if((votes.length == 2) && (votes[0].district != votes[1].district)) {
+            votes.pop(); //delete both choices and re-add the last choice
+            votes.pop();
+            votes.unshift({'name': name, 'district': district});
           }
         }
         console.log('District 1-12 votes:');
