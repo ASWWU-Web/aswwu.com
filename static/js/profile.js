@@ -110,7 +110,7 @@ function setProfileData(data,div) {
 				$(this).prev().remove();
 				$(this).fadeIn();
 			}).attr("src", function() {
-				return config.mu.sm+(value || config.defaults.profilePhoto);
+				return config.mu.md+(value || config.defaults.profilePhoto);
 			});
 		} else if (key == "phone") {
 			obj.html("<a href='tel:"+value+"'>"+value+"</a>");
