@@ -303,13 +303,68 @@ function senateElectionHandler() {
     var votes = [];
     var SMvotes = [];
 
+        // Controls highlighting on profile pictures
+    function reDraw() {
+      $(".selected").removeClass('selected'); // Unselect all previous choices
+
+      // Update districts 1-12
+      $.each(votes, function(k, v) {
+        $(".profile[data-name='"+v.name+"']").addClass('selected');
+      });
+
+      // Update district 13
+      $.each(SMvotes, function(k, v) {
+        $(".profile[data-name='"+v.name+"']").addClass('selected');
+      });
+    }
+
+    // Clears textboxes that don't contain vote choices
+    function resetText() {
+      /*var selDis
+      if(votes.length > 0) {
+        selDis = votes[0].district;
+        if(votes.length == 2) {
+          var boxes = $('#'+selDis+' > .textBoxes').children()val();
+
+          if(box1 != ""){
+            box1 = box1.toLowerCase();
+          }
+          if(box2!= ""){
+            box2 = box2.toLowerCase();
+          }
+
+          if((box1 != votes[0].name) && (box1 != votes[1].name)) {
+            $('#'+selDis+' > .textBoxes > .write-in1').val('DID IT');
+          }
+          if((box2 != votes[0].name) && (box2 != votes[1].name)) {
+            $('#'+selDis+' > .textBoxes > .write-in2').val('DID IT');
+          }
+        } else {
+          if(box1 != votes[0].name) {
+            $('#'+selDis+' > .textBoxes > .write-in1').val('DID IT');
+          }
+          if(box2 != votes[0].name) {
+            $('#'+selDis+' > .textBoxes > .write-in2').val('DID IT');
+          }
+        }
+      }
+
+      if(SMvotes.length > 0) {
+        selDis = 13;
+        if(SMvotes.length == 2) {
+
+        } else {
+          
+        }
+      }*/
+    }
+
     $('.district').hide();
     $('#districtChoice').change(function () {
       $('.district').hide();
       $('#'+$(this).val()).show();
     });
     $('.profile').click(function() {
-      $(".selected").removeClass('selected');
       var name = $(this).data('name');
       var district = $(this).data('district');
       //UNTESTED SM DISTRICT STUFF
@@ -324,7 +379,7 @@ function senateElectionHandler() {
           }
         }
         console.log('SM District votes:');
-        console.log(votes);
+        console.log(SMvotes);
         //SLIGHTLY TESTED OTHER DISTRICT STUFF
       } else {
         votes.unshift({'name': name, 'district': district});
@@ -348,13 +403,54 @@ function senateElectionHandler() {
         console.log('District 1-12 votes:');
         console.log(votes);
       }
-      // go through the votes and SMvotes array, highlighting each person selected
-      $.each(votes, function(k, v) {
-        $(".profile[data-name='"+v.name+"']").addClass('selected');
-      });
-      $.each(SMvotes, function(k, v) {
-        $(".profile[data-name='"+v.name+"']").addClass('selected');
-      });
+      reDraw();
+      resetText();
+
+    });
+
+    $('[class^="write-in"]').blur(function() {
+      var name = $(this).val();
+      var district = $(this).parent().parent().attr('id');
+      if(name != "") {
+        if(district == 13) {
+          SMvotes.unshift({'name': name.toLowerCase()});
+          if(SMvotes.length > 2) {
+            SMvotes.pop();
+            $(this).siblings().val('');
+          }
+          if(SMvotes.length == 2) {
+            if(SMvotes[0].name == SMvotes[1].name) {
+              SMvotes.pop();
+              $(this).siblings().val('');
+            }
+          } 
+          console.log('SM District votes:');
+          console.log(SMvotes); 
+        } else {
+          votes.unshift({'name': name.toLowerCase(), 'district': district});
+          if(votes.length > 2) {
+            votes.pop();
+            $(this).siblings().val('');
+          }
+          if(votes.length == 2) {
+            if(votes[0].name == votes[1].name) {
+              votes.pop();
+              $(this).siblings().val('');
+            }
+            if((votes.length == 2) && (votes[0].district != votes[1].district)) {
+              votes.pop(); 
+              votes.pop();
+              votes.unshift({'name': name.toLowerCase(), 'district': district});
+              $(this).siblings().val('');
+            }
+          }
+          console.log('District 1-12 votes:');
+          console.log(votes);
+        }
+      }
+
+      reDraw();
+      resetText();
 
     });
     //Submit ballot
