@@ -181,8 +181,15 @@ function dbSearch(q, limits, cb, autocomplete) {
 		q2 = q2.toLowerCase();
 		var u1 = u.username.split(".")[0].toLowerCase();
 		var u2 = u.username.split(".").reverse()[0].toLowerCase();
-		var f1 = u.full_name.split(" ")[0] || u1;
-		var f2 = u.full_name.split(" ").reverse()[0] || u2;
+		var f1, f2;
+		if(u.hasOwnProperty("full_name")){
+			f1 = u.full_name.split(" ")[0] || u1;
+			f2 = u.full_name.split(" ").reverse()[0] || u2;
+		} else {
+			f1 = u1
+			f2 = u1
+		}
+
 		f1 = f1.toLowerCase();
 		f2 = f2.toLowerCase();
 		return (u1.indexOf(q1) == 0 || u2.indexOf(q1) == 0 || f1.indexOf(q1) == 0 || f2.indexOf(q1) == 0) &&
