@@ -320,43 +320,61 @@ function senateElectionHandler() {
 
     // Clears textboxes that don't contain vote choices
     function resetText() {
-      /*var selDis
+      var selDis
+
+      // Check district 1-12 boxes
       if(votes.length > 0) {
         selDis = votes[0].district;
+        var box1 = $("#"+selDis+"").find('.write-in1');
+        var box2 = $("#"+selDis+"").find('.write-in2');
         if(votes.length == 2) {
-          var boxes = $('#'+selDis+' > .textBoxes').children()val();
 
-          if(box1 != ""){
-            box1 = box1.toLowerCase();
+          if((box1.val().toLowerCase() != votes[0].name) && (box1.val().toLowerCase() != votes[1].name)) {
+            box1.val('');
           }
-          if(box2!= ""){
-            box2 = box2.toLowerCase();
-          }
-
-          if((box1 != votes[0].name) && (box1 != votes[1].name)) {
-            $('#'+selDis+' > .textBoxes > .write-in1').val('DID IT');
-          }
-          if((box2 != votes[0].name) && (box2 != votes[1].name)) {
-            $('#'+selDis+' > .textBoxes > .write-in2').val('DID IT');
+          if((box2.val().toLowerCase() != votes[0].name) && (box2.val().toLowerCase() != votes[1].name)) {
+            box2.val('');
           }
         } else {
-          if(box1 != votes[0].name) {
-            $('#'+selDis+' > .textBoxes > .write-in1').val('DID IT');
+          if(box1.val().toLowerCase() != votes[0].name) {
+            box1.val('');
           }
-          if(box2 != votes[0].name) {
-            $('#'+selDis+' > .textBoxes > .write-in2').val('DID IT');
+          if(box2.val().toLowerCase() != votes[0].name) {
+            box2.val('');
           }
+        }
+
+        if(box1.val().toLowerCase() == box2.val().toLowerCase()) {
+          box2.val('');
+        }
+      }
+      // Check district 13 boxes
+      if(SMvotes.length > 0) {
+        var box1 = $("#13").find('.write-in1');
+        var box2 = $("#13").find('.write-in2');
+        if(SMvotes.length == 2) {
+
+          if((box1.val().toLowerCase() != SMvotes[0].name) && (box1.val().toLowerCase() != SMvotes[1].name)) {
+            box1.val('');
+          }
+          if((box2.val().toLowerCase() != SMvotes[0].name) && (box2.val().toLowerCase() != SMvotes[1].name)) {
+            box2.val('');
+          }
+        } else {
+          if(box1.val().toLowerCase() != SMvotes[0].name) {
+            box1.val('');
+          }
+          if(box2.val().toLowerCase() != SMvotes[0].name) {
+            box2.val('');
+          }
+        }
+
+        if(box1.val().toLowerCase() == box2.val().toLowerCase()) {
+          box2.val('');
         }
       }
 
-      if(SMvotes.length > 0) {
-        selDis = 13;
-        if(SMvotes.length == 2) {
-
-        } else {
-          
-        }
-      }*/
+      
     }
 
     $('.district').hide();
