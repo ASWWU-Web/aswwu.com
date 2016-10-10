@@ -302,7 +302,7 @@ function senateElectionHandler() {
   loader(main, "static/html/senate_election.html", function() {
     var votes = [];
     var SMvotes = [];
-    
+
     $('.district').hide();
     $('#districtChoice').change(function () {
       $('.district').hide();
@@ -322,7 +322,7 @@ function senateElectionHandler() {
           if(SMvotes[0].name == SMvotes[1].name) {
             SMvotes.pop();
           }
-        }  
+        }
         console.log('SM District votes:');
         console.log(votes);
         //SLIGHTLY TESTED OTHER DISTRICT STUFF
@@ -355,7 +355,26 @@ function senateElectionHandler() {
       $.each(SMvotes, function(k, v) {
         $(".profile[data-name='"+v.name+"']").addClass('selected');
       });
-      
+
+    });
+    //Submit ballot
+    $("#electionForm").submit(function(event) {
+      event.preventDefault();
+      $.ajax({
+        url: config.server+"senate_election/vote" + user.username,
+        beforeSend: setAuthHeaders,
+        method: "POST",
+        data: electionData,
+        success: function(data) {
+          if (data.vote) {
+            $(".response").text("Thank you for your vote!").show().delay(2500).fadeOut();
+            electionData = data.vote;
+            setElectionSelects();
+          } else {
+            $(".errors").text(data.error.capitalize()).show().delay(2500).fadeOut();
+          }
+        }
+      });
     });
   });
 }
