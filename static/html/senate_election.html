@@ -201,50 +201,13 @@
     </div>
     <div class="row">
       <div class="small-12 columns">
-				<button type="submit" class="button expand">Submit Ballot!</button>
-			</div>
-      <div class="small-12 columns">
-        <div data-alert class="hide errors alert-box alert radius"></div>
+        <div data-alert class="hide error alert-box alert radius"></div>
         <div data-alert class="hide response alert-box success radius"></div>
       </div>
+      <div class="small-12 columns">
+				<button type="submit" class="button expand">Submit Ballot!</button>
+			</div>
+
     </div>
   </form>
 </div>
-
-<<!-- div class="row">
-  <div class="small-12 columns" id="senatetest">
-      Candidate One: <input type="text" name="candidate_one"><br>
-      Candidate Two: <input type="text" name="candidate_two"><br>
-      SM Candidate One: <input type="text" name="sm_one"><br>
-      SM Candidate Two: <input type="text" name="sm_two"><br>
-      <button id="submit">Submit</button>
-      <script type="text/javascript">
-        $('#submit').click(function() {
-          console.log("We got here");
-          var can1 = $('#senatetest [name=candidate_one]').val();
-          var can2 = $('#senatetest [name=candidate_two]').val();
-          var sm1 = $('#senatetest [name=sm_one]').val();
-          var sm2 = $('#senatetest [name=sm_two]').val();
-          $.ajax({
-            url: "http://localhost:8888/senateelections/vote/"+user.username,
-            beforeSend: setAuthHeaders,
-            dataType: "JSON",
-            type: "POST",
-            cache: false,
-            data: {wwuid: user.wwuid, candidate_one: can1, candidate_two: can2, sm_one: sm1, sm_two: sm2},
-            success: function(data) {
-              if (data.error) processLogin("","");
-              processLogin((data.user ? data.user : data), (data.token ? data.token : getToken()));
-              if (typeof callback == "function")
-                callback(data);
-            },
-            error: function(data) {
-              processLogin("","");
-              if (typeof callback == "function")
-                callback({});
-            }
-          });
-        });
-      </script>
-  </div>
-</div> -->

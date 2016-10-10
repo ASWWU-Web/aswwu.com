@@ -381,7 +381,7 @@ function senateElectionHandler() {
           box2.val('');
         }
       }
-      
+
     }
 
     $('.district').hide();
@@ -392,7 +392,7 @@ function senateElectionHandler() {
     $('.profile').click(function() {
       var name = $(this).data('name');
       var district = $(this).data('district');
-    
+
       if(district == 13) {
         SMvotes.unshift({'name': name});
         if(SMvotes.length > 2) {
@@ -405,7 +405,7 @@ function senateElectionHandler() {
         }
         console.log('SM District votes:');
         console.log(SMvotes);
-        
+
       } else {
         votes.unshift({'name': name, 'district': district});
         // if you've voted more than twice, remove the first selection
@@ -446,9 +446,9 @@ function senateElectionHandler() {
             if(SMvotes[0].name == SMvotes[1].name) {
               SMvotes.pop();
             }
-          } 
+          }
           console.log('SM District votes:');
-          console.log(SMvotes); 
+          console.log(SMvotes);
         } else {
           votes.unshift({'name': name.toLowerCase(), 'district': district});
           if(votes.length > 2) {
@@ -459,7 +459,7 @@ function senateElectionHandler() {
               votes.pop();
             }
             if((votes.length == 2) && (votes[0].district != votes[1].district)) {
-              votes.pop(); 
+              votes.pop();
               votes.pop();
               votes.unshift({'name': name.toLowerCase(), 'district': district});
             }
@@ -474,22 +474,42 @@ function senateElectionHandler() {
 
     });
     //Submit ballot
-    $("#electionForm").submit(function(event) {
+    $("#senateForm").submit(function(event) {
       event.preventDefault();
-      $.ajax({
-        url: config.server+"senate_election/vote" + user.username,
-        beforeSend: setAuthHeaders,
-        method: "POST",
-        data: electionData,
-        success: function(data) {
-          if (data.vote) {
+      var getName = function(index, isSM){
+         if(isSM){
+             if(index in SMvotes && SMvotes[index] !== undefined){
+                 return SMvotes[index].name;
+             } else {
+                 return "";
+             }
+         }else {
+             if(index in votes && votes[index] !== undefined){
+                 return votes[index].name;
+             }else {
+                 return "";
+             }
+         }
+     };
+    can1 = getName(0,false);
+    can2 = getName(1,false);
+    sm1 = getName(0,true);
+    sm2 = getName(1,true);
+    $.ajax({
+    url: config.server+"senate_election/vote/" + user.username,
+    beforeSend: setAuthHeaders,
+    method: "POST",
+    data: {"wwuid": user.wwuid, "candidate_one": can1, "candidate_two": can2, "sm_one": sm1, "sm_two": sm2},
+    success: function(data) {
+        if (data.vote) {
             $(".response").text("Thank you for your vote!").show().delay(2500).fadeOut();
-            electionData = data.vote;
-            setElectionSelects();
-          } else {
-            $(".errors").text(data.error.capitalize()).show().delay(2500).fadeOut();
-          }
+        } else {
+            $(".error").text(data.error.capitalize()).show().delay(2500).fadeOut();
         }
+    },
+    error: function(data) {
+        $(".error").text(data.statusText).show().delay(2500).fadeOut();
+    }
       });
     });
   });
