@@ -347,6 +347,14 @@ function senateElectionHandler() {
         if(box1.val().toLowerCase() == box2.val().toLowerCase()) {
           box2.val('');
         }
+
+        // Remove any text that is written in other districts
+        for(i = 1; i < 12; i++) {
+          if(i != selDis) {
+            $("#"+i+"").find('.write-in1').val('');
+            $("#"+i+"").find('.write-in2').val('');
+          }
+        }
       }
       // Check district 13 boxes
       if(SMvotes.length > 0) {
@@ -373,7 +381,6 @@ function senateElectionHandler() {
           box2.val('');
         }
       }
-
       
     }
 
@@ -385,7 +392,7 @@ function senateElectionHandler() {
     $('.profile').click(function() {
       var name = $(this).data('name');
       var district = $(this).data('district');
-      //UNTESTED SM DISTRICT STUFF
+    
       if(district == 13) {
         SMvotes.unshift({'name': name});
         if(SMvotes.length > 2) {
@@ -398,7 +405,7 @@ function senateElectionHandler() {
         }
         console.log('SM District votes:');
         console.log(SMvotes);
-        //SLIGHTLY TESTED OTHER DISTRICT STUFF
+        
       } else {
         votes.unshift({'name': name, 'district': district});
         // if you've voted more than twice, remove the first selection
