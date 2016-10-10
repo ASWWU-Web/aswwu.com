@@ -416,12 +416,10 @@ function senateElectionHandler() {
           SMvotes.unshift({'name': name.toLowerCase()});
           if(SMvotes.length > 2) {
             SMvotes.pop();
-            $(this).siblings().val('');
           }
           if(SMvotes.length == 2) {
             if(SMvotes[0].name == SMvotes[1].name) {
               SMvotes.pop();
-              $(this).siblings().val('');
             }
           } 
           console.log('SM District votes:');
@@ -430,18 +428,15 @@ function senateElectionHandler() {
           votes.unshift({'name': name.toLowerCase(), 'district': district});
           if(votes.length > 2) {
             votes.pop();
-            $(this).siblings().val('');
           }
           if(votes.length == 2) {
             if(votes[0].name == votes[1].name) {
               votes.pop();
-              $(this).siblings().val('');
             }
             if((votes.length == 2) && (votes[0].district != votes[1].district)) {
               votes.pop(); 
               votes.pop();
               votes.unshift({'name': name.toLowerCase(), 'district': district});
-              $(this).siblings().val('');
             }
           }
           console.log('District 1-12 votes:');
