@@ -91,7 +91,7 @@ function setData() {
 		navInit();
 	$(".datepicker").not(".profile").fdatepicker();
 	$(".slickSlider").not(".slick-initialized").slick({autoplay: true, nextArrow: "", prevArrow: ""});
-    tinymce.init({ selector: 'textarea.tinymce' });
+    // tinymce.init({ selector: 'textarea.tinymce' });
 
 	setAutoComplete($("input.autocomplete-search"), function(request, response) {
 		var limits = this.element[0].dataset.searchLimits || "profiles";
