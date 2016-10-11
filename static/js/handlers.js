@@ -654,7 +654,7 @@ function rolesHandler(role, opt) {
                             $("#addOrUpdate input, #addOrUpdate select").each(function(i, inp) {
                                 inp.value = ca[inp.name];
                             });
-                            tinymce.get("contentTinyMCE").setContent(ca.content);
+                            // tinymce.get("contentTinyMCE").setContent(ca.content);
                         }));
                     });
                 });
