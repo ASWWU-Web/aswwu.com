@@ -300,11 +300,11 @@ function senateElectionHandler() {
       return;
   }
   loader(main, "static/html/senate_election.html", function() {
-    var votes = [];
-    var SMvotes = [];
-    var qResponse = "";
+    var votes = [];       // variable holding district 1-12 votes
+    var SMvotes = [];     // variable holding district 13 votes
+    var qResponse = "";   // variable holding response to question
 
-        // Controls highlighting on profile pictures
+    // Controls highlighting on profile pictures
     function reDraw() {
       $(".selected").removeClass('selected'); // Unselect all previous choices
 
@@ -325,9 +325,11 @@ function senateElectionHandler() {
 
       // Check district 1-12 boxes
       if(votes.length > 0) {
+        // select the textboxes for the appropriate district
         selDis = votes[0].district;
         var box1 = $("#"+selDis+"").find('.write-in1');
         var box2 = $("#"+selDis+"").find('.write-in2');
+        // if there are two votes, check the boxes against both votes
         if(votes.length == 2) {
 
           if((box1.val().toLowerCase() != votes[0].name) && (box1.val().toLowerCase() != votes[1].name)) {
@@ -336,6 +338,7 @@ function senateElectionHandler() {
           if((box2.val().toLowerCase() != votes[0].name) && (box2.val().toLowerCase() != votes[1].name)) {
             box2.val('');
           }
+        // if there is only one vote, only check the boxes against that vote
         } else {
           if(box1.val().toLowerCase() != votes[0].name) {
             box1.val('');
@@ -385,15 +388,19 @@ function senateElectionHandler() {
 
     }
 
+    // hide and show districts based on drop-down box
     $('.district').hide();
     $('#districtChoice').change(function () {
       $('.district').hide();
       $('#'+$(this).val()).show();
     });
+
+    // control voting via profile clicks
     $('.profile').click(function() {
       var name = $(this).data('name');
       var district = $(this).data('district');
 
+      // handle SM district votes
       if(district == 13) {
         SMvotes.unshift({'name': name});
         if(SMvotes.length > 2) {
@@ -406,7 +413,7 @@ function senateElectionHandler() {
         }
         console.log('SM District votes:');
         console.log(SMvotes);
-
+      // handle other district votes
       } else {
         votes.unshift({'name': name, 'district': district});
         // if you've voted more than twice, remove the first selection
@@ -434,6 +441,7 @@ function senateElectionHandler() {
 
     });
 
+    // control voting based on write-in boxes
     $('[class^="write-in"]').blur(function() {
       var name = $(this).val();
       var district = $(this).parent().parent().attr('id');
@@ -475,6 +483,7 @@ function senateElectionHandler() {
 
     });
 
+    // get response to question
     $('.question').blur(function () {
       var answer = $(this).val();
       if(answer != "") {
