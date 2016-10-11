@@ -302,6 +302,7 @@ function senateElectionHandler() {
   loader(main, "static/html/senate_election.html", function() {
     var votes = [];
     var SMvotes = [];
+    var qResponse = "";
 
         // Controls highlighting on profile pictures
     function reDraw() {
@@ -473,9 +474,26 @@ function senateElectionHandler() {
       resetText();
 
     });
+
+    $('.question').blur(function () {
+      var answer = $(this).val();
+      if(answer != "") {
+        qResponse = answer;
+        console.log('Answer');
+        console.log(qResponse);
+      }
+    });
+
     //Submit ballot
     $("#senateForm").submit(function(event) {
+      console.log("Submit");
       event.preventDefault();
+
+      var dis;
+      if(votes.length > 0) {
+        dis = votes[0].district;
+      }
+
       var getName = function(index, isSM){
          if(isSM){
              if(index in SMvotes && SMvotes[index] !== undefined){
@@ -499,7 +517,7 @@ function senateElectionHandler() {
     url: config.server+"senate_election/vote/" + user.username,
     beforeSend: setAuthHeaders,
     method: "POST",
-    data: {"wwuid": user.wwuid, "candidate_one": can1, "candidate_two": can2, "sm_one": sm1, "sm_two": sm2},
+    data: {"wwuid": user.wwuid, "candidate_one": can1, "candidate_two": can2, "sm_one": sm1, "sm_two": sm2, "new_department": qResponse, "district": dis},
     success: function(data) {
         if (data.vote) {
             $(".response").text("Thank you for your vote!").show().delay(2500).fadeOut();
