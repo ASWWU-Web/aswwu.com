@@ -18,7 +18,7 @@
   <div class="small-12 columns">
     <h1>ASWWU Senate Elections</h1>
     <h4>Select your district below, then select exactly TWO (2) candidates.</h4>
-    <h5>Voting is open from 8:00am to 8:00pm.  If you were a SM or ACA student last year you may vote for this year's SM/ACA candidates</h5>
+    <h5>Voting is open from 8:00am to 8:00pm.  If you were a SM or ACA student last year you may vote for this year's SM/ACA candidates in addition to your current district's candidates.</h5>
     <hr>
     <select id="districtChoice">
       <option selected disabled>MAKE YOUR CHOICE!</option>
@@ -34,7 +34,7 @@
       <!-- <option value="10">District 10 - Portland Campus</option>
       <option value="11">District 11 - Faculty</option>
       <option value="12">District 12 - Staff</option> -->
-      <option value="13">District 13 - Student Missions/ACA</option>
+      <!-- <option value="13">District 13 - Student Missions/ACA</option> -->
     </select>
   </div>
   <form id="senateForm" class="small-12 columns">
@@ -178,6 +178,9 @@
       <div id="12" class="district row">
         <h3>District 12 - Staff</h3>
       </div> -->
+      <div class="columns small-12">
+        <h5> <input type="checkbox" id="SMcheck"> I was a student missionary last year</h5>
+      </div>
       <div id="13" class="district columns small-12">
         <h3>District 13 - Student Missions/ACA</h3>
         <div class="profile small-6 medium-3 columns" data-district="13" data-name="jackson shampo">
@@ -215,7 +218,7 @@
       <div class="small-12 columns">
 				<button type="submit" class="button expand">Submit Ballot!</button>
 			</div>
-      <div class="smal-12 columns">
+      <div class="small-12 columns">
         <p style="color:white;">Voting again will replace your previous vote.</p>
       </div>
 
