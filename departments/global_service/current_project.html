@@ -28,6 +28,11 @@
     </div>
   </div>
   <div class="small-12 columns">
+    <div id="gsPhotos" class="row">
+
+    </div>
+  </div>
+  <div class="small-12 columns">
     <br>
     <div class="row">
       <div class="small-12 medium-4 columns"><a href="#/departments/global_service/get_involved" class="button expand">Donate Now!</a></div>
@@ -36,3 +41,15 @@
     </div>
   </div>
 </div>
+<script>
+var pics = ["books.jpg","flag.jpg","hills.jpg","pen.jpg","student.jpg","students.jpg","swag.jpg","village.jpg"];
+var gallery = $("#gsPhotos");
+$.each(pics, function(i,v) {
+  if((i+1) == pics.length){
+    gallery.append("<div class='columns small-6 large-4 end'><a href='./departments/global_service/pics/" + v + "' target='_blank'><img style='margin-bottom:15px;' src='./departments/global_service/pics/" + v + "' /></a></div>");
+  } else {
+    gallery.append("<div class='columns small-6 large-4'><a href='./departments/global_service/pics/" + v + "' target='_blank'><img style='margin-bottom:15px;' src='./departments/global_service/pics/" + v + "' /></a></div>");
+  }
+} );
+
+</script>
