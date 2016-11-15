@@ -7,7 +7,7 @@ function getToken() {
 }
 
 function setToken(token) {
-	Cookies.set("token", token);
+	Cookies.set("token", token, {"domain": config.cookie});
 }
 
 function setAuthHeaders(request) {
