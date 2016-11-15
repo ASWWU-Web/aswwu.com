@@ -23,18 +23,12 @@ function navInit() {
 			}
 		}
 	} else {
-		accountLinks.prepend("<li class='has-dropdown accountLinks'><a href='#' data-reveal-id='login-modal'>Login</a><ul class='dropdown'></ul></li>");
+		accountLinks.prepend("<li class='has-dropdown accountLinks'><a href='https://saml.aswwu.com'>Login</a><ul class='dropdown'></ul></li>");
 		accountLinks = accountLinks.find(".accountLinks > ul");
 		accountLinks.append("<li><a href='#/search/birthday="+birthdate+"'>Birthdays</a></li>");
 		accountLinks.append("<li><a href='#/super_search/'>Super Search</a></li>");
 	}
 
-
-	$("#login-form").submit(function(event) {
-		event.preventDefault();
-		$(this).addClass("loading");
-		login($(this));
-	});
 	$(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
 		$(this).find("input[type=text]").focus();
 	});

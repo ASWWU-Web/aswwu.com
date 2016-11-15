@@ -49,34 +49,6 @@ function processLogin(new_user, token) {
 	localStorage.user = JSON.stringify(new_user);
 }
 
-var currentlyLoggingIn = false;
-function login(form) {
-	$("#login-modal .errors h5").text("");
-	if (currentlyLoggingIn) return;
-	currentlyLoggingIn = true;
-	$.ajax({
-		url: config.server+"login",
-		dataType: "JSON",
-		data: form.serialize(),
-		type: "POST",
-		success: function(data) {
-			currentlyLoggingIn = false;
-			$("#login-form").removeClass("loading");
-			if (!data || data.error) {
-				$("#login-form input[type=text]").focus();
-				$("#login-modal .errors h5").text(data.error);
-			} else {
-				$("#login-modal").foundation("reveal","close");
-				processLogin(data.user,data.token);
-				location.reload();
-			}
-		}, error: function(data) {
-			currentlyLoggingIn = false;
-			console.error(data);
-		}
-	});
-}
-
 function logout() {
 	processLogin("","");
 	location.reload();
