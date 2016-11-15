@@ -1,23 +1,13 @@
 var user = {};
 
-function au(check) {
-	var w = localStorage.wwuid || "";
-	if (w == "undefined") w = "";
-	var t = localStorage.token || "";
-	if (t == "undefined") t = "";
-	if (check && (t == "" || w == ""))
-		return false;
-	return config.server+"?token="+w+t;
-}
-
 function getToken() {
-	var t = localStorage.token || "";
+	var t = Cookies.get("token") || "";
 	if (t == "undefined" || t.split("|").length < 3) t = "";
 	return t;
 }
 
 function setToken(token) {
-	localStorage.setItem("token", token);
+	Cookies.set("token", token);
 }
 
 function setAuthHeaders(request) {
