@@ -34,7 +34,7 @@ function setInputByKey(obj, key, value) {
 	if (key == "attached_to" || key == "name") {
 		autocomplete_field = function(request, response) {
 				dbSearch(request.term, "profiles", response, true);
-		}
+		};
 	}
 	setAutoComplete(obj.find("input.autocomplete"), autocomplete_field);
 	setAutoComplete(obj.find("input.autocomplete-multiple"), autocomplete_field,true);
@@ -57,6 +57,15 @@ function setProfileData(data,div) {
 	} else {
 		var profile = data;
 	}
+
+	//Remove 'see full profile' button if they aren't logged in.
+	if(!user.wwuid){
+		//set see more href.
+		div.find("#showMeMore").attr("href","https://saml.aswwu.com?redirectURI=" + encodeURIComponent("/" + window.location.hash));
+	}else {
+		div.find("#showMeMore").remove();
+	}
+
 	if (!profile.full_name || profile.full_name.length < 5)
 		profile.full_name = profile.username.replace(/\./g," ");
 
@@ -100,7 +109,6 @@ function setProfileData(data,div) {
 			}
 			return;
 		}
-
 		if (key !== "photo" && (!value || value == "" || value.length < 2)) return;
 		if (key == "photo") {
 			obj.html("<div class='spinner'></div><img>");
