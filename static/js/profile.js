@@ -39,8 +39,15 @@ function setInputByKey(obj, key, value) {
 	setAutoComplete(obj.find("input.autocomplete"), autocomplete_field);
 	setAutoComplete(obj.find("input.autocomplete-multiple"), autocomplete_field,true);
 
-	obj.find("input[type=text], select").not(".set-key").val(value).attr("name",key).attr("placeholder",key.replace("_"," ").capitalize());
-	obj.find(".value").text(value);
+	function strip(html)
+	{
+	   var tmp = document.createElement("DIV");
+	   tmp.innerHTML = html;
+	   return tmp.textContent || tmp.innerText || "";
+	};
+
+	obj.find("input[type=text], select").not(".set-key").val(strip(value)).attr("name",key).attr("placeholder",key.replace("_"," ").capitalize());
+	obj.find(".value").text(strip(value));
 	obj.find(".key").text(key.replace("_"," ").capitalize());
 	obj.find("input.datepicker").fdatepicker();
 }
