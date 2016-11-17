@@ -373,7 +373,7 @@
         if (!$dropdown.find('.title.back').length) {
 
           if (settings.mobile_show_parent_link == true && url) {
-            //TODO: This is so that the login modal can work with the links properly. 
+            //NOTE: This is custom to aswwu.com so that the login modal, which is no longer in use, can work with the links properly. 
             if(dataAttr)
               $titleLi = $('<li class="title back js-generated"><h5><a href="javascript:void(0)"></a></h5></li><li class="parent-link hide-for-large-up"><a class="parent-link js-generated" data-reveal-id="' + dataAttr + '" href="' + url + '">' + $link.html() +'</a></li>');
             else {
