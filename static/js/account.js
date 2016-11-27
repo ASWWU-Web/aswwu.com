@@ -7,7 +7,8 @@ function getToken() {
 }
 
 function setToken(token) {
-	Cookies.set("token", token, {"domain": config.cookie});
+	//Give the user a cookie that expires in 14 days and has the domain set in config.js
+	Cookies.set("token", token, {"domain": config.cookie, "expires": 14});
 }
 
 function setAuthHeaders(request) {
