@@ -52,6 +52,13 @@ function setInputByKey(obj, key, value) {
 	obj.find("input.datepicker").fdatepicker();
 }
 
+function sanatizeHREF(string){
+	// TODO: Make this not break click to search functionality.
+	//For example "I'm Ryan" -> "Im Ryan"
+	//when users clicks this they won't get the same profile back which is weird. 
+	return string.replace("'", "").replace('"','');
+}
+
 function setProfileData(data,div) {
 	if (user.status == "Student")
 		div.find(".hide-for-students").remove();
@@ -128,24 +135,24 @@ function setProfileData(data,div) {
 				return config.mu.sm+(value || config.defaults.profilePhoto);
 			});
 		} else if (key == "phone") {
-			obj.html("<a href='tel:"+value+"'>"+value+"</a>");
+			obj.html("<a href='tel:"+sanatizeHREF(value)+"'>"+value+"</a>");
 		} else if (key == "email") {
-			obj.html("<a href='mailto:"+value+"'>"+value+"</a>");
+			obj.html("<a href='mailto:"+sanatizeHREF(value)+"'>"+value+"</a>");
 		} else if (key == "website") {
-			obj.html("<a href='http://"+value.replace(/http:\/\/|https:\/\//, "")+"' target='_blank'>"+value+"</a>");
+			obj.html("<a href='http://"+sanatizeHREF(value.replace(/http:\/\/|https:\/\//, ""))+"' target='_blank'>"+value+"</a>");
 		} else if (key == "attached_to") {
-			obj.html("<a href='#/search/"+value+"'>"+value+"</a>");
+			obj.html("<a href='#/search/"+sanatizeHREF(value)+"'>"+value+"</a>");
 		} else if (key == "birthday") {
 			var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-			obj.html("<a href='#/search/birthday="+value+"'>"+months[value.split("-")[0]*1-1]+" "+value.split("-")[1]+"</a>");
+			obj.html("<a href='#/search/birthday="+sanatizeHREF(value)+"'>"+months[value.split("-")[0]*1-1]+" "+value.split("-")[1]+"</a>");
 		} else if (key.search("favorite") > -1 || key.search("hobbies") > -1) {
 			obj.html(value.split(", ").map(function(v) {
-				return "<a href='#/search/"+key+"="+v+"'>"+v+"</a>";
+				return "<a href='#/search/"+sanatizeHREF(key)+"="+v+"'>"+v+"</a>";
 			}).join(", "));
 		} else if (["full_name","username"].indexOf(key) > -1) {
 			obj.text(value);
 		} else {
-			obj.html("<a href='#/search/"+key+"="+value+"'>"+value+"</a>");
+			obj.html("<a href='#/search/"+key+"="+sanatizeHREF(value)+"'>"+value+"</a>");
 		}
 
 		if (obj.hasClass("with-label")) {
