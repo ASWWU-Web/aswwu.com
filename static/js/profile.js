@@ -55,8 +55,8 @@ function setInputByKey(obj, key, value) {
 function sanatizeHREF(string){
 	// TODO: Make this not break click to search functionality.
 	//For example "I'm Ryan" -> "Im Ryan"
-	//when users clicks this they won't get the same profile back which is weird. 
-	return string.replace("'", "").replace('"','');
+	//when users clicks this they won't get the same profile back which is weird.
+	return string.replace(/('|")/g, "");
 }
 
 function setProfileData(data,div) {
