@@ -228,7 +228,7 @@ function electionHandler() {
   if (!user.wwuid) {
       main.html("<div class='row'><div class='small-12 columns'>"+
                   "<h1 style='color:white;'>You must login to access this page</h1><br>"+
-                  "<h3><a href='#' data-reveal-id='login-modal' style='color: white;'>Login</a></h3>"+
+                  "<h3><a href='https://saml.aswwu.com' style='color: white;'>Login</a></h3>"+
                   "</div></div>");
       return;
   }
@@ -295,7 +295,7 @@ function senateElectionHandler() {
    if (!user.wwuid) {
       main.html("<div class='row'><div class='small-12 columns'>"+
                   "<h1 style='color:white;'>You must login to access this page</h1><br>"+
-                  "<h3><a href='#' data-reveal-id='login-modal' style='color: white;'>Login</a></h3>"+
+                  "<h3><a href='https://saml.aswwu.com' data-reveal-id='login-modal' style='color: white;'>Login</a></h3>"+
                   "</div></div>");
       return;
   }
@@ -839,7 +839,7 @@ function volunteerHandler() {
     if (!user.wwuid) {
         main.html("<div class='row'><div class='small-12 columns'>"+
                     "<h1 style='color:white;'>You must login to access this page</h1><br>"+
-                    "<h3><a href='#' data-reveal-id='login-modal' style='color: white;'>Login</a></h3>"+
+                    "<h3><a href='https://saml.aswwu.com' data-reveal-id='login-modal' style='color: white;'>Login</a></h3>"+
                     "</div></div>");
         return;
     }
