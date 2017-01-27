@@ -18,24 +18,60 @@
     <hr>
     <ul id="project_reports"></ul>
   </div>
+  <div class="small-12 medium-6 columns" style="color: white;">
+    <hr>
+    <h3>Sample Bills</h3>
+    <hr>
+    <ul>
+      <li>
+        <a href="https://aswwu.com/uploads/ASWWU/Senate/FL%20S1%20-%20Sample%20Document.docx" target='_blank'><u style="color:white">FL S1 - Sample Document.docx </u></a>
+      </li>
+      <li>
+        <a href="https://aswwu.com/uploads/ASWWU/Senate/GL%20S1%20-%20Sample%20GL%20Bill.docx" target='_BLANK'><u style="color:white">GL S1 Sample GL Bill.docx </u></a>
+      </li>
+    </ul>
+  </div>
 </div>
 
 <script>
   var passed_bills = [
-    "F.L. 1 - ASWWU 2015-2016 Budget Approval.pdf",
-    "F.L. 2 - New Headphones for Library.pdf",
-    "F.L. 3 - Atlas Operation on Saturday Nights.docx",
-    "F.L. 4 - Swim Suit Ringers for Locker Rooms.pdf",
-    "F.L. 5 - MLK Day Transportation.pdf",
-    "F.L. 6 - Printer for the Atlas.pdf",
-    "F.L. 7 - Portland Campus FOB access and Security Camera.pdf",
-    "F.L. 8 - New Climbing Shoes and Harnesses for the Climbing Wall in the WEC.pdf",
-    "F.L. 9 - Sound Absorbers for Peterson Memorial Library.pdf",
-    "F.L. 10 - ASWWU 2015-2016 Budget Update.pdf",
-    "F.L. 12 - ASWWU 2015-2016 Budget Update.pdf",
-  ].reverse();
+    "FL 1.pdf",
+    "FL 3.pdf",
+    "PL 1.pdf",
+    "PL 2.pdf",
+    "pL 3.pdf",
+    "PL 4.pdf",
+    "PL 5.pdf",
+    "PL 6.pdf",
+    "PL 7.pdf",
+    "PL 8.pdf",
+    "PL 9.pdf",
+    "PL 10.pdf",
+    "PL 11.pdf",
+    "PL 12.pdf",
+    "PL 27.pdf",
+    "PL 28.pdf"
+  ];
+  var passed_bills_names = [
+    "ASWWU 16-17 Budget Approval",
+    "Men's Volleybal Shirts",
+    "Administrative Employees",
+    "Atlas Employees",
+    "Collegian Employees",
+    "Global Service Employees",
+    "Marketing Employees",
+    "Outdoors Employees",
+    "Photo Employees",
+    "Social Employees",
+    "Spiritual Employees",
+    "Treach Shed Employees",
+    "Video Employees",
+    "Web Employees",
+    "Senate Employees",
+    "Concurrent Position for Nick Ribeiro"
+  ];
   for (var i = 0; i < passed_bills.length; i++) {
-    $('#passed_bills').append('<li><a href="https://aswwu.com/uploads/ASWWU/Senate/'+passed_bills[i]+'" target="_blank"><u style="color: white;">'+passed_bills[i]+'</u></a></li>');
+    $('#passed_bills').append('<li><a href="https://aswwu.com/uploads/ASWWU/Senate/'+passed_bills[i]+'" target="_blank"><u style="color: white;">'+passed_bills[i]+ " ("+ passed_bills_names[i] + ')<u></a></li>');
   }
 
   var project_reports = [
@@ -49,4 +85,5 @@
   for (var i = 0; i < project_reports.length; i++) {
     $('#project_reports').append('<li><a href="https://aswwu.com/uploads/ASWWU/Senate/'+project_reports[i]+'" target="_blank"><u style="color: white;">'+project_reports[i]+'</u></a></li>');
   }
+
 </script>
