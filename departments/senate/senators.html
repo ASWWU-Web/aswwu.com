@@ -18,12 +18,12 @@
   var $div = $("#searchResults > ul:last-child");
   var names = [
     "ethan edwards","andrew yamada",
-    "lance gepford","william johnson",
+    "omar alfaro","william johnson",
     "brennan hoenes","zachary white",
     "michael pappas","hannah chebeleu",
     "courtney macphee","sarina meservia",
     "joshua huh","hallie anderson",
-    "jessica hall","nicolas ribeiro",
+    "","nicolas ribeiro",
     "mason neil","micah hall",
     "joni harris","gabrielle pahler",
     'mickey ye', "christopher wagner",
@@ -33,6 +33,7 @@
   ];
   var districts = ["sittner north","sittner south","meske","conard","foreman","mountain view/birch","hallmark/university housing","off-campus male","off-campus female","portland campus","faculty","staff","student missions/ACA"];
   for (var i = 0; i < names.length; i++) {
+    if (names[i] == ""){continue;}
     var d = Math.floor(i/2);
     $div.append("<li><a class='profile' data-name='"+names[i]+"'><div class='profile-photo fill'></div><h5 class='profile-full_name'></h5><h5>District "+(d+1)+" - "+districts[d].capitalize()+"</h5></a></li>");
   }
