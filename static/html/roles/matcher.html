@@ -1,0 +1,161 @@
+<div class="row">
+  <div class="columns small-12">
+    <h1>Find the ones.</h1>
+      <input id="filterMatches" type="text" placeholder="relationship_status filter: (ex'Will Date for coffee')" />
+    <button id="doit" class="button primary">Do it!!</button>
+    <h6>Note: this will take a while just be patient (check the console for progress.)</h6>
+  </div>
+  <div id="mainMatches" class="columns small-12"></div>
+  <div id="showMoreButton" class="columns small-12">
+
+  </div>
+</div>
+<script>
+
+var excapeRegex = function(str){
+  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+};
+
+var frequencySearch = function(terms,user){
+  terms = terms.split(',');
+  //returns the number of matches in the user object.
+  user = JSON.stringify(user);
+  var count = 0;
+  for (var term in terms){
+    if(!terms[term] || terms[term] == "" || terms[term] == " ")
+      break;
+    try{
+      var regex = new RegExp(excapeRegex(terms[term]), 'g');
+      var something = user.match(regex) || [];
+      count += something.length;
+    }
+    catch (e){
+      debugger;
+    }
+
+  }
+  return count;
+};
+
+var matchAttrs = ['attached_to','birthday','career_goals','class_standing','favorite_books','favorite_food','favorite_movies','favorite_music','graduate','high_school','hobbies','majors','minors','personality','pet_peeves','preprofessional','quote','relationship_status','website'];
+var comonality = function(user1,user2) {
+  //var matchAttrs = ['hobbies','favorite_books','favorite_food','favorite_movies','favorite_music','personality'];
+  var total = 0;
+  for (var i in matchAttrs) {
+    key = matchAttrs[i];
+    if (user1.hasOwnProperty(key) && user1[key] && user1[key] != "None" && user1[key] != "") {
+      total += frequencySearch(user1[key],user2);
+    }
+  }
+  return total;
+};
+
+var getProfilefromUName = function(username) {
+  return globalDatabase.filter(function(value){
+    return (value.username == username);
+  })[0];
+};
+
+var profileHTML = function(user) {
+  return "<a href='https://aswwu.com/#/profile/" + user.username + "' target='_blank'><img src='https://aswwu.com/media/img-sm/" + user.photo + "' /><br /><h6>" + user.full_name + "</h6></a>"
+};
+
+var matchIndex = 0;
+var addProfiles = function(){
+  goalMatchIndex = 50 + matchIndex;
+  var html = "";
+  while(matchIndex < goalMatchIndex) {
+    user1 = getProfilefromUName(matches[matchIndex].user1);
+    user2 = getProfilefromUName(matches[matchIndex].user2);
+    html += `
+      <div class="row">
+        <div class="columns small-5">
+          <h6>` + profileHTML(user1) + `</h6>
+        </div>
+        <div class="columns small-2">
+          <h1>` + matches[matchIndex].commonality + `</h1>
+        </div>
+        <div class="columns small-5">
+          <h6>`+ profileHTML(user2) + `</h6>
+        </div>
+      </div>
+    `;
+    matchIndex++;
+  }
+  $('#mainMatches').append(html);
+}
+
+var matches = [];
+var globalDatabase;
+var commonalitySearch = function(database) {
+  globalDatabase = database;
+  console.log("Searching...");
+
+  $("#mainMatches").html("");
+
+  //filter for collegian
+  var filter = $("#filterMatches").val();
+  if(filter){
+    database = database.filter(function(value) {
+      return (value.relationship_status.toLowerCase() == filter.toLowerCase());
+    });
+  }
+
+
+  matches = [];
+
+  //Main For() (runs on every user)
+  for (var user1 in database) {
+    database.sort(function(a,b){
+      return b.views - a.views
+    });
+
+    if(user1%10 == 0) {
+      console.log(user1/database.length*100, "% complete");
+      $('#mainMatches .progress .meter').width(Math.round(user1/database.length*100) + "%");
+    }
+
+    var result = [];
+    //Sub for() matches main user(user1) to every other user(user2).
+    for (var user2 in database) {
+      if(database[user1].username != database[user2].username){
+        //check for male female
+        if(database[user1].gender == database[user2].gender)
+          break;
+        result.push({
+          'user1':database[user1].username,
+          'user2':database[user2].username,
+          'commonality': comonality(database[user1],database[user2])
+        });
+      }
+    }
+    result = result.sort(function(r1,r2) {
+      return r2.commonality - r1.commonality;
+    });
+    result = result.slice(0,5);
+    matches = matches.concat(result);
+  }
+  matches = matches.sort(function(r1,r2){
+    return r2.commonality - r1.commonality;
+  });
+  addProfiles();
+  $("#showMoreButton").append("<button class='button primary' onclick='addProfiles()'>Show more</button>");
+  console.log(matches);
+
+};
+
+$("#doit").click(function() {
+    $.ajax({
+      url: config.server+"matcher",
+      method: "GET",
+      beforeSend: setAuthHeaders,
+      dataType: "JSON",
+      success: function(data) {
+          commonalitySearch(data.database);
+      },
+      error: function(data) {
+          console.error(data);
+      }
+  });
+})
+</script>
