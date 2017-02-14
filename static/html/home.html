@@ -5,10 +5,25 @@
 		<img id="logo" src="https://aswwu.com/media/images/ASWWU_logo_full.png">
 		<br><br>
 		<input type="text" class="autocomplete-search autofocus" placeholder="Searcheth away!">
-		<div class="slickSlider">
+		<div id="slickSlider" class="slickSlider">
 			<!--Slick just goes down the div element by element so add or remove elements as you see fit.-->
 			<a href="#/departments/global_service"><h4 style="color: white;">Donate with ASWWU Global Service <img style='height: 2em; display: inline-block;' src='departments/global_service/global_service_logo.png'>&emsp;&emsp;</h4></a>
 			<a href="#/volunteer"><h4 style="color: white;">Change the world by Getting Involved!</h4></a>
 		</div>
 	</div>
 </div>
+<script>
+var timedEvents =[{
+	link: "https://docs.google.com/forms/d/e/1FAIpQLSd7LGFjNtz_hdKcFqOiNoPlczgqtHt2RqzBJceDNa_tnwHTmQ/viewform",
+	text: "🇺🇸 Vote in the Primary ASWWU Elections 🇺🇸",
+	timeStart: new Date(2017, 1, 14,8),
+	timeEnd: new Date(2017, 1, 14, 20)
+}];
+var epochDate = new Date();
+var epochTime = Math.floor(epochDate.getTime());
+for (var i in timedEvents) {
+	if( timedEvents[i].timeStart.getTime() <= epochTime && epochTime <= timedEvents[i].timeEnd.getTime()){
+		$('#slickSlider').prepend("<a href='" + timedEvents[i].link + "'><h4 style='color:white;'>" + timedEvents[i].text + "</h4></a>");
+	}
+}
+</script>
