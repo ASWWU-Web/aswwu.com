@@ -134,7 +134,8 @@ for (var i = 1; i <= 5; i++) {
 function loader(div,url,cb) {
 	div.empty();
 	div.append(spinner);
-	div.load(url, function(response, status, xhr) {
+	var time = new Date().getTime();
+	div.load(url, "_=" + time.toString(), function(response, status, xhr) {
 		if (cb && typeof cb === "function") cb(xhr);
 		setData();
 	});
