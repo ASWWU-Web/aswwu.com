@@ -1,11 +1,13 @@
 @charset 'UTF-8';
-#slider {
-    background-color: rgba(0,0,0,0.65);
+#slickSlider {
+    text-shadow: 0 0 10px black;
+    color: white;
 }
+
 .slick-slide h4 {
     margin:0;
 }
-/* Slider 
+/* Slider
 .slick-loading .slick-list
 {
     background: #fff url('./static/ajax-loader.gif') center center no-repeat;
