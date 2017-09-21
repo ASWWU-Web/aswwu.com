@@ -27,7 +27,7 @@ var config = {
 		profilePhoto: "images/mask_unknown.png",
 		mediaURL: "https://aswwu.com/media/",
 		uploadPath: "uploads/",
-		year: 1617
+		year: 1718
 	},
 };
 config.favicon = config.defaults.mediaURL+"img-xs/"+config.favicon;
