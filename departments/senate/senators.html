@@ -3,34 +3,37 @@
   <div class="small-12 columns" id="searchResults">
     <h2>Senate Administration</h2>
     <ul class='small-block-grid-2 medium-block-grid-3 large-block-grid-4'>
-      <li><a class='profile' data-name='jackson shampo'><div class='profile-photo fill'></div><h5 class='profile-full_name'></h5><h5>President of Senate/EVP</h5></a></li>
-      <li><a class='profile' data-name='allison banks'><div class='profile-photo fill'></div><h5 class='profile-full_name'></h5><h5>Parliamentarian</h5></a></li>
-      <li><a class='profile' data-name='caleb bibb'><div class='profile-photo fill'></div><h5 class='profile-full_name'></h5><h5>Assistant to the EVP</h5></a></li>
-      <li><a class='profile' data-name='austin silcox'><div class='profile-photo fill'></div><h5 class='profile-full_name'></h5><h5>Senate Secretary</h5></a></li>
+      <li><a class='profile' data-name='Omar Alfaro'><div class='profile-photo fill'></div><h5 class='profile-full_name'></h5><h5>President of Senate/EVP</h5></a></li>
+      <li><a class='profile' data-name='Miranda Roberts'><div class='profile-photo fill'></div><h5 class='profile-full_name'></h5><h5>Parliamentarian</h5></a></li>
+      <li><a class='profile' data-name='Sabrina Mapes'><div class='profile-photo fill'></div><h5 class='profile-full_name'></h5><h5>Assistant to the EVP</h5></a></li>
+      <!-- <li><a class='profile' data-name='ryan'><div class='profile-photo fill'></div><h5 class='profile-full_name'></h5><h5>Senate Secretary</h5></a></li> -->
     </ul>
     <hr>
     <h2>ASWWU Senators</h2>
+    <h6>Senators have yet to be elected.</h6>
     <ul class='small-block-grid-2 medium-block-grid-3 large-block-grid-4'></ul>
   </div>
 </div>
 
 <script>
   var $div = $("#searchResults > ul:last-child");
-  var names = [
-    "ethan edwards","andrew yamada",
-    "omar alfaro","william johnson",
-    "sarah cabral","zachary white",
-    "michael pappas","hannah chebeleu",
-    "courtney macphee","sarina meservia",
-    "joshua huh","E Ourorodrigues",
-    "rachel barlow","nicolas ribeiro",
-    "mason neil","micah hall",
-    "joni harris","gabrielle pahler",
-    'mickey ye', "christopher wagner",
-    "debbie muthersbaugh","brant berglin",
-    "amanda eldevik","emily muthersbaugh",
-    "Kyle Simpson","siim parna"
-  ];
+  // var names = [
+  //   "ethan edwards","andrew yamada",
+  //   "omar alfaro","william johnson",
+  //   "sarah cabral","zachary white",
+  //   "michael pappas","hannah chebeleu",
+  //   "courtney macphee","sarina meservia",
+  //   "joshua huh","E Ourorodrigues",
+  //   "rachel barlow","nicolas ribeiro",
+  //   "mason neil","micah hall",
+  //   "joni harris","gabrielle pahler",
+  //   'mickey ye', "christopher wagner",
+  //   "debbie muthersbaugh","brant berglin",
+  //   "amanda eldevik","emily muthersbaugh",
+  //   "Kyle Simpson","siim parna"
+  // ];
+  var names = [];
+
   var districts = ["sittner north","sittner south","meske","conard","foreman","mountain view/birch","hallmark/university housing","off-campus male","off-campus female","portland campus","faculty","staff","student missions/ACA"];
   for (var i = 0; i < names.length; i++) {
     if (names[i] == ""){continue;}
