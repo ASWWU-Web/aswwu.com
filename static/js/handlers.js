@@ -393,23 +393,23 @@ function senateElectionHandler() {
     $('#districtChoice').change(function () {
       $('.district').hide();
       $('#'+$(this).val()).show();
-      if(document.getElementById('SMcheck').checked) {
-        $('#13').show();
-      }
+    //   if(document.getElementById('SMcheck').checked) {
+    //     $('#13').show();
+    //   }
     });
 
-    // hide the SM district behind a checkbox
-    $('#SMcheck').change(function() {
-      if(this.checked) {
-        $('#13').show();
-      } else {
-        $('#13').hide();
-        SMvotes.pop();
-        SMvotes.pop();
-        reDraw();
-        resetText();
-      }
-    });
+    // // hide the SM district behind a checkbox
+    // $('#SMcheck').change(function() {
+    //   if(this.checked) {
+    //     $('#13').show();
+    //   } else {
+    //     $('#13').hide();
+    //     SMvotes.pop();
+    //     SMvotes.pop();
+    //     reDraw();
+    //     resetText();
+    //   }
+    // });
 
     // control voting via profile clicks
     $('.profile').click(function() {
