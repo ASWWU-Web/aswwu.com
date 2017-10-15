@@ -320,73 +320,73 @@ function senateElectionHandler() {
     }
 
     // Clears textboxes that don't contain vote choices
-    function resetText() {
-      var selDis;
-
-      // Check district 1-12 boxes
-      if(votes.length > 0) {
-        // select the textboxes for the appropriate district
-        selDis = votes[0].district;
-        var box1 = $("#"+selDis+"").find('.write-in1');
-        var box2 = $("#"+selDis+"").find('.write-in2');
-        // if there are two votes, check the boxes against both votes
-        if(votes.length == 2) {
-
-          if((box1.val().toLowerCase() != votes[0].name) && (box1.val().toLowerCase() != votes[1].name)) {
-            box1.val('');
-          }
-          if((box2.val().toLowerCase() != votes[0].name) && (box2.val().toLowerCase() != votes[1].name)) {
-            box2.val('');
-          }
-        // if there is only one vote, only check the boxes against that vote
-        } else {
-          if(box1.val().toLowerCase() != votes[0].name) {
-            box1.val('');
-          }
-          if(box2.val().toLowerCase() != votes[0].name) {
-            box2.val('');
-          }
-        }
-
-        if(box1.val().toLowerCase() == box2.val().toLowerCase()) {
-          box2.val('');
-        }
-
-        // Remove any text that is written in other districts
-        for(i = 1; i < 12; i++) {
-          if(i != selDis) {
-            $("#"+i+"").find('.write-in1').val('');
-            $("#"+i+"").find('.write-in2').val('');
-          }
-        }
-      }
-      // Check district 13 boxes
-      if(SMvotes.length > 0) {
-        var box1 = $("#13").find('.write-in1');
-        var box2 = $("#13").find('.write-in2');
-        if(SMvotes.length == 2) {
-
-          if((box1.val().toLowerCase() != SMvotes[0].name) && (box1.val().toLowerCase() != SMvotes[1].name)) {
-            box1.val('');
-          }
-          if((box2.val().toLowerCase() != SMvotes[0].name) && (box2.val().toLowerCase() != SMvotes[1].name)) {
-            box2.val('');
-          }
-        } else {
-          if(box1.val().toLowerCase() != SMvotes[0].name) {
-            box1.val('');
-          }
-          if(box2.val().toLowerCase() != SMvotes[0].name) {
-            box2.val('');
-          }
-        }
-
-        if(box1.val().toLowerCase() == box2.val().toLowerCase()) {
-          box2.val('');
-        }
-      }
-
-    }
+    // function resetText() {
+    //   var selDis;
+    //
+    //   // Check district 1-12 boxes
+    //   if(votes.length > 0) {
+    //     // select the textboxes for the appropriate district
+    //     selDis = votes[0].district;
+    //     var box1 = $("#"+selDis+"").find('.write-in1');
+    //     var box2 = $("#"+selDis+"").find('.write-in2');
+    //     // if there are two votes, check the boxes against both votes
+    //     if(votes.length == 2) {
+    //
+    //       if((box1.val().toLowerCase() != votes[0].name) && (box1.val().toLowerCase() != votes[1].name)) {
+    //         box1.val('');
+    //       }
+    //       if((box2.val().toLowerCase() != votes[0].name) && (box2.val().toLowerCase() != votes[1].name)) {
+    //         box2.val('');
+    //       }
+    //     // if there is only one vote, only check the boxes against that vote
+    //     } else {
+    //       if(box1.val().toLowerCase() != votes[0].name) {
+    //         box1.val('');
+    //       }
+    //       if(box2.val().toLowerCase() != votes[0].name) {
+    //         box2.val('');
+    //       }
+    //     }
+    //
+    //     if(box1.val().toLowerCase() == box2.val().toLowerCase()) {
+    //       box2.val('');
+    //     }
+    //
+    //     // Remove any text that is written in other districts
+    //     for(i = 1; i < 12; i++) {
+    //       if(i != selDis) {
+    //         $("#"+i+"").find('.write-in1').val('');
+    //         $("#"+i+"").find('.write-in2').val('');
+    //       }
+    //     }
+    //   }
+    //   // Check district 13 boxes
+    //   if(SMvotes.length > 0) {
+    //     var box1 = $("#13").find('.write-in1');
+    //     var box2 = $("#13").find('.write-in2');
+    //     if(SMvotes.length == 2) {
+    //
+    //       if((box1.val().toLowerCase() != SMvotes[0].name) && (box1.val().toLowerCase() != SMvotes[1].name)) {
+    //         box1.val('');
+    //       }
+    //       if((box2.val().toLowerCase() != SMvotes[0].name) && (box2.val().toLowerCase() != SMvotes[1].name)) {
+    //         box2.val('');
+    //       }
+    //     } else {
+    //       if(box1.val().toLowerCase() != SMvotes[0].name) {
+    //         box1.val('');
+    //       }
+    //       if(box2.val().toLowerCase() != SMvotes[0].name) {
+    //         box2.val('');
+    //       }
+    //     }
+    //
+    //     if(box1.val().toLowerCase() == box2.val().toLowerCase()) {
+    //       box2.val('');
+    //     }
+    //   }
+    //
+    // }
 
     // hide and show districts based on drop-down box
     $('.district').hide();
@@ -438,10 +438,11 @@ function senateElectionHandler() {
         }
         // if you've got two votes in
         if(votes.length == 2) {
-          // only allow a person to be selected once
-          if(votes[0].name == votes[1].name) {
             votes.pop();
-          }
+          // only allow a person to be selected once
+        //   if(votes[0].name == votes[1].name) {
+        //     votes.pop();
+        //   }
           // only allow two votes from the same district
           if((votes.length == 2) && (votes[0].district != votes[1].district)) {
             votes.pop(); //delete both choices and re-add the last choice
@@ -453,7 +454,7 @@ function senateElectionHandler() {
         console.log(votes);
       }
       reDraw();
-      resetText();
+    //   resetText();
 
     });
 
