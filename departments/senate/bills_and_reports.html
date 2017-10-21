@@ -14,7 +14,7 @@
   <div class="small-12 medium-6 columns" style="color: white;">
     <h3>Project Reports</h3>
     <hr>
-    <h5>At the completion of any project, wether passed or failed by senate, each senator is required to submit a report detailing their work and certifying that improvements have been implemented. This ensures transparency to the student body, and allows future Senators to understand the research and reasoning behind each bill and to be able to easily pick up where others left off.</h5>
+    <h5>At the completion of any project, whether passed or failed by senate, each senator is required to submit a report detailing their work and certifying that improvements have been implemented. This ensures transparency to the student body, and allows future Senators to understand the research and reasoning behind each bill and to be able to easily pick up where others left off.</h5>
     <hr>
     <ul id="project_reports"></ul>
   </div>
@@ -22,24 +22,19 @@
 
 <script>
   var passed_bills = [
-    "FL 1.pdf",
-    "FL 3.pdf",
+    "FL 1 - Atlas Syrups.docx",
+    "FL 2 - Hang Board for WEC.docx",
   ];
   var passed_bills_names = [
-    "ASWWU 16-17 Budget Approval",
-    "Men's Volleybal Shirts",
+    "Atlas Syrups",
+    "Hang Board for WEC",
   ];
   for (var i = 0; i < passed_bills.length; i++) {
-    $('#passed_bills').append('<li><a href="https://aswwu.com/uploads/ASWWU/Senate/'+passed_bills[i]+'" target="_blank"><u style="color: white;">'+passed_bills[i]+ " ("+ passed_bills_names[i] + ')<u></a></li>');
+    $('#passed_bills').append('<li><a href="https://aswwu.com/uploads/ASWWU/Senate/pr_pb/'+passed_bills[i]+'" target="_blank"><u style="color: white;">'+passed_bills[i]+ " ("+ passed_bills_names[i] + ')<u></a></li>');
   }
 
   var project_reports = [
-    "F.L. 2 - New Headphones for Library.docx",
-    "FL3 synopsis.pdf",
-    "FL12 - Canon Lens Project Report.docx",
-    "FL13 - GoPro Project Report.docx",
-    "New WIFI Routers for Hallmark.docx",
-    "Unlocking Dorm Back & Side Doors Past 10 PM.docx"
+
   ].reverse();
   for (var i = 0; i < project_reports.length; i++) {
     $('#project_reports').append('<li><a href="https://aswwu.com/uploads/ASWWU/Senate/'+project_reports[i]+'" target="_blank"><u style="color: white;">'+project_reports[i]+'</u></a></li>');
