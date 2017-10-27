@@ -45,20 +45,25 @@
   	transform: rotate(360deg);
 	}
 }
-#upsidedown {
-	transform: rotateX(-180deg);
-	transition: 1s ease-in-out;
+@media (min-width: 500px) {
+	#upsidedown {
+		transform: rotateX(-180deg);
+		transition: 1s ease-in-out;
+	}
+	#upsidedown:hover {
+		transform: rotateX(0deg);
+	}
 }
-#upsidedown:hover {
-	transform: rotateX(0deg);
-}
+
 </style>
 <script>
 var upsidedown = new Audio("/static/media/stranger-things.mp3");
 $("#upsidedown").hover(function() {
 	upsidedown.play();
+	$('#bg-overlay').addClass('upsidedown');
 }, function() {
 	upsidedown.pause();
+	$('#bg-overlay').removeClass('upsidedown');
 } )
 </script>
 <script>
