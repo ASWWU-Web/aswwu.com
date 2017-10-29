@@ -27,10 +27,10 @@ h5.response {color: green;}
   /*min-width: 100%;
   min-height: 100%;
   max-width: 1000%;*/
-  -webkit-transition: -webkit-filter 2s;
-  -moz-transition: -moz-filter 2s;
-  -o-transition: -o-filter 2s;
-  transition: -webkit-filter 2s ,filter 2s;
+  -webkit-transition: -webkit-filter 300ms;
+  -moz-transition: -moz-filter 300ms;
+  -o-transition: -o-filter 300ms;
+  transition: -webkit-filter 300ms ,filter 300ms;
 }
 
 #background.hash {
@@ -38,16 +38,6 @@ h5.response {color: green;}
   -moz-filter: saturate(0%) brightness(45%);
   -o-filter: saturate(0%) brightness(45%);
   filter: saturate(0%) brightness(45%);
-}
-
-#bg-overlay {
-  height: 100%;
-  width: 100%;
-  transition: all 5s;
-}
-
-#bg-overlay.upsidedown {
-  background-color: rgba(100, 0, 0, .7);
 }
 
 .shadow {

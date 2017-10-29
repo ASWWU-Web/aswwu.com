@@ -1,7 +1,7 @@
 
 <br><br>
 <div class='row'>
-	<div id='upsidedown' class='columns small-12 medium-10 medium-offset-1' style='padding: 2em; text-align: center;'>
+	<div class='columns small-12 medium-10 medium-offset-1' style='padding: 2em; text-align: center;'>
 		<img id="logo" src="https://aswwu.com/media/images/ASWWU_logo_full.png">
 		<br><br>
 		<input type="text" class="autocomplete-search autofocus" placeholder="Searcheth away!">
@@ -45,34 +45,14 @@
   	transform: rotate(360deg);
 	}
 }
-@media (min-width: 500px) {
-	#upsidedown {
-		transform: rotateX(-180deg);
-		transition: 1s ease-in-out;
-	}
-	#upsidedown:hover {
-		transform: rotateX(0deg);
-	}
-}
-
 </style>
-<script>
-var upsidedown = new Audio("/static/media/stranger-things.mp3");
-$("#upsidedown").hover(function() {
-	upsidedown.play();
-	$('#bg-overlay').addClass('upsidedown');
-}, function() {
-	upsidedown.pause();
-	$('#bg-overlay').removeClass('upsidedown');
-} )
-</script>
 <script>
 // try {
 // 	var timedEvents =[{
-// 		link: "#/senate_election",
-// 		text: "District 7 (Offcampus) Senate Election!",
-// 		timeStart: new Date(2017, 10, 24, 8),
-// 		timeEnd: new Date(2017, 10, 27, 20)
+// 		link: "https://docs.google.com/forms/d/e/1FAIpQLSf00vkeypM6DwzsuLs8JTw-YCAsVGZemxw-uIQYiTVygCn2TQ/viewform",
+// 		text: "🇺🇸 Vote in the General ASWWU Elections 🇺🇸",
+// 		timeStart: new Date(2017, 1, 21,8),
+// 		timeEnd: new Date(2017, 1, 21, 20)
 // 	}];
 // 	var epochDate = new Date();
 // 	var epochTime = Math.floor(epochDate.getTime());
