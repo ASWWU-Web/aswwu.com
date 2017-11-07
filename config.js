@@ -3,10 +3,10 @@ var config = {
 	title: "ASWWU",
 	description: "the Associated Student Body of Walla Walla University",
 	favicon: "images/mask_unknown.png",
-	// server: "http://127.0.0.1:8888/",
-	// cookie: "localhost",
-	server: "https://aswwu.com/server/",
-	cookie: ".aswwu.com",
+	server: "http://127.0.0.1:8888/",
+	cookie: "localhost",
+	//server: "https://aswwu.com/server/",
+	//cookie: ".aswwu.com",
 	files: {
 		js: [
 			"static/js/navigation.js",
