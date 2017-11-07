@@ -228,7 +228,7 @@ function electionHandler() {
   if (!user.wwuid) {
       main.html("<div class='row'><div class='small-12 columns'>"+
                   "<h1 style='color:white;'>You must login to access this page</h1><br>"+
-                  "<h3><a href='https://saml.aswwu.com' style='color: white;'>Login</a></h3>"+
+                  "<h3><a href='https://saml.aswwu.com?redirectURI=/#/election' style='color: white;'>Login</a></h3>"+
                   "</div></div>");
       return;
   }
@@ -295,7 +295,7 @@ function senateElectionHandler() {
    if (!user.wwuid) {
       main.html("<div class='row'><div class='small-12 columns'>"+
                   "<h1 style='color:white;'>You must login to access this page</h1><br>"+
-                  "<h3><a href='https://saml.aswwu.com' data-reveal-id='login-modal' style='color: white;'>Login</a></h3>"+
+                  "<h3><a href='https://saml.aswwu.com?redirectURI=/#/senate_election' data-reveal-id='login-modal' style='color: white;'>Login</a></h3>"+
                   "</div></div>");
       return;
   }
@@ -321,7 +321,7 @@ function senateElectionHandler() {
 
     // Clears textboxes that don't contain vote choices
     function resetText() {
-      var selDis
+      var selDis;
 
       // Check district 1-12 boxes
       if(votes.length > 0) {
@@ -393,23 +393,23 @@ function senateElectionHandler() {
     $('#districtChoice').change(function () {
       $('.district').hide();
       $('#'+$(this).val()).show();
-      if(document.getElementById('SMcheck').checked) {
-        $('#13').show();
-      }
+    //   if(document.getElementById('SMcheck').checked) {
+    //     $('#13').show();
+    //   }
     });
 
-    // hide the SM district behind a checkbox
-    $('#SMcheck').change(function() {
-      if(this.checked) {
-        $('#13').show();
-      } else {
-        $('#13').hide();
-        SMvotes.pop();
-        SMvotes.pop();
-        reDraw();
-        resetText();
-      }
-    });
+    // // hide the SM district behind a checkbox
+    // $('#SMcheck').change(function() {
+    //   if(this.checked) {
+    //     $('#13').show();
+    //   } else {
+    //     $('#13').hide();
+    //     SMvotes.pop();
+    //     SMvotes.pop();
+    //     reDraw();
+    //     resetText();
+    //   }
+    // });
 
     // control voting via profile clicks
     $('.profile').click(function() {
@@ -839,7 +839,7 @@ function volunteerHandler() {
     if (!user.wwuid) {
         main.html("<div class='row'><div class='small-12 columns'>"+
                     "<h1 style='color:white;'>You must login to access this page</h1><br>"+
-                    "<h3><a href='https://saml.aswwu.com' data-reveal-id='login-modal' style='color: white;'>Login</a></h3>"+
+                    "<h3><a href='https://saml.aswwu.com?redirectURI=/#/volunteer' data-reveal-id='login-modal' style='color: white;'>Login</a></h3>"+
                     "</div></div>");
         return;
     }
