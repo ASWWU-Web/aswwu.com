@@ -23,7 +23,7 @@ function navInit() {
 			}
 		}
 	} else {
-		accountLinks.prepend("<li class='has-dropdown accountLinks'><a rel="nofollow" href='https://saml.aswwu.com'>Login</a><ul class='dropdown'></ul></li>");
+		accountLinks.prepend("<li class='has-dropdown accountLinks'><a href='https://saml.aswwu.com'>Login</a><ul class='dropdown'></ul></li>");
 		accountLinks = accountLinks.find(".accountLinks > ul");
 		accountLinks.append("<li><a href='#/search/birthday="+birthdate+"'>Birthdays</a></li>");
 		accountLinks.append("<li><a href='#/super_search/'>Super Search</a></li>");
