@@ -24,13 +24,11 @@
   var passed_bills = [
     "FL 1 - Atlas Syrups.docx",
     "FL 2 - Hang Board for WEC.docx",
-  ];
-  var passed_bills_names = [
-    "Atlas Syrups",
-    "Hang Board for WEC",
+    "FL 5 - ASWWU Budget.docx",
+    "FL 6 - ASWWU Portland Budget.docx"
   ];
   for (var i = 0; i < passed_bills.length; i++) {
-    $('#passed_bills').append('<li><a href="https://aswwu.com/uploads/ASWWU/Senate/pr_pb/'+passed_bills[i]+'" target="_blank"><u style="color: white;">'+passed_bills[i]+ " ("+ passed_bills_names[i] + ')<u></a></li>');
+    $('#passed_bills').append('<li><a href="https://aswwu.com/uploads/ASWWU/Senate/pr_pb/'+passed_bills[i]+'" target="_blank"><u style="color: white;">'+passed_bills[i].split('.')[0]+ "<u></a></li>");
   }
 
   var project_reports = [
