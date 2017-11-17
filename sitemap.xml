@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<url>
+  <loc>https://aswwu.com/</loc>
+  <lastmod>2017-11-16T00:16:47+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://aswwu.com/jobs/</loc>
+  <lastmod>2017-05-14T23:23:37+00:00</lastmod>
+  <priority>0.90</priority>
+</url>
+<url>
+  <loc>https://aswwu.com/music/</loc>
+  <lastmod>2015-10-16T21:13:46+00:00</lastmod>
+  <priority>0.30</priority>
+</url>
+<url>
+  <loc>https://aswwu.com/prayitforward/</loc>
+  <lastmod>2015-09-27T04:48:42+00:00</lastmod>
+  <priority>0.30</priority>
+</url>
+<url>
+  <loc>https://aswwu.com/collegian</loc>
+  <lastmod>2017-11-01T04:48:42+00:00</lastmod>
+  <priority>0.70</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>https://aswwu.com/video</loc>
+  <lastmod>2017-11-01T04:48:42+00:00</lastmod>
+  <priority>0.85</priority>
+</url>
+<url>
+  <loc>https://aswwu.com/photo</loc>
+  <lastmod>2017-11-01T04:48:42+00:00</lastmod>
+  <priority>0.85</priority>
+</url>
+<url>
+  <loc>https://aswwu.com/#/departments/administration/</loc>
+  <lastmod>2017-11-01T04:48:42+00:00</lastmod>
+  <priority>0.60</priority>
+</url>
+<url>
+  <loc>https://aswwu.com/#/departments/tread_shed</loc>
+  <lastmod>2017-11-01T04:48:42+00:00</lastmod>
+  <priority>0.70</priority>
+</url>
+<url>
+  <loc>https://aswwu.com/#/departments/aswwu_outdoors</loc>
+  <lastmod>2017-11-01T04:48:42+00:00</lastmod>
+  <priority>0.70</priority>
+</url>
+<url>
+  <loc>https://aswwu.com/globalservice</loc>
+  <lastmod>2017-11-01T04:48:42+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+</urlset>
