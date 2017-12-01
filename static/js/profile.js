@@ -52,11 +52,16 @@ function setInputByKey(obj, key, value) {
 	obj.find("input.datepicker").fdatepicker();
 }
 
-function sanatizeHREF(string){
+function sanatizeHREF(fieldVal){
 	// TODO: Make this not break click to search functionality.
 	//For example "I'm Ryan" -> "Im Ryan"
-	//when users clicks this they won't get the same profile back which is weird.
-	return string.replace(/('|")/g, "");
+	//when users clicks this they won't get the same profile back which is
+	//unexpected behavior.
+	var a = "";
+	if(field) {
+		a = String(fieldVal).replace(/('|")/g, "");
+	}
+	return a;
 }
 
 function setProfileData(data,div) {
