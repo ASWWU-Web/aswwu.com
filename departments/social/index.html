@@ -1,119 +1,140 @@
-<div class="row">
-  <div class="small-12 columns">
-    <h1>ASWWU Social</h1>
+<style>
+  #outdoors a {color: white;}
+  #outdoors a:hover {color: #abc;}
+  #slidebg, #outdoors > div:first-of-type {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #222;
+    background-position: center;
+    background-size: cover;
+    -webkit-filter: saturate(50%) brightness(75%);
+    -moz-filter: saturate(50%) brightness(75%);
+    -o-filter: saturate(50%) brightness(75%);
+    filter: saturate(50%) brightness(75%);
+  }
+</style>
+<div class="row" id="outdoors">
+  <div id="slidebg"></div>
+  <div class="row">
+    <div class="small-12 columns text-center">
+      <h1>ASWWU Social</h1>
+    </div>
+    <hr>
   </div>
-  <hr>
-</div>
 
-<div class="row">
-  <div class="small-12 medium-4 medium-offset-2 columns text-center">
-    <h3>Winter 2018 Events</h3>
-    <table id="winterEvents" style="width:100%;">
+  <div class="row">
+    <div class="small-12 medium-4 medium-offset-2 columns text-center">
+      <h3>Winter 2018 Events</h3>
+      <table id="winterEvents" style="width:100%;">
 
-    </table>
+      </table>
+    </div>
+    <div class="small-12 medium-4 columns text-center">
+      <h3>Spring 2018 Events</h3>
+      <table id="springEvents" style="width:100%;">
+
+      </table>
+    </div>
+    <hr />
   </div>
-  <div class="small-12 medium-4 columns text-center">
-    <h3>Spring 2018 Events</h3>
-    <table id="springEvents" style="width:100%;">
 
-    </table>
-  </div>
-  <hr />
-</div>
-
-<!-- BotB Form -->
-<div class="row">
-  <div class="small-12 medium-8 columns">
-    <iframe id="JotFormIFrame-73168390316155" onload="window.parent.scrollTo(0,0)" allowtransparency="true" src="https://form.jotform.com/73168390316155" frameborder="0" style="width: 1px; min-width: 100%; height:539px; border:none;" scrolling="yes"> </iframe>
-    <script type="text/javascript"> var ifr = document.getElementById("JotFormIFrame-73168390316155"); if(window.location.href && window.location.href.indexOf("?") > -1) { var get = window.location.href.substr(window.location.href.indexOf("?") + 1); if(ifr && get.length > 0) { var src = ifr.src; src = src.indexOf("?") > -1 ? src + "&" + get : src + "?" + get; ifr.src = src; } } window.handleIFrameMessage = function(e) { var args = e.data.split(":"); if (args.length > 2) { iframe = document.getElementById("JotFormIFrame-" + args[2]); } else { iframe = document.getElementById("JotFormIFrame"); } if (!iframe) return; switch (args[0]) { case "scrollIntoView": iframe.scrollIntoView(); break; case "setHeight": iframe.style.height = args[1] + "px"; break; case "collapseErrorPage": if (iframe.clientHeight > window.innerHeight) { iframe.style.height = window.innerHeight + "px"; } break; case "reloadPage": window.location.reload(); break; } var isJotForm = (e.origin.indexOf("jotform") > -1) ? true : false; if(isJotForm && "contentWindow" in iframe && "postMessage" in iframe.contentWindow) { var urls = {"docurl":encodeURIComponent(document.URL),"referrer":encodeURIComponent(document.referrer)}; iframe.contentWindow.postMessage(JSON.stringify({"type":"urls","value":urls}), "*"); } }; if (window.addEventListener) { window.addEventListener("message", handleIFrameMessage, false); } else if (window.attachEvent) { window.attachEvent("onmessage", handleIFrameMessage); } </script>
-  </div>
-  <!-- Halftime Shows  -->
-  <div class="small-12 medium-4 columns">
-    <div class="row text-center" style="background-color:white; color:black;">
-      <div class="small-12 columns">
-        <h4 style="color:black;">Wolves Game Halftimes Presented by ASWWU Social</h4>
-        <p class="text-center">
-          1/18/18 @ 7:00 PM hosted by Chemistry Club<br />
-          1/18/18 @ 9:00 PM featuring a performance by WWU Freshman Sienna Pierre<br />
-          1/19/18 @ 12:00 PM hosted by ASWWU Global Services<br />
-          1/19/18 @ 2:00 PM hosted by Village Club<br />
-          1/27/18 @ 7:30 PM hosted by ASWWU Social<br />
-          2/2/18 @ 12:00 PM hosted by Nursing Club<br />
-          2/2/18 @ 2:00 PM hosted by Math Club<br />
-          2/3/18 @ 6:30 PM hosted by Engineers without Borders<br />
-          2/3/18 @ 8:30 PM hosted by the Asian Pacific Islander Club<br />
-          2/10/18 @ 9:00 PM hosted by the Black Student Christian Forum<br />
-          2/11/18 @ 2:00 PM hosted by Psychology Club<br />
-          2/11/18 @ 4:00 PM hosted by Latinix Club
-        </p>
+  <!-- BotB Form -->
+  <div class="row">
+    <div class="small-12 medium-8 columns">
+      <iframe id="JotFormIFrame-73168390316155" onload="window.parent.scrollTo(0,0)" allowtransparency="true" src="https://form.jotform.com/73168390316155" frameborder="0" style="width: 1px; min-width: 100%; height:539px; border:none;" scrolling="yes"> </iframe>
+      <script type="text/javascript"> var ifr = document.getElementById("JotFormIFrame-73168390316155"); if(window.location.href && window.location.href.indexOf("?") > -1) { var get = window.location.href.substr(window.location.href.indexOf("?") + 1); if(ifr && get.length > 0) { var src = ifr.src; src = src.indexOf("?") > -1 ? src + "&" + get : src + "?" + get; ifr.src = src; } } window.handleIFrameMessage = function(e) { var args = e.data.split(":"); if (args.length > 2) { iframe = document.getElementById("JotFormIFrame-" + args[2]); } else { iframe = document.getElementById("JotFormIFrame"); } if (!iframe) return; switch (args[0]) { case "scrollIntoView": iframe.scrollIntoView(); break; case "setHeight": iframe.style.height = args[1] + "px"; break; case "collapseErrorPage": if (iframe.clientHeight > window.innerHeight) { iframe.style.height = window.innerHeight + "px"; } break; case "reloadPage": window.location.reload(); break; } var isJotForm = (e.origin.indexOf("jotform") > -1) ? true : false; if(isJotForm && "contentWindow" in iframe && "postMessage" in iframe.contentWindow) { var urls = {"docurl":encodeURIComponent(document.URL),"referrer":encodeURIComponent(document.referrer)}; iframe.contentWindow.postMessage(JSON.stringify({"type":"urls","value":urls}), "*"); } }; if (window.addEventListener) { window.addEventListener("message", handleIFrameMessage, false); } else if (window.attachEvent) { window.attachEvent("onmessage", handleIFrameMessage); } </script>
+    </div>
+    <!-- Halftime Shows  -->
+    <div class="small-12 medium-4 columns">
+      <div class="row text-center" style="background-color:white; color:black;">
+        <div class="small-12 columns">
+          <h4 style="color:black;">Wolves Game Halftimes Presented by ASWWU Social</h4>
+          <p class="text-center">
+            1/18/18 @ 7:00 PM hosted by Chemistry Club<br />
+            1/18/18 @ 9:00 PM featuring a performance by WWU Freshman Sienna Pierre<br />
+            1/19/18 @ 12:00 PM hosted by ASWWU Global Services<br />
+            1/19/18 @ 2:00 PM hosted by Village Club<br />
+            1/27/18 @ 7:30 PM hosted by ASWWU Social<br />
+            2/2/18 @ 12:00 PM hosted by Nursing Club<br />
+            2/2/18 @ 2:00 PM hosted by Math Club<br />
+            2/3/18 @ 6:30 PM hosted by Engineers without Borders<br />
+            2/3/18 @ 8:30 PM hosted by the Asian Pacific Islander Club<br />
+            2/10/18 @ 9:00 PM hosted by the Black Student Christian Forum<br />
+            2/11/18 @ 2:00 PM hosted by Psychology Club<br />
+            2/11/18 @ 4:00 PM hosted by Latinix Club
+          </p>
+        </div>
       </div>
     </div>
+    <hr />
   </div>
-  <hr />
-</div>
 
-<div class="row">
-  <div class="small-12 columns">
-    <h2>The Team</h2>
-    <ul class="small-block-grid-3 medium-block-grid-4">
-      <li class="profile" data-name="Tim Kosaka">
-        <div class='profile-photo fill'></div>
-        <h4 class='profile-full_name'></h4>
-        <h6>Social Vice President</h6>
-      </li>
-      <li class="profile " data-name="Alyssa Dorland">
-        <div class='profile-photo fill'></div>
-        <h4 class='profile-full_name'></h4>
-        <h6>Administrative Assistant to the Social VP</h6>
-      </li>
-      <li class="profile " data-name="Natalie Schmidt">
-        <div class='profile-photo fill'></div>
-        <h4 class='profile-full_name'></h4>
-        <h6>Director of External Relations</h6>
-      </li>
-      <li class="profile " data-name="Ben Selby">
-        <div class='profile-photo fill'></div>
-        <h4 class='profile-full_name'></h4>
-        <h6>Tear Down Manager</h6>
-      </li>
-      <li class="profile " data-name="Savanna Pardo">
-        <div class='profile-photo fill'></div>
-        <h4 class='profile-full_name'></h4>
-        <h6>Major Events Coordinator</h6>
-      </li>
-      <li class="profile " data-name="Alex Chase">
-        <div class='profile-photo fill'></div>
-        <h4 class='profile-full_name'></h4>
-        <h6>​Events Coordinator</h6>
-      </li>
-      <li class="profile " data-name="Brooke Thompson">
-        <div class='profile-photo fill'></div>
-        <h4 class='profile-full_name'></h4>
-        <h6>​Events Coordinator</h6>
-      </li>
-      <li class="profile " data-name="Lauren Parfitt">
-        <div class='profile-photo fill'></div>
-        <h4 class='profile-full_name'></h4>
-        <h6>​Events Coordinator</h6>
-      </li>
-    </ul>
+  <div class="row">
+    <div class="small-12 columns">
+      <h2>The Team</h2>
+      <ul class="small-block-grid-3 medium-block-grid-4">
+        <li class="profile" data-name="Tim Kosaka">
+          <div class='profile-photo fill'></div>
+          <h4 class='profile-full_name'></h4>
+          <h6>Social Vice President</h6>
+        </li>
+        <li class="profile " data-name="Alyssa Dorland">
+          <div class='profile-photo fill'></div>
+          <h4 class='profile-full_name'></h4>
+          <h6>Administrative Assistant to the Social VP</h6>
+        </li>
+        <li class="profile " data-name="Natalie Schmidt">
+          <div class='profile-photo fill'></div>
+          <h4 class='profile-full_name'></h4>
+          <h6>Director of External Relations</h6>
+        </li>
+        <li class="profile " data-name="Ben Selby">
+          <div class='profile-photo fill'></div>
+          <h4 class='profile-full_name'></h4>
+          <h6>Tear Down Manager</h6>
+        </li>
+        <li class="profile " data-name="Savanna Pardo">
+          <div class='profile-photo fill'></div>
+          <h4 class='profile-full_name'></h4>
+          <h6>Major Events Coordinator</h6>
+        </li>
+        <li class="profile " data-name="Alex Chase">
+          <div class='profile-photo fill'></div>
+          <h4 class='profile-full_name'></h4>
+          <h6>​Events Coordinator</h6>
+        </li>
+        <li class="profile " data-name="Brooke Thompson">
+          <div class='profile-photo fill'></div>
+          <h4 class='profile-full_name'></h4>
+          <h6>​Events Coordinator</h6>
+        </li>
+        <li class="profile " data-name="Lauren Parfitt">
+          <div class='profile-photo fill'></div>
+          <h4 class='profile-full_name'></h4>
+          <h6>​Events Coordinator</h6>
+        </li>
+      </ul>
+    </div>
+    <hr />
   </div>
-  <hr />
-</div>
 
 
-<div class="row">
-  <div class="small-12 columns">
+  <div class="row">
+    <div class="small-12 columns">
 
-    <h2>Contact Us</h2>
-    <h6>
-      Stop by our office on Mondays - Thursdays @ 3-5 PM
-    </h6>
-    <h6>
-      <a href="mailto:ASWWU.Social@wallawalla.edu">ASWWU.Social@wallawalla.edu</a>
-      Office: <a href="tel:509-527-2122">509-527-2122</a>
-      ​Cell: <a href="tel:206-458-0109">206-458-0109</a>
-    </h6>
+      <h2>Contact Us</h2>
+      <h6>
+        Stop by our office on Mondays - Thursdays @ 3-5 PM
+      </h6>
+      <h6>
+        <a href="mailto:ASWWU.Social@wallawalla.edu">ASWWU.Social@wallawalla.edu</a>
+        Office: <a href="tel:509-527-2122">509-527-2122</a>
+        ​Cell: <a href="tel:206-458-0109">206-458-0109</a>
+      </h6>
+    </div>
   </div>
 </div>
 
@@ -167,4 +188,17 @@ for (var i in selectors) {
   }
 
 }
+$("#slidebg").bgswitcher({
+    images: [
+      "/media/images/social_page/3S1A9035.jpg",
+      "/media/images/social_page/3S1A4138.jpg",
+      "/media/images/social_page/3S1A4077.jpg",
+      "/media/images/social_page/3S1A3833.jpg",
+      "/media/images/social_page/3S1A3767.jpg",
+      "/media/images/social_page/2U3A7569.jpg"
+    ],
+    interval: 15000,
+    effect: "fade"
+});
+$("#outdoors > div:first").css("position","fixed");
 </script>
