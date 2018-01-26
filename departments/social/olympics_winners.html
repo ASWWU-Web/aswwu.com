@@ -1,1 +1,101 @@
-<h1>Test</h1>
+
+<div class="row">
+    <div class="small-12 columns">
+        <h2>ASWWU Olympics Medalists</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 columns">
+        <h1 class="text-center">🥇Gold🥇</h1>
+        <hr>
+        <div class="small-12 columns" style="color: white;">
+          <ul id="gold" class='small-block-grid-2 medium-block-grid-3 large-block-grid-4'></ul>
+        </div>
+        <hr>
+    </div>
+</div>
+
+<div class="row">
+    <div class="small-12 columns">
+        <h1 class="text-center">🥈Silver🥈</h1>
+        <hr>
+        <div class="small-12 columns" style="color: white;">
+          <ul id="silver" class='small-block-grid-2 medium-block-grid-3 large-block-grid-4'></ul>
+        </div>
+        <hr>
+    </div>
+</div>
+
+<div class="row">
+    <div class="small-12 columns">
+        <h1 class="text-center">🥉Bronze🥉</h1>
+        <hr>
+        <div class="small-12 columns" style="color: white;">
+          <ul id="bronze" class='small-block-grid-2 medium-block-grid-3 large-block-grid-4'></ul>
+        </div>
+        <hr>
+    </div>
+</div>
+
+<script>
+    var addProfiles = function(documentID, winners) {
+        var $div = $(documentID);
+        for (var key in winners) {
+            $div.append("<li><a class='profile' data-name='"+winners[key]+"'>"+
+                          "<div class='profile-photo fill'></div>"+
+                          "<h5 class='profile-full_name'></h5>"+
+                          "<h5>"+key+"</h5>"+
+                        "</a></li>");
+        }
+    }
+
+    var gold = {
+        "Bungee Run ": "Brandon Craigle",
+        "Bungee Run": "Amanda Harrison",
+        "Ping Pong Singles": "Christian Nieman",
+        "Ping Pong Singles ": "Cadence Trenchard",
+        "Ping Pong Pairs": "Grant Ratan",
+        "Ping Pong Pairs ": "Andrea Kroll",
+        "ASWWU Bike Race": "Austin Gulby",
+        "ASWWU Bike Race ": "Taylor Wallace",
+        "Twister": "Zachary Winslow",
+        "Twister ": "Elizabeth Butikofer",
+        "Obstacle Course": "Diana Irias",
+        "Obstacle Course ": "Jorge Juarez",
+        "Foosball": "Scott Simus",
+        "Foosball ": "Grant Ratana",
+
+    };
+    addProfiles("#gold", gold);
+    var silver = {
+        "Bungee Run": "Travis Stanger",
+        "Ping Pong Singles ": "Jonathan Gillespie",
+        "Ping Pong Singles": "Zoe Ferrell",
+        "Ping Pong Pairs": "Jahri Harris",
+        "Ping Pong Pairs ": "Kalli Griffin",
+        "ASWWU Bike Race": "Nico Belliard",
+        "ASWWU Bike Race ": "Meghan Spracklen",
+        "Twister": "Daniel Trujillo",
+        "Twister ": "Elizabeth Fry",
+        "Obstacle Course": "Paloma Garcia",
+        "Obstacle Course ": "Spencer Gulbay",
+        "Foosball": "Alexandra Duncan",
+        "Foosball ": "Jordyn Watkins",
+
+
+    };
+    addProfiles("#silver", silver);
+    var bronze = {
+        "Ping Pong Singles": "Jocelyn Griffin",
+        "ASWWU Bike Race": "Kraig Davis",
+        "ASWWU Bike Race ": "Jordyn Watkins",
+        "Twister": "Spencer Wagner",
+        "Twister ": "Madison Verska",
+        "Obstacle Course": "Meghan Spracklen",
+        "Obstacle Course ": "Scott Simus",
+        "Foosball": "Cameron Bierwagen",
+        "Foosball ": "Amanda Marx"
+    };
+    addProfiles("#bronze", bronze);
+
+</script>
