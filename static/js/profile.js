@@ -56,7 +56,12 @@ function sanatizeHREF(string){
 	// TODO: Make this not break click to search functionality.
 	//For example "I'm Ryan" -> "Im Ryan"
 	//when users clicks this they won't get the same profile back which is weird.
-	return string.replace(/('|")/g, "");
+	try {
+		return string.replace(/('|")/g, "");
+	} catch(e) {
+		console.log(e);
+		return "";
+	}
 }
 
 function setProfileData(data,div) {
@@ -149,7 +154,7 @@ function setProfileData(data,div) {
 			obj.html(value.split(", ").map(function(v) {
 				return "<a href='#/search/"+sanatizeHREF(key)+"="+v+"'>"+v+"</a>";
 			}).join(", "));
-		} else if (["full_name","username"].indexOf(key) > -1) {
+		} else if (["full_name","username","views"].indexOf(key) > -1) {
 			obj.text(value);
 		} else {
 			obj.html("<a href='#/search/"+key+"="+sanatizeHREF(value)+"'>"+value+"</a>");
