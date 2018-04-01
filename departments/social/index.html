@@ -37,15 +37,16 @@
   </div>
 
   <div class="row">
+
     <div class="small-12 medium-6 columns text-center">
-      <h3>Winter 2018 Events</h3>
-      <table id="winterEvents" style="width:100%;">
+      <h3>Spring 2018 Events</h3>
+      <table id="springEvents" style="width:100%;">
 
       </table>
     </div>
     <div class="small-12 medium-6 columns text-center">
-      <h3>Spring 2018 Events</h3>
-      <table id="springEvents" style="width:100%;">
+      <h3>Fall 2018 Events</h3>
+      <table id="fallEvents" style="width:100%;">
 
       </table>
     </div>
@@ -192,18 +193,6 @@
 </div>
 
 <script>
-
-var winter_events = [
-  {"name":"Battle of the Bands ","loc":" The WEC","date":"Saturday, March 3, 2018 ","time":" 8:00 PM"},
-  {"name":"A night of Mystery","loc":" Bowers Hall","date":"Saturday, March 10, 2018 ","time":" 7:30 PM"},
-  {"name":"Deadweek Sunday Slumber Party","loc":"Bowers Hall","date":"Sunday, March 11, 2018 ","time":" 7:30 PM"},
-  {"name":"Deadweek Monday Movie Night","loc":"The SAC","date":"Monday, March 12, 2018 ","time":" 7:00 PM"},
-  {"name":"Deadweek Tuesday Kittens & Puppies","loc":"The Library","date":"Tuesday, March 13, 2018 ","time":" 11:00 AM"},
-  {"name":"Deadweek Wednesday Late Night Breakfast","loc":"Bowers Hall","date":"Wednesday, March 14, 2018 ","time":" 7:30 PM"},
-  // {"name":"Deadweek Thursday Coffee Cupping","loc":"The Havstad Alumni Center","date":"Thursday, March 15, 2018 ","time":" 7:30 PM"},
-  {"name":"Deadweek Saturday Bed Races","loc":"The Jesus Sculpture","date":"Saturday, March 17, 2018 ","time":" 7:30 PM"}];
-
-//For debugging.
 var spring_events = [
   {"name":"Manhunt ","loc":" Meet at the Bowers Green","date":"Sunday, April 8, 2018 ","time":" 7:00 PM"},
   {"name":"ASWWU Races ","loc":" Meet at the Ad Building","date":"Friday, April 13, 2018 ","time":" 3:00 PM"},
@@ -221,7 +210,21 @@ var spring_events = [
   {"name":"ASWWU's Year End Party","loc":"Bowers Green","date":"Saturday, June 9, 2018 ","time":" 9:00 PM"}
 ];
 
-var selectors = [{sel:'#winterEvents', data:'winter_events'}, {sel:'#springEvents', data:'spring_events'}];
+var fall_events = [
+  {"name": "ASWWU BBQ", "date": "Monday, September 24, 2018", "loc": "Centennial Green", "time": "TBA" },
+  {"name": "Outdoor Movie", "date": "Sunday, September 30, 2018", "loc": "Centennial Green", "time": "TBA" },
+  {"name": "Barn Party", "date": "Saturday, October 13, 2018", "loc": "WEC Gym", "time": "TBA" },
+  {"name": "ASWWU Jeprody", "date": "Thursday, October 18, 2018", "loc": "Village Hall", "time": "TBA" },
+  {"name": "Roller Skating", "date": "Wednesday, October 24, 2018", "loc": "Village Church Youth Center", "time": "TBA" },
+  {"name": "Dancing Lessons", "date": "Thursday, November 6, 2018", "loc": "Blackbox Theater ", "time": "TBA" },
+  {"name": "Cinnamon Rolls", "date": "Monday, November 12, 2018", "loc": "Front of Admin Building ", "time": "TBA" },
+  {"name": "Uno Tournament", "date": "Saturday, December 1, 2018", "loc": "Peterson Memorial Library", "time": "TBA" },
+  {"name": "Midnight Breakfast", "date": "Monday, December 3, 2018", "loc": "Bowers Hall Lobby", "time": "TBA" },
+  {"name": "Kittens & Puppies", "date": "Wednesday, December 5, 2018", "loc": "Peterson Memorial Library", "time": "TBA" },
+  {"name": "Christmas Caroling", "date": "Friday, December 7, 2018", "loc": "Meet Behind the Admin Building", "time": "TBA" },
+];
+
+var selectors = [{sel:'#springEvents', data:'spring_events'}, {sel:"#fallEvents", data: 'fall_events'}];
 
 for (var i in selectors) {
   var selector = selectors[i].sel;
