@@ -32,7 +32,7 @@
         Avalanche Awareness and Rescue Practice  Mar. 2-3  https://form.jotform.com/80316535516151
         Smith Rocks Camping  Mar. 9-10  https://form.jotform.com/80316414916151
         -->
-        <table style="margin: 0 auto;">
+        <table id="events" style="margin: 0 auto;">
           <tr>
             <th>
               Event
@@ -43,50 +43,6 @@
             <th>
               Signup
             </th>
-          </tr>
-          <tr>
-            <td>
-              Schweitzer Cabin and Ski trip.
-            </td>
-            <td>
-              Feb. 17-19
-            </td>
-            <td>
-              <a href="https://form.jotform.com/80316599116157" class="button success tiny" style="margin:0;" >Sign Up</a>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Overnight Cross Country Ski trip
-            </td>
-            <td>
-              Feb. 24-25
-            </td>
-            <td>
-              <a href="https://form.jotform.com/80316949816163" class="button success tiny" style="margin:0;" >Sign Up</a>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Avalanche Awareness and Rescue Practice
-            </td>
-            <td>
-              Mar. 2-3
-            </td>
-            <td>
-              <a href="https://form.jotform.com/80316535516151" class="button success tiny" style="margin:0;" >Sign Up</a>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Smith Rocks Camping Trip
-            </td>
-            <td>
-              Mar. 9-10
-            </td>
-            <td>
-              <a href="https://form.jotform.com/80638147971162" class="button success tiny" style="margin:0;" >Sign Up</a>
-            </td>
           </tr>
         </table>
       </p>
@@ -148,4 +104,32 @@
         effect: "fade"
     });
     $("#outdoors > div:first").css("position","fixed");
+
+    //Render event table
+    var trips = [
+      {
+        "date": "April 6-7",
+        "name": "Caving near Trout Lake, WA"
+      },{
+        "date": "April 13-14", "name": "Climbing in Hells Canyon newar Oxbow, OR"
+      },{
+        "date": "April 21", "name": "Mountain Biking"
+      },{
+        "date": "April 27-29", "name": "ASWWU Rosario WEkkend Outdoor Activities"
+      },{
+        "date": "May 11-12", "name": "Backpacking Trip"
+      },{
+        "date": "May 18-19", "name": "Rafting Trip"
+      },{
+        "date": "June 1-3", "name": "Surf Trip at Pacific City, OR"
+      }
+    ];
+    var $events = $("#events")
+    for (let trip of trips) {
+      var link = "Link Comming Soon";
+      if(trip.link) {
+        link = '<a href="' + trip.link + '" class="button success tiny" style="margin:0;" >Sign Up</a>';
+      }
+      $events.append("\n  <tr>\n    <td>\n      " + trip.name + "\n    </td>\n    <td>\n      " + trip.date + "\n    </td>\n    <td>\n      " + link + "\n    </td>\n  </tr>\n  ")
+    }
 </script>
