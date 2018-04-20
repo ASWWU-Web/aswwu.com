@@ -114,7 +114,7 @@
       },{
         "date": "April 21", "name": "Mountain Biking"
       },{
-        "date": "April 27-29", "name": "ASWWU Rosario WEkkend Outdoor Activities"
+        "date": "April 27-29", "name": "ASWWU Rosario WEkkend Outdoor Activities", "link": "https://wwuform.formstack.com/forms/aswwu_rosario"
       },{
         "date": "May 11-12", "name": "Backpacking Trip"
       },{
@@ -125,7 +125,7 @@
     ];
     var $events = $("#events")
     for (let trip of trips) {
-      var link = "Link Comming Soon";
+      var link = "";
       if(trip.link) {
         link = '<a href="' + trip.link + '" class="button success tiny" style="margin:0;" >Sign Up</a>';
       }
